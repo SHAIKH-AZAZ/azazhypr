@@ -19,6 +19,8 @@ PanelWindow {
     color: "transparent"
     visible: !Sys.barHidden
     WlrLayershell.namespace: "quickshell-bar"
+    // the calendar has a text field; other panels never need the keyboard
+    WlrLayershell.keyboardFocus: drop === "calendar" ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
 
     // ---- dropdown state ----
     property string drop: ""

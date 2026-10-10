@@ -36,11 +36,44 @@ ColumnLayout {
             root.close();
         }
     }
-    ListRow {
+    Card {
         visible: Sys.weather !== ""
-        text: Sys.weather
-        sub: "Weather (click to refresh)"
-        onClicked: Sys.refreshSlow()
+        title: "Weather"
+        glyph: "\uf0c2"
+
+        RowLayout {
+            Layout.fillWidth: true
+            Txt { text: Sys.weather; font.pixelSize: 20; font.bold: true }
+            Txt { Layout.fillWidth: true; text: Sys.weatherDesc; color: Theme.muted; horizontalAlignment: Text.AlignRight }
+        }
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: 6
+            Txt { text: "\uf041"; color: Theme.accent }
+            Txt { Layout.fillWidth: true; text: Sys.weatherPlace || "Unknown location" }
+        }
+        Txt {
+            Layout.fillWidth: true
+            visible: Sys.weatherFeels !== ""
+            text: "Feels " + Sys.weatherFeels + "  ·  Humidity " + Sys.weatherHumidity + "  ·  Wind " + Sys.weatherWind
+            color: Theme.muted
+            font.pixelSize: 11
+            wrapMode: Text.Wrap
+        }
+        Txt {
+            Layout.fillWidth: true
+            text: Config.weatherLocation === ""
+                ? "Location is guessed from your IP. Set weatherLocation in services/Config.qml to pin it."
+                : "Location set in services/Config.qml"
+            color: Theme.muted
+            font.pixelSize: 10
+            wrapMode: Text.Wrap
+        }
+        MouseArea {
+            // click anywhere on the card refreshes
+            anchors.fill: parent
+            onClicked: Sys.refreshSlow()
+        }
     }
     ListRow {
         visible: Sys.kbActive !== ""

@@ -12,7 +12,8 @@ Singleton {
     readonly property int notifTimeout: 3000          // ms a popup stays when the app sets no timeout
     readonly property int notifMaxTimeout: 5000       // ms hard cap, even when the app asks for longer
     readonly property int notifMaxVisible: 4          // popups on screen at once
-    readonly property bool notifCriticalSticky: true  // critical urgency stays until dismissed
+    readonly property int notifRadius: 4              // corner radius of popups/cards (0 = boxy, 12 = soft)
+    readonly property int notifCriticalTimeout: 10000 // ms a critical popup stays (0 = until dismissed). It stays in the panel either way
     // brightness/volume scripts call notify-send; the OSD already shows those.
     // "hide" = swallow them (OSD only), "show" = also show a (replacing) popup
     readonly property string osdNotifs: "hide"
@@ -27,6 +28,9 @@ Singleton {
     readonly property bool showWeather: true
     readonly property string weatherLocation: ""      // "" = auto by IP, or "Delhi", "28.6,77.2"
     readonly property int slowPollMs: 30 * 60 * 1000  // updates + weather refresh
+
+    // ---- calendar ----
+    readonly property bool calendarMondayFirst: false // week starts on Monday instead of Sunday
 
     // ---- launcher / screenshot ----
     readonly property string terminal: "kitty"

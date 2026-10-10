@@ -12,6 +12,8 @@ Singleton {
 
     property bool dnd: false
     property var popups: []
+    property var counts: ({})         // notification id -> how many identical ones were merged into it
+    property var times: ({})          // notification id -> arrival ms, for "5m" labels in the panel
     readonly property var list: server.trackedNotifications
 
     NotificationServer {
@@ -28,6 +30,20 @@ Singleton {
             if ((tag === "brightness_notif" || tag === "volume_notif") && Config.osdNotifs === "hide") return;
 
             n.tracked = true;
+
+            // identical (app, summary, body) as one already shown -> merge: old one goes, new one carries the count
+            let count = 1;
+            const same = x => x.appName === n.appName && x.summary === n.summary && x.body === n.body;
+            for (const o of [...root.list.values]) {
+                if (o !== n && same(o)) { count += root.counts[o.id] ?? 1; root.drop(o); o.dismiss(); }
+            }
+
+            const t = Object.assign({}, root.times);
+            t[n.id] = Date.now();
+            root.times = t;
+            const c = Object.assign({}, root.counts);
+            c[n.id] = count;
+            root.counts = c;
 
             // "synchronous" tag = replace the previous notification with the same tag
             if (tag) {

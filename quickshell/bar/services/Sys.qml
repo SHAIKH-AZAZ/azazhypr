@@ -32,7 +32,12 @@ Singleton {
 
     // slow poll (Config.slowPollMs)
     property int updates: 0
-    property string weather: ""
+    property string weather: ""          // "☀ +26°C" (bar)
+    property string weatherPlace: ""     // "Bhubaneswar, Odisha, IN" as resolved by wttr.in
+    property string weatherDesc: ""      // "Smoky haze"
+    property string weatherFeels: ""
+    property string weatherHumidity: ""
+    property string weatherWind: ""
 
     property real _rx: 0
     property string _pacman: ""
@@ -113,8 +118,19 @@ Singleton {
     }
     Process {
         id: wx
-        command: ["sh", "-c", 'curl -fsS --max-time 8 "wttr.in/$1?format=%c+%t" 2>/dev/null', "sh", Config.weatherLocation]
-        stdout: StdioCollector { onStreamFinished: root.weather = text.trim().replace(/\s+/g, " ") }
+        command: ["sh", "-c", 'curl -fsS --max-time 8 "wttr.in/$1?format=%c|%t|%l|%C|%f|%h|%w" 2>/dev/null', "sh", Config.weatherLocation]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                const f = text.trim().split("|").map(x => x.replace(/\s+/g, " ").trim());
+                if (f.length < 7) return;      // error page / offline: keep the last good values
+                root.weather = (f[0] + " " + f[1]).trim();
+                root.weatherPlace = f[2];
+                root.weatherDesc = f[3];
+                root.weatherFeels = f[4];
+                root.weatherHumidity = f[5];
+                root.weatherWind = f[6];
+            }
+        }
     }
     Timer { id: recount; interval: 3000; onTriggered: root.refreshSlow() }
 
