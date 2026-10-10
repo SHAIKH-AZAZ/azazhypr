@@ -3,6 +3,11 @@ import Quickshell
 
 // Tweakables. Edit the values, the bar reloads on save.
 Singleton {
+    // ---- look ----
+    // true = static ink-black surfaces (same as kitty's ink-black theme), false = wallpaper palette.
+    // Accent colors (blue/green/yellow/red) always follow the wallpaper.
+    readonly property bool inkBlack: true
+
     // ---- notifications ----
     readonly property int notifTimeout: 3000          // ms a popup stays when the app sets no timeout
     readonly property int notifMaxTimeout: 5000       // ms hard cap, even when the app asks for longer
