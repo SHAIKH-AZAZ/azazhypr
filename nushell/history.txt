@@ -1,0 +1,24 @@
+ls
+ls -la
+$nu.default-config-dir
+cd $nu.default-config-dir
+clear
+nvim 
+exit
+clear
+source ~/.config/nushell/config.nu
+clear
+exit
+ls
+clear
+cls
+ls
+cls
+zeditor . 
+clear
+ls
+exit
+clear
+cls
+upgrade
+exit

@@ -1,0 +1,33 @@
+2026/09/11-00:09:56.957 81da Reusing MANIFEST /home/azaz/.config/obsidian/IndexedDB/app_obsidian.md_0.indexeddb.leveldb/MANIFEST-000001
+2026/09/11-00:09:56.958 81da Recovering log #3
+2026/09/11-00:09:56.958 81da Reusing old log /home/azaz/.config/obsidian/IndexedDB/app_obsidian.md_0.indexeddb.leveldb/000003.log 
+2026/09/11-00:12:59.689 81dc Level-0 table #5: started
+2026/09/11-00:12:59.717 81dc Level-0 table #5: 1082523 bytes OK
+2026/09/11-00:12:59.718 81dc Delete type=0 #3
+2026/09/11-00:13:02.688 81f2 Level-0 table #7: started
+2026/09/11-00:13:02.720 81f2 Level-0 table #7: 1489197 bytes OK
+2026/09/11-00:13:02.721 81f2 Delete type=0 #4
+2026/09/11-00:13:02.765 81f2 Compacting 1@1 + 1@2 files
+2026/09/11-00:13:02.815 81f2 Generated table #8@1: 11649 keys, 1527405 bytes
+2026/09/11-00:13:02.815 81f2 Compacted 1@1 + 1@2 files => 1527405 bytes
+2026/09/11-00:13:02.816 81f2 compacted to: files[ 0 0 1 0 0 0 0 ]
+2026/09/11-00:13:02.817 81f2 Delete type=2 #5
+2026/09/11-00:13:02.817 81f2 Delete type=2 #7
+2026/09/11-00:13:06.973 81dc Level-0 table #10: started
+2026/09/11-00:13:07.019 81dc Level-0 table #10: 1463633 bytes OK
+2026/09/11-00:13:07.020 81dc Delete type=0 #6
+2026/09/11-00:13:07.068 81dc Compacting 1@1 + 1@2 files
+2026/09/11-00:13:07.127 81dc Generated table #11@1: 11234 keys, 2196063 bytes
+2026/09/11-00:13:07.134 81dc Generated table #12@1: 2807 keys, 286141 bytes
+2026/09/11-00:13:07.134 81dc Compacted 1@1 + 1@2 files => 2482204 bytes
+2026/09/11-00:13:07.135 81dc compacted to: files[ 0 0 2 0 0 0 0 ]
+2026/09/11-00:13:10.625 81f2 Level-0 table #14: started
+2026/09/11-00:13:10.656 81f2 Level-0 table #14: 1460996 bytes OK
+2026/09/11-00:13:10.658 81f2 Delete type=2 #8
+2026/09/11-00:13:10.658 81f2 Delete type=0 #9
+2026/09/11-00:13:10.658 81f2 Delete type=2 #10
+2026/09/11-00:13:10.702 81dc Compacting 1@1 + 2@2 files
+2026/09/11-00:13:10.754 81dc Generated table #15@1: 11041 keys, 2190320 bytes
+2026/09/11-00:13:10.782 81dc Generated table #16@1: 5311 keys, 1283703 bytes
+2026/09/11-00:13:10.782 81dc Compacted 1@1 + 2@2 files => 3474023 bytes
+2026/09/11-00:13:10.783 81dc compacted to: files[ 0 0 2 0 0 0 0 ]

@@ -1,0 +1,3 @@
+connect.mdns_devices="[{\"created_timestamp\":1788520670,\"device_id\":\"\",\"device_info\":{\"addresses\":[\"10.10.115.13\"],\"availability\":\"any\",\"device_type\":\"unknown\",\"get_info_json\":\"\",\"is_group\":false,\"should_send_wol\":false},\"discovery_name\":\"Spotify Desktop Launcher._spotify-connect._tcp.local\",\"display_name\":\"\",\"hostname\":\"DESKTOP-OG880FJ.local\",\"last_seen\":1788520824,\"page_uri\":\"/zc\",\"port\":52005,\"public_ip\":\"180.211.97.148\",\"required_device_info\":{\"public_key\":\"\",\"remote_name\":\"\",\"version\":\"\"},\"ttl\":60,\"txt_records\":{\"CPath\":\"/zc\"}}]"
+connect.dial_devices="[]"
+audio.play_bitrate_non_metered_migrated=true

@@ -1,0 +1,4 @@
+2026-10-08 00:21:52.077 [info] Started local extension host with pid 165309.
+2026-10-08 00:21:52.261 [info] [DefaultAccount] Authentication provider is not available. {"id":"github","name":"GitHub","enterprise":false}
+2026-10-08 00:21:52.976 [error] Unknown actor MainThreadTesting
+2026-10-08 00:21:54.010 [error] Review does not expose the terminal API

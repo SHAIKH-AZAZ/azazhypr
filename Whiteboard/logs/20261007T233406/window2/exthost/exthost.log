@@ -1,0 +1,7 @@
+2026-10-07 23:45:16.696 [info] Extension host with pid 133448 started
+2026-10-07 23:45:16.696 [info] Skipping acquiring lock for /home/azaz/.config/Whiteboard/User/workspaceStorage/83ddac4587adb4d37b96e9ba96377954.
+2026-10-07 23:45:16.742 [info] ExtensionService#_doActivateExtension vscode.typescript-language-features, startup: false, activationEvent: 'onLanguage:typescript'
+2026-10-07 23:45:17.188 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*'
+2026-10-07 23:45:17.333 [info] Eager extensions activated
+2026-10-07 23:45:18.583 [info] Extension host terminating: received terminate message from renderer
+2026-10-07 23:45:18.586 [info] Extension host with pid 133448 exiting with code 0

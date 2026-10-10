@@ -1,0 +1,12 @@
+2026-10-08 11:07:18.021 [info] StorageMainService: creating application shared storage
+2026-10-08 11:07:18.209 [info] [shared storage] Creating shared storage database at '/home/azaz/.dev-fast-review-shared/sharedStorage/state.vscdb' (wasCreated: false)
+2026-10-08 11:07:18.211 [info] [shared storage] Initializing fallback application storage (path: /home/azaz/.config/Whiteboard/User/globalStorage/state.vscdb)
+2026-10-08 11:07:18.236 [info] [shared storage] Fallback application storage initialized with 43 items
+2026-10-08 11:07:18.240 [info] update#setState idle
+2026-10-08 11:07:21.740 [info] [Review server] {"event":"ready","version":3,"instanceId":"177dd9d5-3523-4883-9bdd-375f27fd1857","url":"http://127.0.0.1:42897","appPid":22277,"serverPid":22588,"token":"XytVLLBqjjexDJdFDxB99xWBAtgHF-uM0jOoUQ2oJYU","startedAt":1791437841719,"key":"stable","channel":"stable","appPath":"/usr/share/whiteboard/whiteboard","appVersion":"0.2.0","cliPath":"/usr/share/whiteboard/resources/app/review-runtime/dist/cli.js","cliVersion":"0.2.0","cliRuntimePath":"/usr/share/whiteboard/whiteboard","installationId":"035853b3-57a5-428f-afd3-75b99768f126"}
+2026-10-08 11:07:21.740 [info] [Review Desktop] server ready at http://127.0.0.1:42897
+2026-10-08 11:07:23.171 [info] [Review server] [Review] structural diff: /usr/share/whiteboard/resources/app/review-runtime/bin/diffr --repo /home/azaz/Desktop/code/Buniyadbyte/BuildCast/Build_cast_nest --format ndjson --stream-annotations 344fb823faffd0d58fa087b10f952bd543251d57 --
+2026-10-08 11:07:48.241 [info] update#setState checking for updates
+2026-10-08 11:07:48.657 [info] update#setState available for download
+2026-10-08 17:30:10.485 [info] Extension host with pid 22589 exited with code: 0, signal: unknown.
+2026-10-08 17:30:10.494 [error] [Review Desktop] server host terminated: exit 0 (unknown)

@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "projects": {
+    "/home/azaz": {
+      "decision": "trusted"
+    },
+    "/home/azaz/Desktop/code/Buniyadbyte/Interns_work/saumil/pdf_extract": {
+      "decision": "trusted"
+    }
+  }
+}

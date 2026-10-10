@@ -1,0 +1,70 @@
+2026-10-08 11:07:26.101 [info] Searching for interpreters in posix paths locator
+2026-10-08 11:07:26.101 [info] Searching for pyenv environments
+2026-10-08 11:07:26.101 [info] Searching for conda environments
+2026-10-08 11:07:26.101 [info] Searching for global virtual environments
+2026-10-08 11:07:26.101 [info] Searching for custom virtual environments
+2026-10-08 11:07:26.101 [warning] Dir "/home/azaz/Desktop/code/Buniyadbyte/BuildCast/Build_cast_nest/.pixi/envs" is not watchable (directory does not exist)
+2026-10-08 11:07:26.101 [info] pyenv is not installed
+2026-10-08 11:07:26.101 [info] Finished searching for pyenv environments: 87 milliseconds
+2026-10-08 11:07:26.101 [info] Finished searching for custom virtual envs: 72 milliseconds
+2026-10-08 11:07:26.101 [info] > conda info --json
+2026-10-08 11:07:26.101 [info] > hatch env show --json
+2026-10-08 11:07:26.101 [info] cwd: .
+2026-10-08 11:07:26.101 [info] Finished searching for global virtual envs: 143 milliseconds
+2026-10-08 11:07:26.101 [info] Found: /bin/python --> /bin/python3.14
+2026-10-08 11:07:26.322 [info] Found: /bin/python3 --> /bin/python3.14
+2026-10-08 11:07:26.404 [info] Found: /bin/python3.14 --> /bin/python3.14
+2026-10-08 11:07:26.410 [info] Skipping ActivatedEnv Detection:  process.env.VSCODE_CLI !== '1'
+2026-10-08 11:07:26.426 [info] Python interpreter path: /bin/python
+2026-10-08 11:07:26.644 [info] > pyenv which python
+2026-10-08 11:07:26.644 [info] cwd: .
+2026-10-08 11:07:26.696 [info] > /bin/python -I /usr/share/whiteboard/resources/app/extensions/ms-python.python/python_files/get_output_via_markers.py /usr/share/whiteboard/resources/app/extensions/ms-python.python/python_files/interpreterInfo.py
+2026-10-08 11:07:26.696 [info] Found: /sbin/python --> /sbin/python3.14
+2026-10-08 11:07:26.708 [info] Editor support is inactive since language server is set to None.
+2026-10-08 11:07:26.709 [info] Found: /sbin/python3 --> /sbin/python3.14
+2026-10-08 11:07:26.709 [info] Found: /sbin/python3.14 --> /sbin/python3.14
+2026-10-08 11:07:26.737 [info] Found: /usr/bin/python --> /usr/bin/python3.14
+2026-10-08 11:07:26.738 [info] Found: /usr/bin/python3 --> /usr/bin/python3.14
+2026-10-08 11:07:26.738 [info] Found: /usr/bin/python3.14 --> /usr/bin/python3.14
+2026-10-08 11:07:26.896 [info] Found: /usr/sbin/python --> /usr/sbin/python3.14
+2026-10-08 11:07:27.051 [info] > hatch env find default
+2026-10-08 11:07:27.051 [info] cwd: .
+2026-10-08 11:07:27.051 [info] > hatch env find hatch-build
+2026-10-08 11:07:27.051 [info] cwd: .
+2026-10-08 11:07:27.051 [info] > hatch env find hatch-check-code
+2026-10-08 11:07:27.051 [info] cwd: .
+2026-10-08 11:07:27.051 [info] > hatch env find hatch-check-fmt
+2026-10-08 11:07:27.051 [info] cwd: .
+2026-10-08 11:07:27.051 [info] > hatch env find hatch-check-types
+2026-10-08 11:07:27.051 [info] cwd: .
+2026-10-08 11:07:27.051 [info] > hatch env find hatch-static-analysis
+2026-10-08 11:07:27.051 [info] cwd: .
+2026-10-08 11:07:27.051 [info] > hatch env find hatch-test.py3.14
+2026-10-08 11:07:27.051 [info] cwd: .
+2026-10-08 11:07:27.051 [info] > hatch env find hatch-test.py3.14t
+2026-10-08 11:07:27.051 [info] cwd: .
+2026-10-08 11:07:27.051 [info] > hatch env find hatch-test.py3.13
+2026-10-08 11:07:27.051 [info] cwd: .
+2026-10-08 11:07:27.051 [info] > hatch env find hatch-test.py3.12
+2026-10-08 11:07:27.051 [info] cwd: .
+2026-10-08 11:07:27.051 [info] > hatch env find hatch-test.py3.11
+2026-10-08 11:07:27.051 [info] cwd: .
+2026-10-08 11:07:27.051 [info] > hatch env find hatch-test.py3.10
+2026-10-08 11:07:27.051 [info] cwd: .
+2026-10-08 11:07:27.051 [info] > hatch env find hatch-uv
+2026-10-08 11:07:27.051 [info] cwd: .
+2026-10-08 11:07:27.052 [info] Found: /usr/sbin/python3 --> /usr/sbin/python3.14
+2026-10-08 11:07:27.088 [info] Found: /usr/sbin/python3.14 --> /usr/sbin/python3.14
+2026-10-08 11:07:27.111 [error] Failed to resolve symbolic link:  [Error: ENOENT: no such file or directory, lstat '/home/azaz/.local/share/uv/python/cpython-3.11-linux-x86_64-gnu/bin/python3.11'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/azaz/.local/share/uv/python/cpython-3.11-linux-x86_64-gnu/bin/python3.11'
+}
+2026-10-08 11:07:27.197 [info] > /sbin/python -I /usr/share/whiteboard/resources/app/extensions/ms-python.python/python_files/get_output_via_markers.py /usr/share/whiteboard/resources/app/extensions/ms-python.python/python_files/interpreterInfo.py
+2026-10-08 11:07:27.242 [info] Finished searching for interpreters in posix paths locator: 1368 milliseconds
+2026-10-08 11:07:27.242 [info] > /usr/bin/python -I /usr/share/whiteboard/resources/app/extensions/ms-python.python/python_files/get_output_via_markers.py /usr/share/whiteboard/resources/app/extensions/ms-python.python/python_files/interpreterInfo.py
+2026-10-08 11:07:27.368 [info] > /usr/sbin/python -I /usr/share/whiteboard/resources/app/extensions/ms-python.python/python_files/get_output_via_markers.py /usr/share/whiteboard/resources/app/extensions/ms-python.python/python_files/interpreterInfo.py
+2026-10-08 11:07:27.983 [info] Environments refresh paths discovered (event): 2119 milliseconds
+2026-10-08 11:07:27.983 [info] Environments refresh finished (event): 2119 milliseconds
+2026-10-08 11:07:27.983 [info] Environments refresh paths discovered: 2119 milliseconds

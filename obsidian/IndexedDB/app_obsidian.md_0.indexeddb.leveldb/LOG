@@ -1,0 +1,50 @@
+2026/09/11-14:38:18.218 29296 Reusing MANIFEST /home/azaz/.config/obsidian/IndexedDB/app_obsidian.md_0.indexeddb.leveldb/MANIFEST-000001
+2026/09/11-14:38:18.218 29296 Recovering log #13
+2026/09/11-14:38:18.230 29296 Reusing old log /home/azaz/.config/obsidian/IndexedDB/app_obsidian.md_0.indexeddb.leveldb/000013.log 
+2026/09/11-14:38:18.231 29296 Delete type=2 #14
+2026/09/11-14:38:18.231 29296 Delete type=2 #12
+2026/09/11-14:38:18.231 29296 Delete type=2 #11
+2026/09/11-14:38:21.134 29296 Level-0 table #19: started
+2026/09/11-14:38:21.160 29296 Level-0 table #19: 1607115 bytes OK
+2026/09/11-14:38:21.163 29296 Delete type=0 #13
+2026/09/11-14:38:21.185 29296 Compacting 1@1 + 2@2 files
+2026/09/11-14:38:21.224 29296 Generated table #20@1: 11004 keys, 2191662 bytes
+2026/09/11-14:38:21.248 29296 Generated table #21@1: 6087 keys, 1609526 bytes
+2026/09/11-14:38:21.248 29296 Compacted 1@1 + 2@2 files => 3801188 bytes
+2026/09/11-14:38:21.250 29296 compacted to: files[ 0 0 2 0 0 0 0 ]
+2026/09/11-14:38:21.657 29296 Level-0 table #23: started
+2026/09/11-14:38:21.681 29296 Level-0 table #23: 1675094 bytes OK
+2026/09/11-14:38:21.682 29296 Delete type=2 #15
+2026/09/11-14:38:21.682 29296 Delete type=2 #19
+2026/09/11-14:38:21.683 29296 Delete type=2 #16
+2026/09/11-14:38:21.683 29296 Delete type=0 #18
+2026/09/11-14:38:21.728 29296 Compacting 1@1 + 2@2 files
+2026/09/11-14:38:21.776 29296 Generated table #24@1: 11004 keys, 2191877 bytes
+2026/09/11-14:38:21.807 29296 Generated table #25@1: 6090 keys, 1610134 bytes
+2026/09/11-14:38:21.807 29296 Compacted 1@1 + 2@2 files => 3802011 bytes
+2026/09/11-14:38:21.808 29296 compacted to: files[ 0 0 2 0 0 0 0 ]
+2026/09/11-14:38:22.132 29296 Level-0 table #27: started
+2026/09/11-14:38:22.161 29296 Level-0 table #27: 1669358 bytes OK
+2026/09/11-14:38:22.163 29296 Delete type=2 #20
+2026/09/11-14:38:22.163 29296 Delete type=2 #21
+2026/09/11-14:38:22.163 29296 Delete type=0 #22
+2026/09/11-14:38:22.163 29296 Delete type=2 #23
+2026/09/11-14:38:22.207 29296 Compacting 1@1 + 2@2 files
+2026/09/11-14:38:22.257 29296 Generated table #28@1: 11001 keys, 2189021 bytes
+2026/09/11-14:38:22.292 29296 Generated table #29@1: 6093 keys, 1611975 bytes
+2026/09/11-14:38:22.292 29296 Compacted 1@1 + 2@2 files => 3800996 bytes
+2026/09/11-14:38:22.293 29296 compacted to: files[ 0 0 2 0 0 0 0 ]
+2026/09/11-14:38:22.524 29296 Level-0 table #31: started
+2026/09/11-14:38:22.551 29296 Level-0 table #31: 1671720 bytes OK
+2026/09/11-14:38:22.556 29296 Delete type=2 #24
+2026/09/11-14:38:22.556 29296 Delete type=0 #26
+2026/09/11-14:38:22.556 29296 Delete type=2 #27
+2026/09/11-14:38:22.556 29296 Delete type=2 #25
+2026/09/11-14:38:22.582 2927f Compacting 1@1 + 2@2 files
+2026/09/11-14:38:22.627 2927f Generated table #32@1: 11005 keys, 2191316 bytes
+2026/09/11-14:38:22.663 2927f Generated table #33@1: 6090 keys, 1608737 bytes
+2026/09/11-14:38:22.663 2927f Compacted 1@1 + 2@2 files => 3800053 bytes
+2026/09/11-14:38:22.665 2927f compacted to: files[ 0 0 2 0 0 0 0 ]
+2026/09/11-14:38:22.665 2927f Delete type=2 #29
+2026/09/11-14:38:22.665 2927f Delete type=2 #28
+2026/09/11-14:38:22.665 2927f Delete type=2 #31

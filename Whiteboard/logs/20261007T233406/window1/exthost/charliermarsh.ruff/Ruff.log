@@ -1,0 +1,87 @@
+2026-10-08 00:12:20.453 [info] Name: Ruff
+2026-10-08 00:12:20.453 [info] Module: ruff
+2026-10-08 00:12:20.453 [info] The Python Environments extension is not installed or is disabled.
+2026-10-08 00:12:20.453 [info] Initializing Python extension
+2026-10-08 00:12:20.453 [info] Using Python extension for Python environment detection
+2026-10-08 00:12:22.101 [info] Resolving active Python environment for workspace: 'file:///home/azaz/Desktop/code/Buniyadbyte/BuildCast/Build_cast_nest'
+2026-10-08 00:12:22.109 [info] Resolved Python executable for Ruff lookup: '/bin/python'
+2026-10-08 00:12:22.212 [info] Falling back to bundled executable: /usr/share/whiteboard/resources/app/extensions/charliermarsh.ruff/bundled/libs/bin/ruff
+2026-10-08 00:12:22.273 [info] Resolved 'ruff.nativeServer: auto' to use the native server
+2026-10-08 00:12:22.281 [info] Workspace settings for /home/azaz/Desktop/code/Buniyadbyte/BuildCast/Build_cast_nest: {
+    "nativeServer": "auto",
+    "cwd": "/home/azaz/Desktop/code/Buniyadbyte/BuildCast/Build_cast_nest",
+    "workspace": "file:///home/azaz/Desktop/code/Buniyadbyte/BuildCast/Build_cast_nest",
+    "path": [],
+    "ignoreStandardLibrary": true,
+    "interpreter": [],
+    "configuration": null,
+    "importStrategy": "fromEnvironment",
+    "codeAction": {
+        "fixViolation": {
+            "enable": true
+        },
+        "disableRuleComment": {
+            "enable": true
+        }
+    },
+    "lint": {
+        "enable": true,
+        "run": "onType",
+        "args": [],
+        "preview": null,
+        "select": null,
+        "extendSelect": null,
+        "ignore": null
+    },
+    "format": {
+        "args": [],
+        "preview": null,
+        "backend": "internal"
+    },
+    "enable": true,
+    "organizeImports": true,
+    "fixAll": true,
+    "showNotifications": "off",
+    "exclude": null,
+    "lineLength": null,
+    "configurationPreference": "editorFirst",
+    "showSyntaxErrors": true,
+    "logLevel": null,
+    "logFile": null
+}
+2026-10-08 00:12:22.291 [info] Global settings: {
+    "nativeServer": "auto",
+    "cwd": "/home/azaz",
+    "workspace": "/home/azaz",
+    "path": [],
+    "ignoreStandardLibrary": true,
+    "interpreter": [],
+    "configuration": null,
+    "importStrategy": "fromEnvironment",
+    "codeAction": {
+        "fixViolation": {
+            "enable": true
+        },
+        "disableRuleComment": {
+            "enable": true
+        }
+    },
+    "lint": {
+        "enable": true,
+        "run": "onType",
+        "args": []
+    },
+    "format": {
+        "args": [],
+        "backend": "internal"
+    },
+    "enable": true,
+    "organizeImports": true,
+    "fixAll": true,
+    "showNotifications": "off",
+    "configurationPreference": "editorFirst",
+    "showSyntaxErrors": true
+}
+2026-10-08 00:12:22.291 [info] Found Ruff 0.16.0 at /usr/share/whiteboard/resources/app/extensions/charliermarsh.ruff/bundled/libs/bin/ruff
+2026-10-08 00:12:22.291 [info] Server run command: /usr/share/whiteboard/resources/app/extensions/charliermarsh.ruff/bundled/libs/bin/ruff server
+2026-10-08 00:12:22.292 [info] Server: Start requested.

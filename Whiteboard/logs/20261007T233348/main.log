@@ -1,0 +1,12 @@
+2026-10-07 23:33:48.697 [info] StorageMainService: creating application shared storage
+2026-10-07 23:33:48.992 [info] [shared storage] Creating shared storage database at '/home/azaz/.dev-fast-review-shared/sharedStorage/state.vscdb' (wasCreated: true)
+2026-10-07 23:33:48.994 [info] [shared storage] Initializing fallback application storage (path: /home/azaz/.config/Whiteboard/User/globalStorage/state.vscdb)
+2026-10-07 23:33:49.012 [info] [shared storage] Fallback application storage initialized with 3 items
+2026-10-07 23:33:49.013 [info] update#setState idle
+2026-10-07 23:33:58.711 [error] [Review Desktop] unable to resolve the login-shell environment; starting with the application environment: Unable to resolve your shell environment in a reasonable time. Please review your shell configuration and restart.
+2026-10-07 23:33:58.762 [error] Unable to resolve your shell environment in a reasonable time. Please review your shell configuration and restart.
+2026-10-07 23:33:58.762 [error] resolving shell environment failed Unable to resolve your shell environment in a reasonable time. Please review your shell configuration and restart.
+2026-10-07 23:33:58.765 [error] Unable to resolve your shell environment in a reasonable time. Please review your shell configuration and restart.
+2026-10-07 23:34:03.367 [info] Extension host with pid 121698 exited with code: 0, signal: unknown.
+2026-10-07 23:34:03.903 [error] Blocked vscode-file request vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/canvas/canvas-loader.js
+2026-10-07 23:34:04.113 [error] [Review Desktop] server host terminated: exit 0 (unknown)

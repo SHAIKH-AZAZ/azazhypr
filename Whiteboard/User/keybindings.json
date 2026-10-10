@@ -1,0 +1,86 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "ctrl+enter",
+        "command": "-geminicodeassist.generateCode",
+        "when": "authLoggedIn && config.geminicodeassist.enable && editorTextFocus && !inGeminiDiffView && !isInDiffEditor && !nextEditSessionAvailable"
+    },
+    {
+        "key": "ctrl+s",
+        "command": "-gemini.diff.accept",
+        "when": "gemini.diff.isVisible"
+    },
+    {
+        "key": "meta+s",
+        "command": "-gemini.diff.accept",
+        "when": "gemini.diff.isVisible"
+    },
+    {
+        "key": "alt+a",
+        "command": "-geminicodeassist.codelens.accept",
+        "when": "authLoggedIn && cloudcode.duetAI.documentMatch && config.geminicodeassist.enable && inGeminiDiffView && isInDiffEditor"
+    },
+    {
+        "key": "alt+d",
+        "command": "-geminicodeassist.codelens.reject",
+        "when": "authLoggedIn && cloudcode.duetAI.documentMatch && config.geminicodeassist.enable && inGeminiDiffView && isInDiffEditor"
+    },
+    {
+        "key": "ctrl+i",
+        "command": "-geminicodeassist.showinEditor",
+        "when": "authLoggedIn && config.geminicodeassist.enable && editorTextFocus && shouldRegisterInEditorCommand && !inGeminiDiffView && !isInDiffEditor"
+    },
+    {
+        "key": "ctrl+alt+x",
+        "command": "-geminicodeassist.terminal.addSelectionToChatContext",
+        "when": "terminalTextSelectedInFocused"
+    },
+    {
+        "key": "ctrl+alt+x",
+        "command": "-geminicodeassist.editor.addSelectionToChatContext",
+        "when": "!terminalTextSelectedInFocused"
+    },
+    {
+        "key": "escape",
+        "command": "-geminicodeassist.rejectCompletion",
+        "when": "authLoggedIn && config.geminicodeassist.enable && inlineSuggestionVisible"
+    },
+    {
+        "key": "alt+g",
+        "command": "-workbench.view.extension.geminiChat",
+        "when": "viewContainer.workbench.view.extension.geminiChat.enabled && !runningOnCloudShell"
+    },
+    {
+        "key": "alt+/",
+        "command": "-geminicodeassist.editor.disableContextHint",
+        "when": "gcaPinnableTextHighlightedInEditor"
+    },
+    {
+        "key": "tab",
+        "command": "-geminicodeassist.nextEdit.acceptSuggestion",
+        "when": "authLoggedIn && config.geminicodeassist.enable && editorTextFocus && nextEditSessionActive"
+    },
+    {
+        "key": "escape",
+        "command": "-geminicodeassist.nextEdit.dismissSuggestions",
+        "when": "authLoggedIn && config.geminicodeassist.enable && editorTextFocus && nextEditSessionActive || authLoggedIn && config.geminicodeassist.enable && editorTextFocus && nextEditSessionAvailable"
+    },
+    {
+        "key": "tab",
+        "command": "-geminicodeassist.nextEdit.startSession",
+        "when": "authLoggedIn && config.geminicodeassist.enable && editorTextFocus && nextEditSessionAvailable"
+    },
+    {
+        "key": "meta+s",
+        "command": "-geminicodeassist.saveKeysClicked",
+        "when": "inGeminiDiffView"
+    },
+    {
+        "key": "shift+enter",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "\u001b\r"
+        },
+        "when": "terminalFocus"
+    }
+]

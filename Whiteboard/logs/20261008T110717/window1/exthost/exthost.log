@@ -1,0 +1,82 @@
+2026-10-08 11:07:21.490 [info] Extension host with pid 22589 started
+2026-10-08 11:07:21.490 [info] Skipping acquiring lock for /home/azaz/.config/Whiteboard/User/workspaceStorage/5c8dc606.
+2026-10-08 11:07:21.505 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*'
+2026-10-08 11:07:21.519 [info] Eager extensions activated
+2026-10-08 11:07:25.230 [info] ExtensionService#_doActivateExtension ms-python.python, startup: false, activationEvent: 'onLanguage:markdown', root cause: charliermarsh.ruff
+2026-10-08 11:07:25.463 [info] ExtensionService#_doActivateExtension vscode.markdown-language-features, startup: false, activationEvent: 'onLanguage:markdown'
+2026-10-08 11:07:25.576 [info] ExtensionService#_doActivateExtension vscode.typescript-language-features, startup: false, activationEvent: 'onLanguage:typescript'
+2026-10-08 11:07:26.424 [error] Error: Unknown actor MainThreadTesting
+    at _RPCProtocol._doInvokeHandler (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406805:13)
+    at _RPCProtocol._invokeHandler (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406797:35)
+    at _RPCProtocol._receiveRequest (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406740:22)
+    at _RPCProtocol._receiveOneMessage (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406669:14)
+    at UniqueContainer.value (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406556:59)
+    at Emitter._deliver (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:17742:16)
+    at Emitter.fire (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:17767:12)
+    at BufferedEmitter.fire (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:404737:23)
+    at MessagePort.<anonymous> (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:410311:23)
+2026-10-08 11:07:26.424 [error] Error: Unknown actor MainThreadTesting
+    at _RPCProtocol._doInvokeHandler (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406805:13)
+    at _RPCProtocol._invokeHandler (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406797:35)
+    at _RPCProtocol._receiveRequest (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406740:22)
+    at _RPCProtocol._receiveOneMessage (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406669:14)
+    at UniqueContainer.value (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406556:59)
+    at Emitter._deliver (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:17742:16)
+    at Emitter.fire (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:17767:12)
+    at BufferedEmitter.fire (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:404737:23)
+    at MessagePort.<anonymous> (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:410311:23)
+2026-10-08 11:07:26.425 [error] Error: Unknown actor MainThreadTesting
+    at _RPCProtocol._doInvokeHandler (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406805:13)
+    at _RPCProtocol._invokeHandler (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406797:35)
+    at _RPCProtocol._receiveRequest (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406740:22)
+    at _RPCProtocol._receiveOneMessage (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406669:14)
+    at UniqueContainer.value (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406556:59)
+    at Emitter._deliver (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:17742:16)
+    at Emitter.fire (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:17767:12)
+    at BufferedEmitter.fire (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:404737:23)
+    at MessagePort.<anonymous> (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:410311:23)
+2026-10-08 11:07:26.425 [error] Error: Unknown actor MainThreadTesting
+    at _RPCProtocol._doInvokeHandler (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406805:13)
+    at _RPCProtocol._invokeHandler (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406797:35)
+    at _RPCProtocol._receiveRequest (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406740:22)
+    at _RPCProtocol._receiveOneMessage (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406669:14)
+    at UniqueContainer.value (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406556:59)
+    at Emitter._deliver (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:17742:16)
+    at Emitter.fire (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:17767:12)
+    at BufferedEmitter.fire (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:404737:23)
+    at MessagePort.<anonymous> (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:410311:23)
+2026-10-08 11:07:26.425 [error] Error: Unknown actor MainThreadTesting
+    at _RPCProtocol._doInvokeHandler (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406805:13)
+    at _RPCProtocol._invokeHandler (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406797:35)
+    at _RPCProtocol._receiveRequest (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406740:22)
+    at _RPCProtocol._receiveOneMessage (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406669:14)
+    at UniqueContainer.value (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406556:59)
+    at Emitter._deliver (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:17742:16)
+    at Emitter.fire (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:17767:12)
+    at BufferedEmitter.fire (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:404737:23)
+    at MessagePort.<anonymous> (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:410311:23)
+2026-10-08 11:07:26.462 [info] ExtensionService#_doActivateExtension charliermarsh.ruff, startup: false, activationEvent: 'onLanguage:markdown'
+2026-10-08 11:07:26.629 [error] Error: Unknown actor MainThreadTesting
+    at _RPCProtocol._doInvokeHandler (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406805:13)
+    at _RPCProtocol._invokeHandler (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406797:35)
+    at _RPCProtocol._receiveRequest (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406740:22)
+    at _RPCProtocol._receiveOneMessage (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406669:14)
+    at UniqueContainer.value (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406556:59)
+    at Emitter._deliver (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:17742:16)
+    at Emitter.fire (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:17767:12)
+    at BufferedEmitter.fire (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:404737:23)
+    at MessagePort.<anonymous> (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:410311:23)
+2026-10-08 11:07:27.428 [error] Error: Review does not expose the terminal API
+    at unavailable (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:253044:25)
+    at ReviewMainThreadTerminalService.$createTerminal (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:253106:12)
+    at _RPCProtocol._doInvokeHandler (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406811:19)
+    at _RPCProtocol._invokeHandler (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406797:35)
+    at _RPCProtocol._receiveRequest (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406740:22)
+    at _RPCProtocol._receiveOneMessage (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406669:14)
+    at UniqueContainer.value (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:406556:59)
+    at Emitter._deliver (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:17742:16)
+    at Emitter.fire (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:17767:12)
+    at BufferedEmitter.fire (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:404737:23)
+    at MessagePort.<anonymous> (vscode-file://vscode-app/usr/share/whiteboard/resources/app/out/vs/review/review.desktop.main.js:410311:23)
+2026-10-08 17:30:10.392 [info] Extension host terminating: received terminate message from renderer
+2026-10-08 17:30:10.483 [info] Extension host with pid 22589 exiting with code 0

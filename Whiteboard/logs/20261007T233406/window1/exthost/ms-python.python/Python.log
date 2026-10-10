@@ -1,0 +1,133 @@
+2026-10-08 00:12:19.568 [warning] Dir "/home/azaz/.dev/tutorial/sample-service/.git/dev-fast/reviews/1a091762-03b8-4d4f-acaf-dd6cccd370b8/head/1840634e4e0a18ad3462b53c2e56cf53c5c3c600/.pixi/envs" is not watchable (directory does not exist)
+2026-10-08 00:12:19.568 [info] Searching for interpreters in posix paths locator
+2026-10-08 00:12:19.568 [info] Searching for pyenv environments
+2026-10-08 00:12:19.568 [info] Searching for conda environments
+2026-10-08 00:12:19.568 [info] Searching for global virtual environments
+2026-10-08 00:12:19.568 [info] Searching for custom virtual environments
+2026-10-08 00:12:19.568 [warning] Dir "/home/azaz/Desktop/code/Buniyadbyte/BuildCast/Build_cast_nest/.pixi/envs" is not watchable (directory does not exist)
+2026-10-08 00:12:19.568 [info] pyenv is not installed
+2026-10-08 00:12:19.568 [info] Finished searching for pyenv environments: 37 milliseconds
+2026-10-08 00:12:19.568 [info] Finished searching for custom virtual envs: 28 milliseconds
+2026-10-08 00:12:19.568 [info] > conda info --json
+2026-10-08 00:12:19.568 [info] > hatch env show --json
+2026-10-08 00:12:19.568 [info] cwd: ~/.dev/tutorial/sample-service/.git/dev-fast/reviews/1a091762-03b8-4d4f-acaf-dd6cccd370b8/head/1840634e4e0a18ad3462b53c2e56cf53c5c3c600
+2026-10-08 00:12:19.568 [info] > hatch env show --json
+2026-10-08 00:12:19.568 [info] cwd: .
+2026-10-08 00:12:19.568 [info] Finished searching for global virtual envs: 312 milliseconds
+2026-10-08 00:12:19.568 [info] Found: /bin/python --> /bin/python3.14
+2026-10-08 00:12:19.748 [info] Found: /bin/python3 --> /bin/python3.14
+2026-10-08 00:12:19.753 [info] > pyenv which python
+2026-10-08 00:12:19.753 [info] cwd: .
+2026-10-08 00:12:19.767 [info] Skipping ActivatedEnv Detection:  process.env.VSCODE_CLI !== '1'
+2026-10-08 00:12:19.767 [info] Skipping ActivatedEnv Detection:  process.env.VSCODE_CLI !== '1'
+2026-10-08 00:12:19.770 [info] Found: /bin/python3.14 --> /bin/python3.14
+2026-10-08 00:12:19.909 [info] > pyenv which python
+2026-10-08 00:12:19.909 [info] cwd: .
+2026-10-08 00:12:20.033 [info] > hatch env find default
+2026-10-08 00:12:20.033 [info] cwd: .
+2026-10-08 00:12:20.033 [info] > hatch env find hatch-build
+2026-10-08 00:12:20.033 [info] cwd: .
+2026-10-08 00:12:20.033 [info] > hatch env find hatch-check-code
+2026-10-08 00:12:20.033 [info] cwd: .
+2026-10-08 00:12:20.033 [info] > hatch env find hatch-check-fmt
+2026-10-08 00:12:20.033 [info] cwd: .
+2026-10-08 00:12:20.033 [info] > hatch env find hatch-check-types
+2026-10-08 00:12:20.033 [info] cwd: .
+2026-10-08 00:12:20.033 [info] > hatch env find hatch-static-analysis
+2026-10-08 00:12:20.033 [info] cwd: .
+2026-10-08 00:12:20.033 [info] > hatch env find hatch-test.py3.14
+2026-10-08 00:12:20.033 [info] cwd: .
+2026-10-08 00:12:20.033 [info] > hatch env find hatch-test.py3.14t
+2026-10-08 00:12:20.033 [info] cwd: .
+2026-10-08 00:12:20.033 [info] > hatch env find hatch-test.py3.13
+2026-10-08 00:12:20.033 [info] cwd: .
+2026-10-08 00:12:20.033 [info] > hatch env find hatch-test.py3.12
+2026-10-08 00:12:20.033 [info] cwd: .
+2026-10-08 00:12:20.033 [info] > hatch env find hatch-test.py3.11
+2026-10-08 00:12:20.033 [info] cwd: .
+2026-10-08 00:12:20.033 [info] > hatch env find hatch-test.py3.10
+2026-10-08 00:12:20.033 [info] cwd: .
+2026-10-08 00:12:20.033 [info] > hatch env find hatch-uv
+2026-10-08 00:12:20.033 [info] cwd: .
+2026-10-08 00:12:20.407 [info] > hatch env find default
+2026-10-08 00:12:20.408 [info] cwd: ~/.dev/tutorial/sample-service/.git/dev-fast/reviews/1a091762-03b8-4d4f-acaf-dd6cccd370b8/head/1840634e4e0a18ad3462b53c2e56cf53c5c3c600
+2026-10-08 00:12:20.408 [info] > hatch env find hatch-build
+2026-10-08 00:12:20.408 [info] cwd: ~/.dev/tutorial/sample-service/.git/dev-fast/reviews/1a091762-03b8-4d4f-acaf-dd6cccd370b8/head/1840634e4e0a18ad3462b53c2e56cf53c5c3c600
+2026-10-08 00:12:20.408 [info] > hatch env find hatch-check-code
+2026-10-08 00:12:20.408 [info] cwd: ~/.dev/tutorial/sample-service/.git/dev-fast/reviews/1a091762-03b8-4d4f-acaf-dd6cccd370b8/head/1840634e4e0a18ad3462b53c2e56cf53c5c3c600
+2026-10-08 00:12:20.408 [info] > hatch env find hatch-check-fmt
+2026-10-08 00:12:20.408 [info] cwd: ~/.dev/tutorial/sample-service/.git/dev-fast/reviews/1a091762-03b8-4d4f-acaf-dd6cccd370b8/head/1840634e4e0a18ad3462b53c2e56cf53c5c3c600
+2026-10-08 00:12:20.408 [info] > hatch env find hatch-check-types
+2026-10-08 00:12:20.408 [info] cwd: ~/.dev/tutorial/sample-service/.git/dev-fast/reviews/1a091762-03b8-4d4f-acaf-dd6cccd370b8/head/1840634e4e0a18ad3462b53c2e56cf53c5c3c600
+2026-10-08 00:12:20.408 [info] > hatch env find hatch-static-analysis
+2026-10-08 00:12:20.408 [info] cwd: ~/.dev/tutorial/sample-service/.git/dev-fast/reviews/1a091762-03b8-4d4f-acaf-dd6cccd370b8/head/1840634e4e0a18ad3462b53c2e56cf53c5c3c600
+2026-10-08 00:12:20.408 [info] > hatch env find hatch-test.py3.14
+2026-10-08 00:12:20.408 [info] cwd: ~/.dev/tutorial/sample-service/.git/dev-fast/reviews/1a091762-03b8-4d4f-acaf-dd6cccd370b8/head/1840634e4e0a18ad3462b53c2e56cf53c5c3c600
+2026-10-08 00:12:20.408 [info] > hatch env find hatch-test.py3.14t
+2026-10-08 00:12:20.408 [info] cwd: ~/.dev/tutorial/sample-service/.git/dev-fast/reviews/1a091762-03b8-4d4f-acaf-dd6cccd370b8/head/1840634e4e0a18ad3462b53c2e56cf53c5c3c600
+2026-10-08 00:12:20.408 [info] > hatch env find hatch-test.py3.13
+2026-10-08 00:12:20.408 [info] cwd: ~/.dev/tutorial/sample-service/.git/dev-fast/reviews/1a091762-03b8-4d4f-acaf-dd6cccd370b8/head/1840634e4e0a18ad3462b53c2e56cf53c5c3c600
+2026-10-08 00:12:20.408 [info] > hatch env find hatch-test.py3.12
+2026-10-08 00:12:20.408 [info] cwd: ~/.dev/tutorial/sample-service/.git/dev-fast/reviews/1a091762-03b8-4d4f-acaf-dd6cccd370b8/head/1840634e4e0a18ad3462b53c2e56cf53c5c3c600
+2026-10-08 00:12:20.408 [info] > hatch env find hatch-test.py3.11
+2026-10-08 00:12:20.408 [info] cwd: ~/.dev/tutorial/sample-service/.git/dev-fast/reviews/1a091762-03b8-4d4f-acaf-dd6cccd370b8/head/1840634e4e0a18ad3462b53c2e56cf53c5c3c600
+2026-10-08 00:12:20.408 [info] > hatch env find hatch-test.py3.10
+2026-10-08 00:12:20.408 [info] cwd: ~/.dev/tutorial/sample-service/.git/dev-fast/reviews/1a091762-03b8-4d4f-acaf-dd6cccd370b8/head/1840634e4e0a18ad3462b53c2e56cf53c5c3c600
+2026-10-08 00:12:20.408 [info] > hatch env find hatch-uv
+2026-10-08 00:12:20.408 [info] cwd: ~/.dev/tutorial/sample-service/.git/dev-fast/reviews/1a091762-03b8-4d4f-acaf-dd6cccd370b8/head/1840634e4e0a18ad3462b53c2e56cf53c5c3c600
+2026-10-08 00:12:20.455 [info] Found: /sbin/python --> /sbin/python3.14
+2026-10-08 00:12:20.468 [info] Found: /sbin/python3 --> /sbin/python3.14
+2026-10-08 00:12:20.468 [info] Found: /sbin/python3.14 --> /sbin/python3.14
+2026-10-08 00:12:20.518 [info] Found: /usr/bin/python --> /usr/bin/python3.14
+2026-10-08 00:12:20.518 [info] Found: /usr/bin/python3 --> /usr/bin/python3.14
+2026-10-08 00:12:20.518 [info] Found: /usr/bin/python3.14 --> /usr/bin/python3.14
+2026-10-08 00:12:20.680 [info] Found: /usr/sbin/python --> /usr/sbin/python3.14
+2026-10-08 00:12:20.680 [info] Found: /usr/sbin/python3 --> /usr/sbin/python3.14
+2026-10-08 00:12:20.681 [info] Found: /usr/sbin/python3.14 --> /usr/sbin/python3.14
+2026-10-08 00:12:20.684 [error] Failed to resolve symbolic link:  [Error: ENOENT: no such file or directory, lstat '/home/azaz/.local/share/uv/python/cpython-3.11-linux-x86_64-gnu/bin/python3.11'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/azaz/.local/share/uv/python/cpython-3.11-linux-x86_64-gnu/bin/python3.11'
+}
+2026-10-08 00:12:20.731 [info] > /bin/python -I /usr/share/whiteboard/resources/app/extensions/ms-python.python/python_files/get_output_via_markers.py /usr/share/whiteboard/resources/app/extensions/ms-python.python/python_files/interpreterInfo.py
+2026-10-08 00:12:20.796 [info] > /sbin/python -I /usr/share/whiteboard/resources/app/extensions/ms-python.python/python_files/get_output_via_markers.py /usr/share/whiteboard/resources/app/extensions/ms-python.python/python_files/interpreterInfo.py
+2026-10-08 00:12:20.829 [info] Finished searching for interpreters in posix paths locator: 1709 milliseconds
+2026-10-08 00:12:20.925 [info] > /usr/bin/python -I /usr/share/whiteboard/resources/app/extensions/ms-python.python/python_files/get_output_via_markers.py /usr/share/whiteboard/resources/app/extensions/ms-python.python/python_files/interpreterInfo.py
+2026-10-08 00:12:21.016 [info] > /usr/sbin/python -I /usr/share/whiteboard/resources/app/extensions/ms-python.python/python_files/get_output_via_markers.py /usr/share/whiteboard/resources/app/extensions/ms-python.python/python_files/interpreterInfo.py
+2026-10-08 00:12:22.069 [info] Environments refresh paths discovered (event): 2949 milliseconds
+2026-10-08 00:12:22.069 [info] Environments refresh finished (event): 2949 milliseconds
+2026-10-08 00:12:22.069 [info] Environments refresh paths discovered: 2949 milliseconds
+2026-10-08 00:12:22.083 [info] Searching for interpreters in posix paths locator
+2026-10-08 00:12:22.083 [info] Searching for pyenv environments
+2026-10-08 00:12:22.083 [info] Searching for conda environments
+2026-10-08 00:12:22.083 [info] Searching for global virtual environments
+2026-10-08 00:12:22.083 [info] Searching for custom virtual environments
+2026-10-08 00:12:22.086 [info] pyenv is not installed
+2026-10-08 00:12:22.086 [info] Finished searching for pyenv environments: 3 milliseconds
+2026-10-08 00:12:22.086 [info] Finished searching for custom virtual envs: 3 milliseconds
+2026-10-08 00:12:22.088 [info] Finished searching for global virtual envs: 5 milliseconds
+2026-10-08 00:12:22.112 [info] Editor support is inactive since language server is set to None.
+2026-10-08 00:12:22.112 [info] Python interpreter path: /bin/python
+2026-10-08 00:12:22.113 [info] Found: /bin/python --> /bin/python3.14
+2026-10-08 00:12:22.114 [info] Found: /bin/python3 --> /bin/python3.14
+2026-10-08 00:12:22.115 [info] Found: /bin/python3.14 --> /bin/python3.14
+2026-10-08 00:12:22.212 [info] Found: /sbin/python --> /sbin/python3.14
+2026-10-08 00:12:22.225 [info] Found: /sbin/python3 --> /sbin/python3.14
+2026-10-08 00:12:22.230 [info] Found: /sbin/python3.14 --> /sbin/python3.14
+2026-10-08 00:12:22.264 [info] Found: /usr/bin/python --> /usr/bin/python3.14
+2026-10-08 00:12:22.265 [info] Found: /usr/bin/python3 --> /usr/bin/python3.14
+2026-10-08 00:12:22.265 [info] Found: /usr/bin/python3.14 --> /usr/bin/python3.14
+2026-10-08 00:12:22.348 [info] Found: /usr/sbin/python --> /usr/sbin/python3.14
+2026-10-08 00:12:22.349 [info] Found: /usr/sbin/python3 --> /usr/sbin/python3.14
+2026-10-08 00:12:22.349 [info] Found: /usr/sbin/python3.14 --> /usr/sbin/python3.14
+2026-10-08 00:12:22.350 [error] Failed to resolve symbolic link:  [Error: ENOENT: no such file or directory, lstat '/home/azaz/.local/share/uv/python/cpython-3.11-linux-x86_64-gnu/bin/python3.11'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/azaz/.local/share/uv/python/cpython-3.11-linux-x86_64-gnu/bin/python3.11'
+}
+2026-10-08 00:12:22.370 [info] Finished searching for interpreters in posix paths locator: 299 milliseconds
+2026-10-08 00:12:22.402 [info] Environments refresh paths discovered (event): 331 milliseconds
+2026-10-08 00:12:22.402 [info] Environments refresh finished (event): 331 milliseconds
+2026-10-08 00:12:22.402 [info] Environments refresh paths discovered: 331 milliseconds

@@ -1,0 +1,41 @@
+2026-10-08 00:21:52.941 [info] Telemetry level is off
+2026-10-08 00:21:52.941 [info] Experiments are disabled, only manually opted experiments are active.
+2026-10-08 00:21:52.941 [warning] Dir "/home/azaz/Desktop/code/Buniyadbyte/BuildCast/Build_cast_nest/.pixi/envs" is not watchable (directory does not exist)
+2026-10-08 00:21:52.974 [info] Skipping ActivatedEnv Detection:  process.env.VSCODE_CLI !== '1'
+2026-10-08 00:21:52.978 [info] Python interpreter path: /bin/python
+2026-10-08 00:21:53.010 [info] Starting Environment refresh
+2026-10-08 00:21:53.031 [info] > hatch env show --json
+2026-10-08 00:21:53.031 [info] cwd: .
+2026-10-08 00:21:53.092 [info] > /bin/python -I /usr/share/whiteboard/resources/app/extensions/ms-python.python/python_files/get_output_via_markers.py /usr/share/whiteboard/resources/app/extensions/ms-python.python/python_files/interpreterInfo.py
+2026-10-08 00:21:53.529 [info] > hatch env find default
+2026-10-08 00:21:53.529 [info] cwd: .
+2026-10-08 00:21:53.529 [info] > hatch env find hatch-build
+2026-10-08 00:21:53.529 [info] cwd: .
+2026-10-08 00:21:53.529 [info] > hatch env find hatch-check-code
+2026-10-08 00:21:53.529 [info] cwd: .
+2026-10-08 00:21:53.529 [info] > hatch env find hatch-check-fmt
+2026-10-08 00:21:53.529 [info] cwd: .
+2026-10-08 00:21:53.529 [info] > hatch env find hatch-check-types
+2026-10-08 00:21:53.529 [info] cwd: .
+2026-10-08 00:21:53.529 [info] > hatch env find hatch-static-analysis
+2026-10-08 00:21:53.529 [info] cwd: .
+2026-10-08 00:21:53.529 [info] > hatch env find hatch-test.py3.14
+2026-10-08 00:21:53.529 [info] cwd: .
+2026-10-08 00:21:53.529 [info] > hatch env find hatch-test.py3.14t
+2026-10-08 00:21:53.529 [info] cwd: .
+2026-10-08 00:21:53.529 [info] > hatch env find hatch-test.py3.13
+2026-10-08 00:21:53.529 [info] cwd: .
+2026-10-08 00:21:53.529 [info] > hatch env find hatch-test.py3.12
+2026-10-08 00:21:53.529 [info] cwd: .
+2026-10-08 00:21:53.529 [info] > hatch env find hatch-test.py3.11
+2026-10-08 00:21:53.529 [info] cwd: .
+2026-10-08 00:21:53.529 [info] > hatch env find hatch-test.py3.10
+2026-10-08 00:21:53.529 [info] cwd: .
+2026-10-08 00:21:53.529 [info] > hatch env find hatch-uv
+2026-10-08 00:21:53.529 [info] cwd: .
+2026-10-08 00:21:54.431 [info] Environments refresh finished (event): 1422 milliseconds
+2026-10-08 00:21:54.431 [info] Environments refresh paths discovered: 1422 milliseconds
+2026-10-08 00:21:54.433 [info] Environment refresh took 1424 milliseconds
+2026-10-08 00:21:54.441 [info] > pyenv which python
+2026-10-08 00:21:54.441 [info] cwd: .
+2026-10-08 00:21:54.459 [info] Editor support is inactive since language server is set to None.

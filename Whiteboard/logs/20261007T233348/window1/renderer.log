@@ -1,0 +1,4 @@
+2026-10-07 23:33:54.610 [info] Started initializing default profile extensions in extensions installation folder. file:///home/azaz/.dev-fast-review/extensions
+2026-10-07 23:33:55.329 [info] Completed initializing default profile extensions in extensions installation folder. file:///home/azaz/.dev-fast-review/extensions
+2026-10-07 23:33:56.116 [warning] [lifecycle] onWillShutdown is taking a long time, pending operations: join.stopExtensionHosts
+2026-10-07 23:33:58.867 [info] Started local extension host with pid 121698.

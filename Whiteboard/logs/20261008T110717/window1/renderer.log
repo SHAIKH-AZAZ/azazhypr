@@ -1,0 +1,4 @@
+2026-10-08 11:07:20.930 [info] Started local extension host with pid 22589.
+2026-10-08 11:07:25.581 [error] ResizeObserver loop completed with undelivered notifications.
+2026-10-08 11:07:26.431 [error] Unknown actor MainThreadTesting
+2026-10-08 11:07:27.442 [error] Review does not expose the terminal API

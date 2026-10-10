@@ -1,0 +1,85 @@
+{
+    "telemetry.sqmId": "",
+    "telemetry.machineId": "b61c175d935fb8ec7c0a4e1747677b5bbc206eddf6233b603ed383c76b53449e",
+    "telemetry.devDeviceId": "4807224a-8956-490b-a742-4296bf5ef4bf",
+    "backupWorkspaces": {
+        "workspaces": [],
+        "folders": [],
+        "emptyWindows": [
+            {
+                "backupFolder": "1791396229550"
+            }
+        ]
+    },
+    "profileAssociations": {
+        "workspaces": {
+            "file:///home/azaz/.dev/tutorial/sample-service/.git/dev-fast/reviews/1a091762-03b8-4d4f-acaf-dd6cccd370b8/navigator/workspaces/1840634e4e0a18ad3462b53c2e56cf53c5c3c600/sample-service.code-workspace": "__default__profile__",
+            "file:///home/azaz/Desktop/code/Buniyadbyte/BuildCast/Build_cast_nest/.git/dev-fast/reviews/96ec9506-c4d1-41c7-b027-4db53660dec0/navigator/workspaces/worktree/buildcast-nest-api.code-workspace": "__default__profile__"
+        },
+        "emptyWindows": {
+            "1791396229550": "__default__profile__"
+        }
+    },
+    "windowControlHeight": 58,
+    "theme": "vs-dark",
+    "themeBackground": "#1e1e1e",
+    "windowSplash": {
+        "zoomLevel": 0,
+        "baseTheme": "vs-dark",
+        "colorInfo": {
+            "foreground": "#eef0f4",
+            "background": "#1e1e1e",
+            "editorBackground": "rgba(30, 30, 30, 0.8)",
+            "titleBarBackground": "#12161e",
+            "activityBarBackground": "rgba(30, 30, 30, 0.8)",
+            "sideBarBackground": "rgba(30, 30, 30, 0.8)",
+            "panelBackground": "rgba(30, 30, 30, 0)",
+            "editorGroupBorder": "#444444",
+            "agentsPanelBackground": "rgba(30, 30, 30, 0.8)",
+            "agentsPanelBorder": "#303031",
+            "statusBarBackground": "#007acc",
+            "statusBarNoFolderBackground": "#68217a"
+        },
+        "layoutInfo": {
+            "sideBarSide": "left",
+            "editorPartMinWidth": 220,
+            "titleBarHeight": 40,
+            "activityBarWidth": 0,
+            "sideBarWidth": 0,
+            "auxiliaryBarWidth": 0,
+            "statusBarHeight": 0,
+            "windowBorder": false,
+            "modernUI": false
+        }
+    },
+    "windowsState": {
+        "lastActiveWindow": {
+            "backupPath": "/home/azaz/.config/Whiteboard/Backups/1791396229550",
+            "uiState": {
+                "mode": 0,
+                "x": 16,
+                "y": 10,
+                "width": 1920,
+                "height": 1080,
+                "zoomLevel": 2
+            }
+        },
+        "openedWindows": []
+    },
+    "windowSplashWorkspaceOverride": {
+        "layoutInfo": {
+            "sideBarWidth": 238,
+            "auxiliaryBarWidth": 300,
+            "workspaces": {
+                "83ddac4587adb4d37b96e9ba96377954": {
+                    "sideBarVisible": true,
+                    "auxiliaryBarVisible": false
+                },
+                "455d36430bec626a3f46d456aab3b4ba": {
+                    "sideBarVisible": true,
+                    "auxiliaryBarVisible": false
+                }
+            }
+        }
+    }
+}

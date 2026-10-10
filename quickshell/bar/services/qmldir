@@ -1,0 +1,4 @@
+singleton Theme Theme.qml
+singleton Sys Sys.qml
+singleton Notifs Notifs.qml
+singleton Config Config.qml

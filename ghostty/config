@@ -1,0 +1,54 @@
+# Font
+font-family = "JetBrainsMono Nerd Font"
+font-size = 14
+
+# Ligatures
+font-feature = liga
+font-feature = calt
+
+# Transparency & Blur
+background-opacity = 0.7
+background-blur = 50
+
+# Window Size
+window-width = 105
+window-height = 36
+
+# Padding
+window-padding-x = 4
+window-padding-y = 4
+window-padding-color = extend
+
+# Window Behavior
+confirm-close-surface = false
+
+# Hide window decorations (optional)
+# window-decoration = none
+
+# Show current working directory in subtitle
+window-subtitle = working-directory
+
+# Disable Ctrl+Shift+Q
+keybind = ctrl+shift+q=ignore
+
+# Cursor
+cursor-style = block
+cursor-opacity = 1
+
+custom-shader  = "./shaders/cursor_glide.glsl"
+
+# Scrolling
+scrollback-limit = 2000
+
+# Bell
+# audible-bell = false
+
+# Colors
+foreground = #dddddd
+background = #000000
+cursor-color = #dddddd
+selection-foreground = #dddddd
+selection-background = #444444
+
+# Theme
+theme = "3024 Day"

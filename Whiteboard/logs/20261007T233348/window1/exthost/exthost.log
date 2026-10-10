@@ -1,0 +1,6 @@
+2026-10-07 23:34:01.476 [info] Extension host with pid 121698 started
+2026-10-07 23:34:01.476 [info] Skipping acquiring lock for /home/azaz/.config/Whiteboard/User/workspaceStorage/5c8dc606.
+2026-10-07 23:34:01.525 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*'
+2026-10-07 23:34:01.576 [info] Eager extensions activated
+2026-10-07 23:34:03.365 [info] Extension host terminating: received terminate message from renderer
+2026-10-07 23:34:03.366 [info] Extension host with pid 121698 exiting with code 0

@@ -1,0 +1,43 @@
+{
+  "workbenchHtmlPath": "/usr/share/code/resources/app/out/vs/code/electron-browser/workbench/workbench.html",
+  "jsPath": "/usr/share/code/resources/app/out/main.js",
+  "electronJsPath": "/usr/share/code/resources/app/out/main.js",
+  "settingsJsonPath": "/home/azaz/.config/Code/User/settings.json",
+  "cliCommand": "code",
+  "previousCustomizations": {
+    "saved": true,
+    "terminalBackground": null,
+    "vibrancyBackgrounds": {
+      "editorPane.background": null,
+      "editorGroupHeader.tabsBackground": null,
+      "editorGroupHeader.noTabsBackground": null,
+      "breadcrumb.background": null,
+      "editorGutter.background": null,
+      "panel.background": null,
+      "panelStickyScroll.background": null,
+      "tab.activeBackground": null,
+      "tab.unfocusedActiveBackground": null,
+      "sideBar.background": null,
+      "sideBarTitle.background": null,
+      "sideBarStickyScroll.background": null,
+      "activityBar.background": null,
+      "editor.background": null,
+      "editorStickyScroll.background": null,
+      "editorStickyScrollGutter.background": null,
+      "tab.inactiveBackground": null,
+      "tab.unfocusedInactiveBackground": null,
+      "inlineChat.background": null,
+      "editorWidget.background": null,
+      "editorHoverWidget.background": null,
+      "editorSuggestWidget.background": null,
+      "notifications.background": null,
+      "notificationCenterHeader.background": null,
+      "menu.background": null,
+      "quickInput.background": null
+    },
+    "gpuAcceleration": null,
+    "removedFromApplyToAllProfiles": true,
+    "systemColorTheme": null,
+    "autoDetectColorScheme": null
+  }
+}
