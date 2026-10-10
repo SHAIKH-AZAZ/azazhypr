@@ -10,7 +10,7 @@ import "services"
 //   components/  small reusable widgets: Btn, Txt, Chip, Slide, ListRow, Pill
 //   modules/     one file per bar module (Clock, Workspaces, Volume, ...)
 //   panels/      dropdown contents, one file per module that opens one
-//   windows/     layer-shell windows: Bar, Dropdown, NotifPopups, Osd, Launcher, Screenshot, Clipboard
+//   windows/     layer-shell windows: Bar, Dropdown, NotifPopups, Osd, Launcher, Screenshot, Clipboard, Wallpaper
 //   scripts/     shell helpers called by services/Sys.qml
 //
 // Launcher: qs -p ~/.config/quickshell/bar ipc call launcher toggle   (bind to Super+D)
@@ -24,6 +24,7 @@ ShellRoot {
     Launcher {}
     Screenshot {}
     Clipboard {}
+    Wallpaper {}
 
     // qs -p <bar> ipc call bar toggle
     IpcHandler {
