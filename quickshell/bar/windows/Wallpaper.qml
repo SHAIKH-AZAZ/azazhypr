@@ -29,7 +29,12 @@ PanelWindow {
     readonly property real cell: 260
 
     screen: Quickshell.screens.find(s => s.name === monitor) ?? Quickshell.screens[0]
-    anchors { top: true; bottom: true; left: true; right: true }
+    // only as big as the picker: a full-screen transparent layer made the compositor blend the whole
+    // screen on every frame, which is expensive on integrated GPUs
+    anchors { top: true }
+    margins { top: 56 }
+    implicitWidth: Math.min(1300, (screen?.width ?? 1920) - 80)
+    implicitHeight: 300
     visible: open
     color: "transparent"
     exclusionMode: ExclusionMode.Ignore
@@ -45,6 +50,7 @@ PanelWindow {
         search.text = "";
         scan.running = true;
         query.running = true;
+        if (Config.wallpaperThumbs && !thumbsStarted) { thumbsStarted = true; thumbs.running = true }
         Qt.callLater(() => search.forceActiveFocus());
     }
     // path below the wallpapers folder, lowercase: what the search matches against
@@ -118,7 +124,7 @@ PanelWindow {
     onIdxChanged: if (open && ready) previewTimer.restart()
     Timer {
         id: previewTimer
-        interval: 160
+        interval: 220
         onTriggered: { win.previewed = true; win.setWall(win.current) }
     }
 
@@ -129,10 +135,16 @@ PanelWindow {
             onStreamFinished: {
                 win.all = text.split("\n").filter(l => l.length);
                 win.refilter(win.original);
-                list.positionViewAtIndex(win.idx, ListView.Center);
                 win.ready = true;
             }
         }
+    }
+
+    readonly property string thumbDir: Quickshell.env("HOME") + "/.cache/qs-wallpaper-thumbs"
+    property bool thumbsStarted: false
+    Process {
+        id: thumbs
+        command: ["nice", "-n", "19", "sh", Quickshell.shellPath("scripts/thumbs.sh"), win.thumbDir]
     }
 
     property string pendingSet: ""
@@ -143,23 +155,24 @@ PanelWindow {
         function set(path: string): void { win.pendingSet = path; query.running = true }
     }
 
-    MouseArea { anchors.fill: parent; onClicked: win.hide(true) }
+    // click outside = cancel
+    HyprlandFocusGrab {
+        windows: [win]
+        active: win.open
+        onCleared: win.hide(true)
+    }
 
     Rectangle {
         id: panel
-        anchors.horizontalCenter: parent.horizontalCenter
-        y: 56
-        width: Math.min(1300, win.width - 80)
-        height: 300
+        anchors.fill: parent
         radius: 30
-        color: Theme.bg
+        color: "transparent"        // only the cards float over the wallpaper
 
         MouseArea {
             anchors.fill: parent
             onWheel: e => win.move(e.angleDelta.y < 0 || e.angleDelta.x < 0 ? 1 : -1)
         }
 
-        Txt { x: 22; y: 18; text: "Wallpaper"; font.pixelSize: 16; color: Theme.fg }
 
         // search box: always focused, so typing filters; arrows/Enter/Esc are handled here too
         Rectangle {
@@ -167,7 +180,8 @@ PanelWindow {
             y: 12
             width: Math.min(360, parent.width - 340)
             height: 32
-            color: "transparent"
+            radius: 16
+            color: Qt.alpha("#000000", 0.7)
 
             // underline instead of a box
             Rectangle {
@@ -213,9 +227,10 @@ PanelWindow {
                 anchors { left: parent.left; leftMargin: 34; verticalCenter: parent.verticalCenter }
                 visible: search.text === ""
                 text: "Search wallpapers…"
-                color: Theme.muted
+                color: Theme.fg
+                opacity: 0.8
                 font.pixelSize: 13
-            }
+                }
             Txt {   // clear
                 anchors { right: parent.right; rightMargin: 12; verticalCenter: parent.verticalCenter }
                 visible: search.text !== ""
@@ -224,84 +239,16 @@ PanelWindow {
                 MouseArea { id: clearMa; anchors { fill: parent; margins: -6 } hoverEnabled: true; onClicked: search.text = "" }
             }
         }
-        Txt {
-            anchors { right: parent.right; rightMargin: 22 }
-            y: 20
-            text: Quickshell.env("USER")
-            color: Theme.muted
-            font.pixelSize: 13
-        }
 
-        ListView {
+        MoltenArc {
             id: list
-            anchors { left: parent.left; right: parent.right; top: parent.top; topMargin: 56 }
-            height: 168
-            orientation: ListView.Horizontal
+            anchors { left: parent.left; right: parent.right; top: parent.top; topMargin: 52 }
+            height: 206
             model: win.files
-            currentIndex: win.idx
-            cacheBuffer: win.cell * 3
-            clip: true
-            interactive: false
-            highlightRangeMode: ListView.StrictlyEnforceRange
-            preferredHighlightBegin: width / 2 - win.cell / 2
-            preferredHighlightEnd: width / 2 + win.cell / 2
-            highlightMoveDuration: 180
-
-            delegate: Item {
-                id: cellItem
-                required property int index
-                required property string modelData
-                readonly property bool cur: index === win.idx
-
-                width: win.cell
-                height: list.height
-
-                Item {
-                    id: thumb
-                    anchors.centerIn: parent
-                    width: 232; height: 140
-                    scale: cellItem.cur ? 1.0 : 0.86
-                    opacity: cellItem.cur ? 1.0 : 0.6
-                    Behavior on scale { NumberAnimation { duration: 160 } }
-                    Behavior on opacity { NumberAnimation { duration: 160 } }
-
-                    Rectangle { anchors.fill: parent; radius: 16; color: Theme.subtle }
-                    Image {
-                        id: img
-                        anchors.fill: parent
-                        source: "file://" + encodeURI(cellItem.modelData).replace(/#/g, "%23")
-                        sourceSize: Qt.size(464, 280)
-                        fillMode: Image.PreserveAspectCrop
-                        asynchronous: true
-                        cache: true
-                        visible: false
-                    }
-                    Rectangle {
-                        id: mask
-                        anchors.fill: parent
-                        radius: 16
-                        layer.enabled: true
-                        visible: false
-                    }
-                    MultiEffect {
-                        anchors.fill: parent
-                        source: img
-                        maskEnabled: true
-                        maskSource: mask
-                    }
-                    Rectangle {
-                        anchors.fill: parent
-                        radius: 16
-                        color: "transparent"
-                        border { width: cellItem.cur ? 2 : 1; color: cellItem.cur ? Theme.accent : Theme.subtle }
-                    }
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: cellItem.cur ? win.apply() : win.idx = cellItem.index
-                }
-            }
+            index: win.idx
+            thumbDir: Config.wallpaperThumbs ? win.thumbDir : ""
+            onPicked: i => win.idx = i
+            onActivated: win.apply()
         }
 
         Txt {
@@ -312,22 +259,37 @@ PanelWindow {
             font.pixelSize: 14
         }
 
-        // footer
-        Txt {
+        // footer: small pills so the text stays readable over any window or wallpaper
+        Rectangle {
             x: 22
+            anchors.bottom: parent.bottom; anchors.bottomMargin: 12
+            width: Math.min(parent.width / 2, leftFoot.implicitWidth + 24); height: 28; radius: 14
+            color: Qt.alpha("#000000", 0.6)
+            visible: leftFoot.text !== ""
+        }
+        Rectangle {
+            anchors { right: parent.right; rightMargin: 22; bottom: parent.bottom; bottomMargin: 12 }
+            width: rightFoot.implicitWidth + 24; height: 28; radius: 14
+            color: Qt.alpha("#000000", 0.6)
+        }
+        Txt {
+            id: leftFoot
+            x: 34
             anchors.bottom: parent.bottom; anchors.bottomMargin: 18
-            width: parent.width / 2
+            width: Math.min(parent.width / 2 - 24, implicitWidth)
             elide: Text.ElideMiddle
             text: win.current ? win.rel(win.current) : (win.ready ? "" : "Loading…")
-            color: Theme.muted
+            color: Theme.fg
             font.pixelSize: 12
         }
         Txt {
-            anchors { right: parent.right; rightMargin: 22; bottom: parent.bottom; bottomMargin: 18 }
+            id: rightFoot
+            anchors { right: parent.right; rightMargin: 34; bottom: parent.bottom; bottomMargin: 18 }
             text: (win.files.length ? (win.idx + 1) + "/" + win.files.length : "0/0")
                 + (search.text && win.all.length ? " of " + win.all.length : "") + "  ·  Ctrl+R random  ·  Enter to apply"
-            color: Theme.muted
+            color: Theme.fg
             font.pixelSize: 12
+            style: Text.Outline; styleColor: Qt.alpha("#000000", 0.8)
         }
     }
 }

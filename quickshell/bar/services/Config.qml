@@ -36,7 +36,8 @@ Singleton {
 
     // ---- wallpaper picker ----
     readonly property bool wallpaperDissolve: true    // noise dissolve between wallpapers (shaders/dissolve.frag)
-    readonly property int wallpaperFxMs: 600          // length of the dissolve
+    readonly property int wallpaperFxMs: 450          // length of the dissolve
+    readonly property bool wallpaperThumbs: true      // cache small thumbnails (~/.cache/qs-wallpaper-thumbs) so scrolling stays light
 
     // ---- calendar ----
     readonly property bool calendarMondayFirst: false // week starts on Monday instead of Sunday

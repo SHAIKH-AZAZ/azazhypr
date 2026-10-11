@@ -30,5 +30,7 @@ Singleton {
     readonly property color green: Config.inkBlack ? "#5AF78E" : (c.color4 ?? "#a6e3a1")     // wayle green -> color4
     readonly property color yellow: Config.inkBlack ? "#F3F99D" : (c.color5 ?? "#f9e2af")    // wayle yellow-> color5
     readonly property color red: Config.inkBlack ? "#FF5C57" : (c.color3 ?? "#f38ba8")       // wayle red   -> color3
+    readonly property color purple: Config.inkBlack ? "#FF6AC1" : (c.color2 ?? "#cba6f7")
+    readonly property color orange: Config.inkBlack ? "#FF9F43" : (c.color5 ?? "#fab387")
     readonly property string font: "JetBrainsMono Nerd Font"
 }

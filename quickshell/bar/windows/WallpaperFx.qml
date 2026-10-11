@@ -64,8 +64,8 @@ PanelWindow {
     function hideIfDone() { if (animDone && ready) { shown = false; fromSrc = ""; toSrc = "" } }
     onReadyChanged: hideIfDone()
 
-    Image { id: oldImg; visible: false; source: win.fromSrc ? win.url(win.fromSrc) : ""; fillMode: Image.PreserveAspectCrop; asynchronous: true; onStatusChanged: win.check() }
-    Image { id: newImg; visible: false; source: win.toSrc ? win.url(win.toSrc) : ""; fillMode: Image.PreserveAspectCrop; asynchronous: true; onStatusChanged: win.check() }
+    Image { id: oldImg; visible: false; source: win.fromSrc ? win.url(win.fromSrc) : ""; fillMode: Image.PreserveAspectCrop; asynchronous: true; sourceSize: Qt.size(win.width, win.height); onStatusChanged: win.check() }
+    Image { id: newImg; visible: false; source: win.toSrc ? win.url(win.toSrc) : ""; fillMode: Image.PreserveAspectCrop; asynchronous: true; sourceSize: Qt.size(win.width, win.height); onStatusChanged: win.check() }
 
     ShaderEffect {
         id: effect
