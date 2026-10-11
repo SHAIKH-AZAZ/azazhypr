@@ -73,8 +73,9 @@ PanelWindow {
         if (!current) return;
         const f = current;
         hide(false);
-        setWall(f);
-        Sys.run("sh", Quickshell.env("HOME") + "/.config/hypr/UserScripts/WallpaperSelect.sh", "--apply", f);
+        setWall(f);     // dissolve into it (when Config.wallpaperDissolve), awww switches underneath
+        // QS_WALL_FX=1: the script skips awww's own transition, the overlay is the transition
+        Sys.run("env", "QS_WALL_FX=1", "sh", Quickshell.env("HOME") + "/.config/hypr/UserScripts/WallpaperSelect.sh", "--apply", f);
     }
     function move(d) { idx = Math.max(0, Math.min(files.length - 1, idx + d)) }
     // one awww at a time, last target wins (parallel calls could finish out of order and leave a stale wallpaper)
@@ -87,7 +88,9 @@ PanelWindow {
         if (Config.wallpaperDissolve && shown && f !== shown) {
             // overlay first (it looks identical to the wallpaper), then switch the real one under it
             dissolvePending = true;
-            fx.run(shown, f, ms);
+            // drift direction follows the picker: forward through the list = +1
+            const a = all.indexOf(shown), b = all.indexOf(f);
+            fx.run(shown, f, ms, (a < 0 || b < 0 || b >= a) ? 1 : -1);
             shown = f;
         } else {
             shown = f;
@@ -121,7 +124,8 @@ PanelWindow {
         }
     }
 
-    onIdxChanged: if (open && ready) previewTimer.restart()
+    // live preview while browsing is optional: off = the wallpaper only changes (with the effect) on Enter / click
+    onIdxChanged: if (open && ready && Config.wallpaperLivePreview) previewTimer.restart()
     Timer {
         id: previewTimer
         interval: 220
@@ -294,5 +298,5 @@ PanelWindow {
     }
 }
 
-WallpaperFx { id: fx; monitor: win.monitor; duration: Config.wallpaperFxMs }
+WallpaperFx { id: fx; monitor: win.monitor }
 }

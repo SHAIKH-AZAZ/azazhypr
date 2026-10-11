@@ -35,8 +35,18 @@ Singleton {
     readonly property int activityTickSec: 5          // sampling interval
 
     // ---- wallpaper picker ----
+    readonly property bool wallpaperLivePreview: false // true = the wallpaper changes while you browse; false = only when you pick one
     readonly property bool wallpaperDissolve: true    // noise dissolve between wallpapers (shaders/dissolve.frag)
-    readonly property int wallpaperFxMs: 450          // length of the dissolve
+    // "fast": cheap noise burn-through (default, light on integrated GPUs)
+    // "rich": port of the Morph Gallery shader: simplex fbm, bright parts of the new image burn
+    //         through first, frames drift against each other, quintic easing. ~3x the GPU work.
+    readonly property string wallpaperFxStyle: "rich"
+    readonly property bool wallpaperFxOverWindows: true // draw the transition above windows; false = only visible on an empty desktop
+    readonly property int wallpaperFxMs: 450          // length of the dissolve (fast)
+    readonly property int wallpaperFxRichMs: 900      // length of the dissolve (rich)
+    readonly property real wallpaperFxNoise: 3.5      // rich: noise frequency, higher = finer shreds
+    readonly property real wallpaperFxEdge: 0.15      // rich: width of the dissolve front
+    readonly property real wallpaperFxDrift: 0.5      // rich: how far the frames slide
     readonly property bool wallpaperThumbs: true      // cache small thumbnails (~/.cache/qs-wallpaper-thumbs) so scrolling stays light
 
     // ---- calendar ----
