@@ -1,120 +1,128 @@
 {
-    "agent_ui_font_size": 16.0,
-    "git_panel": {
-        "dock": "left"
-    },
-    "diff_view_style": "unified",
-    "title_bar": {
-        "show_branch_status_icon": true
-    },
-    "status_bar": {
-        "show_active_file": true
-    },
-    "vim_mode": false,
-    "project_panel": {
-        "dock": "left"
-    },
-    "vim": {
-        "toggle_relative_line_numbers": true,
-        "show_edit_predictions_in_normal_mode": true,
-        "default_mode": "normal"
-    },
-    "relative_line_numbers": "enabled",
-    "tab_size": 4,
-    "hard_tabs": false,
-    "ensure_final_newline_on_save": true,
-    "remove_trailing_whitespace_on_save": true,
-    "ssh_connections": [
+  "agent_ui_font_size": 16.0,
+  "git_panel": {
+    "dock": "left"
+  },
+  "diff_view_style": "unified",
+  "title_bar": {
+    "show_branch_status_icon": true
+  },
+  "status_bar": {
+    "show_active_file": true
+  },
+  "vim_mode": false,
+  "project_panel": {
+    "dock": "left"
+  },
+  "vim": {
+    "toggle_relative_line_numbers": true,
+    "show_edit_predictions_in_normal_mode": true,
+    "default_mode": "normal"
+  },
+  "relative_line_numbers": "enabled",
+  "tab_size": 4,
+  "hard_tabs": false,
+  "ensure_final_newline_on_save": true,
+  "remove_trailing_whitespace_on_save": true,
+  "ssh_connections": [
+    {
+      "host": "103.133.214.253",
+      "username": "azaz",
+      "args": [],
+      "projects": [
         {
-            "host": "103.133.214.253",
-            "username": "azaz",
-            "args": [],
-            "projects": [
-                {
-                    "paths": [
-                        "/home/azaz"
-                    ]
-                },
-                {
-                    "paths": [
-                        "/home/azaz/hemil/build_cast/./"
-                    ]
-                }
-            ]
+          "paths": [
+            "/home/azaz"
+          ]
         },
         {
-            "host": "103.133.214.253",
-            "username": "azaz",
-            "args": [],
-            "projects": []
-        },
-        {
-            "host": "103.133.214.253",
-            "username": "azaz",
-            "args": [],
-            "projects": []
+          "paths": [
+            "/home/azaz/hemil/build_cast/./"
+          ]
         }
-    ],
-    "inlay_hints": {
-        "enabled": true
+      ]
     },
-    "soft_wrap": "editor_width",
-    "cli_default_open_behavior": "existing_window",
-    "terminal": {
-        "font_family": "JetBrainsMonoNL Nerd Font Mono"
+    {
+      "host": "103.133.214.253",
+      "username": "azaz",
+      "args": [],
+      "projects": []
     },
-    "mouse_wheel_zoom": true,
-    "session": {
-        "trust_all_worktrees": true
-    },
-    "agent_servers": {
-        "gemini": {
-            "type": "registry"
-        },
-        "github-copilot-cli": {
-            "type": "registry"
-        },
-        "claude-acp": {
-            "default_config_options": {
-                "effort": "medium",
-                "mode": "bypassPermissions",
-                "model": "opus"
-            },
-            "type": "registry"
-        },
-        "codex-acp": {
-            "default_config_options": {
-                "reasoning_effort": "high",
-                "model": "gpt-6-sol"
-            },
-            "type": "registry"
-        }
-    },
-    "icon_theme": {
-        "mode": "light",
-        "light": "Colored Zed Icons Theme Dark",
-        "dark": "Zed (Default)"
-    },
-    "ui_font_size": 16,
-    "buffer_font_size": 16.0,
-    "theme": {
-        "mode": "dark",
-        "light": "Catppuccin Iced Latte (Blur) [Light]",
-        "dark": "Catppuccin Espresso (Blur) [Light]"
-    },
-    "indent_guides": {
-        "enabled": true,
-        "line_width": 1,
-        "active_line_width": 1,
-        "coloring": "indent_aware",
-        "background_coloring": "disabled"
-    },
-    "context_servers": {
-        "codebase-memory-mcp": {
-            "command": "/home/azaz/.local/bin/codebase-memory-mcp",
-            "args": [
-                ""
-            ]
-        }
+    {
+      "host": "103.133.214.253",
+      "username": "azaz",
+      "args": [],
+      "projects": []
     }
+  ],
+  "inlay_hints": {
+    "enabled": true
+  },
+  "soft_wrap": "editor_width",
+  "cli_default_open_behavior": "existing_window",
+  "terminal": {
+    "font_family": "JetBrainsMonoNL Nerd Font Mono"
+  },
+  "mouse_wheel_zoom": true,
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "agent_servers": {
+    "gemini": {
+      "type": "registry"
+    },
+    "github-copilot-cli": {
+      "type": "registry"
+    },
+    "claude-acp": {
+      "default_config_options": {
+        "effort": "medium",
+        "mode": "bypassPermissions",
+        "model": "opus"
+      },
+      "type": "registry"
+    },
+    "codex-acp": {
+      "default_config_options": {
+        "reasoning_effort": "high",
+        "model": "gpt-6-sol"
+      },
+      "type": "registry"
+    }
+  },
+  "icon_theme": {
+    "mode": "light",
+    "light": "Colored Zed Icons Theme Dark",
+    "dark": "Zed (Default)"
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 16.0,
+  "theme": {
+    "mode": "dark",
+    "light": "Catppuccin Iced Latte (Blur) [Light]",
+    "dark": "Catppuccin Espresso (Blur) [Light]"
+  },
+  "indent_guides": {
+    "enabled": true,
+    "line_width": 1,
+    "active_line_width": 1,
+    "coloring": "indent_aware",
+    "background_coloring": "disabled"
+  },
+  "context_servers": {
+    "codebase-memory-mcp": {
+      "command": "/home/azaz/.local/bin/codebase-memory-mcp",
+      "args": [
+        ""
+      ]
+    }
+  },
+  "lsp": {
+    "qmljs": {
+      "binary": {
+        "path": "/usr/lib/qt6/bin/qmlls",
+        "arguments": ["-I", "/usr/lib/qt6/qml", "--no-cmake-calls"]
+      }
+    }
+  }
 }
