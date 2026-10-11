@@ -13,6 +13,12 @@ Item {
     property bool spin: false
     property bool badge: false
     property bool struck: false
+    property color struckColor: color       // colour of the strike-through line (e.g. red on a muted speaker)
+    property bool pulse: false              // slow breathing: charging, connected
+    property bool blink: false              // fast blink: low battery
+    property var pop: undefined             // changes -> the icon bounces once (mute toggled, device connected)
+
+    onPopChanged: if (pop !== undefined) popAnim.restart()
 
     signal clicked(var item, int button)
     signal scrolled(int dir)
@@ -39,6 +45,23 @@ Item {
             text: root.glyph
             color: root.color
             font { family: Theme.font; pixelSize: root.size }
+            Behavior on color { ColorAnimation { duration: 200 } }
+
+            // breathing / blinking
+            SequentialAnimation on opacity {
+                running: root.pulse || root.blink
+                loops: Animation.Infinite
+                onRunningChanged: if (!running) iconText.opacity = 1
+                NumberAnimation { to: root.blink ? 0.2 : 0.5; duration: root.blink ? 450 : 900; easing.type: Easing.InOutSine }
+                NumberAnimation { to: 1; duration: root.blink ? 450 : 900; easing.type: Easing.InOutSine }
+            }
+            // one bounce when `pop` changes
+            SequentialAnimation {
+                id: popAnim
+                NumberAnimation { target: iconText; property: "scale"; to: 0.6; duration: 90; easing.type: Easing.OutQuad }
+                NumberAnimation { target: iconText; property: "scale"; to: 1.25; duration: 140; easing.type: Easing.OutBack }
+                NumberAnimation { target: iconText; property: "scale"; to: 1; duration: 120 }
+            }
             NumberAnimation on rotation {
                 from: 0; to: 360; duration: 3000
                 loops: Animation.Infinite
@@ -59,7 +82,7 @@ Item {
         anchors.centerIn: row
         width: root.size * 1.15; height: 2; radius: 1
         rotation: -45
-        color: root.color
+        color: root.struckColor
     }
 
     Rectangle {

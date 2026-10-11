@@ -2,11 +2,18 @@ import QtQuick
 import "../components"
 import "../services"
 
+// Speaker. Icon follows the level; muted (or 0%) = dim speaker with a red strike-through.
 // click: mixer, middle-click: mute, scroll: volume
 Btn {
     property var bar
-    glyph: Sys.sink?.muted ? "\uf026" : "\uf028"
-    color: Sys.sink?.muted ? Theme.muted : Theme.green
+    readonly property real vol: Sys.sink?.volume ?? 0
+    readonly property bool off: (Sys.sink?.muted ?? false) || vol < 0.005
+
+    glyph: off ? "\uf026" : vol < 0.5 ? "\uf027" : "\uf028"
+    color: off ? Theme.muted : Theme.green
+    struck: off
+    struckColor: Theme.red
+    pop: off
     onClicked: (item, b) => {
         if (b === Qt.MiddleButton && Sys.sink) Sys.sink.muted = !Sys.sink.muted;
         else bar.toggle("audio", item);
