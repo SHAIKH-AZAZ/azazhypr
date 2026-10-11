@@ -2,10 +2,14 @@ import QtQuick
 import "../components"
 import "../services"
 
-// wttr.in one-liner (location: Config.weatherLocation, "" = by IP). click: refresh
+// Temperature in the bar. Click: weather panel. The label is the wttr.in one-liner
+// (location: Config.weatherLocation, "" = by IP); before that arrives it falls back to the panel data.
 Btn {
-    visible: Config.showWeather && Sys.weather !== ""
+    property var bar
+    readonly property string fallback: Forecast.cur
+        ? Forecast.icon(Forecast.cur.weather_code, Forecast.cur.is_day === 1) + " " + Math.round(Forecast.cur.temperature_2m) + "°C" : ""
+    visible: Config.showWeather && (Sys.weather !== "" || fallback !== "")
     color: Theme.fg
-    label: Sys.weather
-    onClicked: Sys.refreshSlow()
+    label: Sys.weather !== "" ? Sys.weather : fallback
+    onClicked: item => bar.toggle("weather", item)
 }

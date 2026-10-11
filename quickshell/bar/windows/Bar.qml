@@ -20,7 +20,7 @@ PanelWindow {
     visible: !Sys.barHidden
     WlrLayershell.namespace: "quickshell-bar"
     // the calendar has a text field; other panels never need the keyboard
-    WlrLayershell.keyboardFocus: drop === "calendar" ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
+    WlrLayershell.keyboardFocus: (drop === "calendar" || drop === "weather") ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
 
     // ---- dropdown state ----
     property string drop: ""
@@ -72,7 +72,7 @@ PanelWindow {
                 System { bar: bar }
                 Updates { bar: bar }
                 KbLayout {}
-                Weather {}
+                Weather { bar: bar }
                 Media { bar: bar }
                 Bell { bar: bar }
                 Idle {}

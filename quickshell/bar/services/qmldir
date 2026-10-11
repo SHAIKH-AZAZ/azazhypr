@@ -4,3 +4,4 @@ singleton Notifs Notifs.qml
 singleton Config Config.qml
 singleton Events Events.qml
 singleton Activity Activity.qml
+singleton Forecast Forecast.qml

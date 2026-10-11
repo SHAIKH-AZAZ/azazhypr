@@ -24,15 +24,19 @@ PopupWindow {
         battery: "BatteryPanel",
         notifications: "NotificationsPanel",
         system: "SystemPanel",
-        activity: "ActivityPanel"
+        activity: "ActivityPanel",
+        weather: "WeatherPanel"
     })
-    readonly property var widths: ({ calendar: 420, bluetooth: 360, dashboard: 410, notifications: 390, activity: 440 })
+    readonly property var widths: ({ calendar: 420, bluetooth: 360, dashboard: 410, notifications: 390, activity: 440, weather: 460 })
     readonly property int w: widths[name] ?? 320
 
     anchor.window: bar
     anchor.rect: Qt.rect(Math.max(4, Math.min(bar.width - w - 4, cx - w / 2)), bar.height + 4, 1, 1)
     implicitWidth: w
-    implicitHeight: body.implicitHeight + 24
+    // never taller than the space below the bar: a popup that does not fit gets shifted/clipped by the
+    // compositor (buttons then miss their clicks). Longer content scrolls instead.
+    readonly property real maxH: Math.max(240, (bar.screen?.height ?? 1080) - bar.height - 24)
+    implicitHeight: Math.min(body.implicitHeight + 24, maxH)
     visible: name !== ""
     color: "transparent"
 
@@ -44,11 +48,32 @@ PopupWindow {
         color: Theme.bg
         border { width: 1; color: Theme.subtle }
 
-        Loader {
-            id: body
+        // scrolls (wheel / drag) when the panel is taller than the popup
+        Flickable {
+            id: flick
             x: 12; y: 12
             width: parent.width - 24
-            source: root.files[root.name] ? Qt.resolvedUrl("../panels/" + root.files[root.name] + ".qml") : ""
+            height: parent.height - 24
+            contentWidth: width
+            contentHeight: body.implicitHeight
+            clip: true
+            boundsBehavior: Flickable.StopAtBounds
+            flickableDirection: Flickable.VerticalFlick
+
+            Loader {
+                id: body
+                width: flick.width
+                source: root.files[root.name] ? Qt.resolvedUrl("../panels/" + root.files[root.name] + ".qml") : ""
+                onLoaded: flick.contentY = 0
+            }
+        }
+        // thin scroll indicator
+        Rectangle {
+            visible: flick.contentHeight > flick.height + 1
+            x: parent.width - 7; width: 3; radius: 1.5
+            y: 12 + flick.height * (flick.contentY / flick.contentHeight)
+            height: Math.max(24, flick.height * flick.height / flick.contentHeight)
+            color: Qt.alpha(Theme.fg, 0.35)
         }
 
         Connections {
