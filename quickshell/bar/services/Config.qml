@@ -29,6 +29,15 @@ Singleton {
     readonly property string weatherLocation: ""      // "" = auto by IP, or "Delhi", "28.6,77.2"
     readonly property int slowPollMs: 30 * 60 * 1000  // updates + weather refresh
 
+    // ---- activity (focus tracker) ----
+    readonly property bool showActivity: true         // track focused-app time, bar button + panel
+    readonly property int activityIdleSec: 120        // no input for this long = not counted
+    readonly property int activityTickSec: 5          // sampling interval
+
+    // ---- wallpaper picker ----
+    readonly property bool wallpaperDissolve: true    // noise dissolve between wallpapers (shaders/dissolve.frag)
+    readonly property int wallpaperFxMs: 600          // length of the dissolve
+
     // ---- calendar ----
     readonly property bool calendarMondayFirst: false // week starts on Monday instead of Sunday
 

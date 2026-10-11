@@ -69,11 +69,7 @@ ColumnLayout {
             font.pixelSize: 10
             wrapMode: Text.Wrap
         }
-        MouseArea {
-            // click anywhere on the card refreshes
-            anchors.fill: parent
-            onClicked: Sys.refreshSlow()
-        }
+        TapHandler { onTapped: Sys.refreshSlow() }   // click the card to refresh
     }
     ListRow {
         visible: Sys.kbActive !== ""

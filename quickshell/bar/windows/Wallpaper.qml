@@ -9,14 +9,17 @@ import "../services"
 
 // Wallpaper picker: a carousel of thumbnails with live preview.
 // Toggle: qs -p ~/.config/quickshell/bar ipc call wallpaper toggle   (bound to Super+W)
-// Keys: Left/Right (H/L) move, PageUp/PageDown jump 5, R random, Enter apply, Esc cancel.
+// Type to filter by file/folder name (all words must match). Left/Right (Up/Down) move,
+// PageUp/PageDown jump 5, Home/End, Ctrl+R random, Enter apply, Esc clears the search, then cancels.
 // Moving the selection sets the wallpaper right away (no wallust); Esc puts the old one back.
 // Enter hands the file to WallpaperSelect.sh --apply (wallust, reload, startup config).
+Scope {
 PanelWindow {
     id: win
 
     property bool open: false
-    property var files: []
+    property var all: []                // every wallpaper found
+    property var files: []              // `all` filtered by the search box
     property int idx: 0
     property bool ready: false          // false while the list loads, so the first idx set is not previewed
     property bool previewed: false
@@ -39,9 +42,20 @@ PanelWindow {
         previewed = false;
         ready = false;
         open = true;
+        search.text = "";
         scan.running = true;
         query.running = true;
-        Qt.callLater(() => keys.forceActiveFocus());
+        Qt.callLater(() => search.forceActiveFocus());
+    }
+    // path below the wallpapers folder, lowercase: what the search matches against
+    function rel(f) { const i = f.indexOf("/wallpapers/"); return (i >= 0 ? f.slice(i + 12) : f).toLowerCase() }
+    // re-apply the search, keeping `keep` (default: the selected file) selected when it still matches
+    function refilter(keep) {
+        const prev = keep ?? current;
+        const terms = search.text.toLowerCase().split(/\s+/).filter(t => t);
+        files = terms.length ? all.filter(f => { const r = rel(f); return terms.every(t => r.includes(t)) }) : all;
+        const i = files.indexOf(prev);
+        idx = i >= 0 ? i : 0;
     }
     // cancel = put the wallpaper that was active back
     function hide(cancel) {
@@ -60,14 +74,33 @@ PanelWindow {
     // one awww at a time, last target wins (parallel calls could finish out of order and leave a stale wallpaper)
     property string wallTarget: ""
     property string wallDone: ""
-    function setWall(f) { wallTarget = f; pump() }
+    property string shown: ""           // what awww currently displays (for the dissolve's "from" side)
+    property bool dissolvePending: false
+    function setWall(f, ms) {
+        wallTarget = f;
+        if (Config.wallpaperDissolve && shown && f !== shown) {
+            // overlay first (it looks identical to the wallpaper), then switch the real one under it
+            dissolvePending = true;
+            fx.run(shown, f, ms);
+            shown = f;
+        } else {
+            shown = f;
+            pump();
+        }
+    }
+    Connections {
+        target: fx
+        function onStarted() { if (win.dissolvePending) { win.dissolvePending = false; win.pump(); win.syncFx() } }
+    }
+    // tell the overlay when the real wallpaper underneath matches the target
+    function syncFx() { if (!wallProc.running && wallTarget === wallDone) fx.ready = true }
     function pump() {
         if (wallProc.running || wallTarget === wallDone) return;
         wallDone = wallTarget;
         wallProc.command = ["awww", "img", "-o", monitor, wallTarget, "--transition-type", "none"];
         wallProc.running = true;
     }
-    Process { id: wallProc; onRunningChanged: if (!running) win.pump() }
+    Process { id: wallProc; onRunningChanged: if (!running) { win.pump(); win.syncFx() } }
 
     // the wallpaper actually on screen (qml_color.json can lag behind wallust)
     Process {
@@ -76,7 +109,8 @@ PanelWindow {
         stdout: StdioCollector {
             onStreamFinished: {
                 const p = text.trim();
-                if (p && !win.previewed) win.original = p;
+                if (p) { win.shown = p; if (!win.previewed) win.original = p; }
+                if (win.pendingSet) { const f = win.pendingSet; win.pendingSet = ""; win.setWall(f) }
             }
         }
     }
@@ -93,18 +127,20 @@ PanelWindow {
         command: ["sh", Quickshell.shellPath("scripts/wallpapers.sh")]
         stdout: StdioCollector {
             onStreamFinished: {
-                win.files = text.split("\n").filter(l => l.length);
-                const i = win.files.indexOf(win.original);
-                win.idx = i >= 0 ? i : 0;
+                win.all = text.split("\n").filter(l => l.length);
+                win.refilter(win.original);
                 list.positionViewAtIndex(win.idx, ListView.Center);
                 win.ready = true;
             }
         }
     }
 
+    property string pendingSet: ""
     IpcHandler {
         target: "wallpaper"
         function toggle(): void { win.open ? win.hide(true) : win.show() }
+        // qs -p <bar> ipc call wallpaper set /path/to/image.jpg   (dissolves into it; no wallust)
+        function set(path: string): void { win.pendingSet = path; query.running = true }
     }
 
     MouseArea { anchors.fill: parent; onClicked: win.hide(true) }
@@ -123,28 +159,71 @@ PanelWindow {
             onWheel: e => win.move(e.angleDelta.y < 0 || e.angleDelta.x < 0 ? 1 : -1)
         }
 
-        FocusScope {
-            id: keys
-            anchors.fill: parent
-            focus: true
-            Keys.onPressed: e => {
-                switch (e.key) {
-                case Qt.Key_Left: case Qt.Key_H: win.move(-1); break;
-                case Qt.Key_Right: case Qt.Key_L: win.move(1); break;
-                case Qt.Key_PageUp: win.move(-5); break;
-                case Qt.Key_PageDown: win.move(5); break;
-                case Qt.Key_Home: win.idx = 0; break;
-                case Qt.Key_End: win.idx = Math.max(0, win.files.length - 1); break;
-                case Qt.Key_R: win.idx = Math.floor(Math.random() * win.files.length); break;
-                case Qt.Key_Return: case Qt.Key_Enter: win.apply(); break;
-                case Qt.Key_Escape: win.hide(true); break;
-                default: return;
+        Txt { x: 22; y: 18; text: "Wallpaper"; font.pixelSize: 16; color: Theme.fg }
+
+        // search box: always focused, so typing filters; arrows/Enter/Esc are handled here too
+        Rectangle {
+            anchors.horizontalCenter: parent.horizontalCenter
+            y: 12
+            width: Math.min(360, parent.width - 340)
+            height: 32
+            color: "transparent"
+
+            // underline instead of a box
+            Rectangle {
+                anchors { left: parent.left; right: parent.right; bottom: parent.bottom }
+                height: search.activeFocus ? 2 : 1
+                color: search.activeFocus ? Theme.accent : Theme.subtle
+            }
+
+            Txt { x: 12; anchors.verticalCenter: parent.verticalCenter; text: "\uf002"; color: Theme.muted }
+            TextInput {
+                id: search
+                anchors { fill: parent; leftMargin: 34; rightMargin: 34 }
+                verticalAlignment: TextInput.AlignVCenter
+                color: Theme.fg
+                selectionColor: Theme.accent
+                selectedTextColor: Theme.bg
+                clip: true
+                font { family: Theme.font; pixelSize: 13 }
+                onTextChanged: if (win.open) win.refilter()
+
+                Keys.onPressed: e => {
+                    switch (e.key) {
+                    case Qt.Key_Left: case Qt.Key_Up: win.move(-1); break;
+                    case Qt.Key_Right: case Qt.Key_Down: win.move(1); break;
+                    case Qt.Key_PageUp: win.move(-5); break;
+                    case Qt.Key_PageDown: win.move(5); break;
+                    case Qt.Key_Home: win.idx = 0; break;
+                    case Qt.Key_End: win.idx = Math.max(0, win.files.length - 1); break;
+                    case Qt.Key_R:
+                        if (!(e.modifiers & Qt.ControlModifier)) return;
+                        win.idx = Math.floor(Math.random() * win.files.length);
+                        break;
+                    case Qt.Key_Return: case Qt.Key_Enter: win.apply(); break;
+                    case Qt.Key_Escape:
+                        if (search.text !== "") search.text = ""; else win.hide(true);
+                        break;
+                    default: return;
+                    }
+                    e.accepted = true;
                 }
-                e.accepted = true;
+            }
+            Txt {
+                anchors { left: parent.left; leftMargin: 34; verticalCenter: parent.verticalCenter }
+                visible: search.text === ""
+                text: "Search wallpapers…"
+                color: Theme.muted
+                font.pixelSize: 13
+            }
+            Txt {   // clear
+                anchors { right: parent.right; rightMargin: 12; verticalCenter: parent.verticalCenter }
+                visible: search.text !== ""
+                text: "\uf00d"
+                color: clearMa.containsMouse ? Theme.red : Theme.muted
+                MouseArea { id: clearMa; anchors { fill: parent; margins: -6 } hoverEnabled: true; onClicked: search.text = "" }
             }
         }
-
-        Txt { x: 22; y: 18; text: "Wallpaper"; font.pixelSize: 16; color: Theme.fg }
         Txt {
             anchors { right: parent.right; rightMargin: 22 }
             y: 20
@@ -225,21 +304,33 @@ PanelWindow {
             }
         }
 
+        Txt {
+            anchors { horizontalCenter: parent.horizontalCenter; verticalCenter: parent.verticalCenter; verticalCenterOffset: -6 }
+            visible: win.ready && win.files.length === 0
+            text: search.text ? "No wallpapers match \u201c" + search.text + "\u201d" : "No wallpapers found"
+            color: Theme.muted
+            font.pixelSize: 14
+        }
+
         // footer
         Txt {
             x: 22
             anchors.bottom: parent.bottom; anchors.bottomMargin: 18
             width: parent.width / 2
             elide: Text.ElideMiddle
-            text: win.current ? win.current.split("/").pop() : (win.ready ? "No wallpapers found" : "Loading…")
+            text: win.current ? win.rel(win.current) : (win.ready ? "" : "Loading…")
             color: Theme.muted
             font.pixelSize: 12
         }
         Txt {
             anchors { right: parent.right; rightMargin: 22; bottom: parent.bottom; bottomMargin: 18 }
-            text: (win.files.length ? (win.idx + 1) + "/" + win.files.length : "0/0") + "  ·  R random  ·  Enter to apply"
+            text: (win.files.length ? (win.idx + 1) + "/" + win.files.length : "0/0")
+                + (search.text && win.all.length ? " of " + win.all.length : "") + "  ·  Ctrl+R random  ·  Enter to apply"
             color: Theme.muted
             font.pixelSize: 12
         }
     }
+}
+
+WallpaperFx { id: fx; monitor: win.monitor; duration: Config.wallpaperFxMs }
 }

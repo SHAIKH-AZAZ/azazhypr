@@ -68,6 +68,7 @@ PanelWindow {
             Row {   // status
                 spacing: 2
                 anchors.verticalCenter: parent.verticalCenter
+                ActivityBtn { bar: bar }
                 System { bar: bar }
                 Updates { bar: bar }
                 KbLayout {}
