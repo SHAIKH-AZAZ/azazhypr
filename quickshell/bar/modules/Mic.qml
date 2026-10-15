@@ -8,10 +8,8 @@ Btn {
     property var bar
     readonly property bool off: Sys.source?.muted ?? false
 
-    glyph: off ? "\uf131" : "\uf130"
-    color: off ? Theme.muted : Theme.red
-    struck: off
-    struckColor: Theme.red
+    glyph: off ? "mic_off" : "mic"
+    color: off ? Theme.red : Theme.fg
     pop: off
     onClicked: (item, b) => {
         if (b === Qt.MiddleButton && Sys.source) Sys.source.muted = !Sys.source.muted;

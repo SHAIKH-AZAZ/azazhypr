@@ -4,7 +4,7 @@ import "../services"
 
 Btn {
     property var bar
-    glyph: "\uf1eb"
-    color: Sys.wifi ? Theme.accent : Theme.muted
+    glyph: Sys.wifi ? "wifi" : "wifi_off"
+    color: Sys.wifi ? Theme.fg : Theme.muted
     onClicked: item => bar.toggle("network", item)
 }

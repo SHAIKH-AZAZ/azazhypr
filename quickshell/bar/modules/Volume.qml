@@ -9,10 +9,8 @@ Btn {
     readonly property real vol: Sys.sink?.volume ?? 0
     readonly property bool off: (Sys.sink?.muted ?? false) || vol < 0.005
 
-    glyph: off ? "\uf026" : vol < 0.5 ? "\uf027" : "\uf028"
-    color: off ? Theme.muted : Theme.green
-    struck: off
-    struckColor: Theme.red
+    glyph: off ? "volume_off" : vol < 0.5 ? "volume_down" : "volume_up"
+    color: off ? Theme.red : Theme.fg
     pop: off
     onClicked: (item, b) => {
         if (b === Qt.MiddleButton && Sys.sink) Sys.sink.muted = !Sys.sink.muted;

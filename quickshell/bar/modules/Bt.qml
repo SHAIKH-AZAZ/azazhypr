@@ -11,8 +11,8 @@ Btn {
     readonly property var conn: Bluetooth.devices.values.filter(d => d.connected)
     readonly property var first: conn.length > 0 ? conn[0] : null
 
-    glyph: first ? Sys.btGlyph(first.icon ?? "") : "\uf293"
-    color: !on ? Theme.muted : first ? Theme.blue : Qt.alpha(Theme.blue, 0.6)
+    glyph: first ? Sys.btIcon(first.icon ?? "") : "bluetooth"
+    color: !on || !first ? Theme.muted : Theme.fg
     struck: !on
     struckColor: Theme.red
     pulse: first !== null

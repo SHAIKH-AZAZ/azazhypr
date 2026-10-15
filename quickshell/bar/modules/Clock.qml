@@ -6,7 +6,7 @@ import "../services"
 // Time -> calendar dropdown
 Btn {
     property var bar
-    glyph: "\uf073"; size: 15
+    glyph: "schedule"; size: 17
     color: Theme.accent
     label: Qt.formatDateTime(clock.date, "hh:mm AP")
     onClicked: item => bar.toggle("calendar", item)

@@ -7,6 +7,7 @@ Singleton {
     // true = static ink-black surfaces (same as kitty's ink-black theme), false = wallpaper palette.
     // Accent colors (blue/green/yellow/red) always follow the wallpaper.
     readonly property bool inkBlack: true
+    readonly property bool monoIcons: true            // bar icons + labels one colour; only red (alert) and muted keep theirs
 
     // ---- notifications ----
     readonly property int notifTimeout: 3000          // ms a popup stays when the app sets no timeout

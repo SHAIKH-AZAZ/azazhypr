@@ -6,7 +6,7 @@ import "../services"
 Btn {
     property var bar
     visible: Config.showSystem
-    glyph: ""
+    glyph: "memory"
     color: Theme.blue
     label: Math.round(Sys.cpu) + "%"
     onClicked: item => bar.toggle("system", item)

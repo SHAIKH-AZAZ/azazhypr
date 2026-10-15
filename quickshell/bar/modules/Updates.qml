@@ -6,7 +6,7 @@ import "../services"
 Btn {
     property var bar
     visible: Config.showUpdates && Sys.updates > 0
-    glyph: ""
+    glyph: "upgrade"
     color: Theme.yellow
     label: Sys.updates
     onClicked: (item, b) => b === Qt.RightButton ? Sys.refreshSlow() : bar.toggle("system", item)

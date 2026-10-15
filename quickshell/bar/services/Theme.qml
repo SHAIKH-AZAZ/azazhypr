@@ -33,4 +33,5 @@ Singleton {
     readonly property color purple: Config.inkBlack ? "#FF6AC1" : (c.color2 ?? "#cba6f7")
     readonly property color orange: Config.inkBlack ? "#FF9F43" : (c.color5 ?? "#fab387")
     readonly property string font: "JetBrainsMono Nerd Font"
+    readonly property string iconFont: "Material Symbols Rounded"   // ligature names: "wifi", "volume_up", ...
 }

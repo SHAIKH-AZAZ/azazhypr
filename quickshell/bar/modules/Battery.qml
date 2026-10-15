@@ -12,7 +12,7 @@ Btn {
     readonly property bool full: dev?.state === UPowerDeviceState.FullyCharged
     readonly property bool low: !charging && !full && pct < 0.15
 
-    glyph: charging ? "\uf0e7" : full ? "\uf1e6" : ["\uf244", "\uf243", "\uf242", "\uf241", "\uf240"][Math.min(4, Math.floor(pct * 5))]
+    glyph: charging ? "battery_charging_full" : full ? "power" : low ? "battery_alert" : pct > 0.93 ? "battery_full" : "battery_" + Math.max(1, Math.round(pct * 6)) + "_bar"
     color: charging || full ? Theme.green : pct < 0.15 ? Theme.red : pct < 0.4 ? Theme.yellow : Theme.green
     label: Math.round(pct * 100) + "%"
     pulse: charging

@@ -4,7 +4,7 @@ import "../services"
 
 // hyprsunset night light
 Btn {
-    glyph: "\uf186"
+    glyph: "bedtime"
     color: Theme.yellow
     struck: !Sys.sunset
     onClicked: Sys.toggleSunset()

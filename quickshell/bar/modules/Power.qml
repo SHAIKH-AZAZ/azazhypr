@@ -3,7 +3,7 @@ import "../components"
 import "../services"
 
 Btn {
-    glyph: "\uf011"
+    glyph: "power_settings_new"
     color: Theme.red
     onClicked: Sys.run("wlogout")
 }

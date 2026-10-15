@@ -8,12 +8,16 @@ Item {
     property string glyph
     property string label
     property color color: Theme.fg
-    property color labelColor: color
+    // mono mode: every colour becomes the foreground except alert red and muted grey
+    readonly property color paint: Config.monoIcons && !Qt.colorEqual(color, Theme.red) && !Qt.colorEqual(color, Theme.muted) ? Theme.fg : color
+    property color labelColor: paint
+    // "wifi" style names use the Material Symbols font (ligatures); anything else is a Nerd Font glyph
+    readonly property bool ligature: /^[a-z0-9_]+$/.test(glyph)
     property int size: 18
     property bool spin: false
     property bool badge: false
     property bool struck: false
-    property color struckColor: color       // colour of the strike-through line (e.g. red on a muted speaker)
+    property color struckColor: paint       // colour of the strike-through line (e.g. red on a muted speaker)
     property bool pulse: false              // slow breathing: charging, connected
     property bool blink: false              // fast blink: low battery
     property var pop: undefined             // changes -> the icon bounces once (mute toggled, device connected)
@@ -43,8 +47,8 @@ Item {
             visible: text !== ""
             anchors.verticalCenter: parent.verticalCenter
             text: root.glyph
-            color: root.color
-            font { family: Theme.font; pixelSize: root.size }
+            color: root.paint
+            font { family: root.ligature ? Theme.iconFont : Theme.font; pixelSize: root.size }
             Behavior on color { ColorAnimation { duration: 200 } }
 
             // breathing / blinking

@@ -181,6 +181,18 @@ Singleton {
         return "";
     }
 
+    // Material Symbols name for a bluetooth device class (bar button)
+    function btIcon(icon) {
+        if (/headset|headphone/.test(icon)) return "headphones";
+        if (/keyboard/.test(icon)) return "keyboard";
+        if (/mouse/.test(icon)) return "mouse";
+        if (/phone/.test(icon)) return "smartphone";
+        if (/computer|laptop/.test(icon)) return "laptop";
+        if (/gaming|joystick/.test(icon)) return "sports_esports";
+        if (/speaker|audio/.test(icon)) return "speaker";
+        return "bluetooth_connected";
+    }
+
     function run(...cmd) { Quickshell.execDetached(cmd) }
     function fmt(b) { return b >= 1048576 ? (b / 1048576).toFixed(1) + "MB" : Math.round(b / 1024) + "KB" }
     function fmtRate(b) { return b >= 1048576 ? [(b / 1048576).toFixed(1), "MB/s"] : [(b / 1024).toFixed(1), "KB/s"] }
