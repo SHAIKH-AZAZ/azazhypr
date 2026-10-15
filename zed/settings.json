@@ -100,7 +100,7 @@
   "theme": {
     "mode": "dark",
     "light": "Catppuccin Iced Latte (Blur) [Light]",
-    "dark": "Catppuccin Espresso (Blur) [Light]"
+    "dark": "Catppuccin Espresso (Blur) [Heavy]"
   },
   "indent_guides": {
     "enabled": true,

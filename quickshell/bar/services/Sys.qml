@@ -121,8 +121,17 @@ Singleton {
         command: ["sh", "-c", 'curl -fsS --max-time 8 "wttr.in/$1?format=%c|%t|%l|%C|%f|%h|%w" 2>/dev/null', "sh", Config.weatherLocation]
         stdout: StdioCollector {
             onStreamFinished: {
-                const f = text.trim().split("|").map(x => x.replace(/\s+/g, " ").trim());
-                if (f.length < 7) return;      // error page / offline: keep the last good values
+                // wttr.in answers with an HTML/JS page when it cannot resolve (offline at login, captive
+                // portal, rate limit). Accept only the exact 7-field answer with a real temperature.
+                const raw = text.trim();
+                const f = raw.split("|").map(x => x.replace(/\s+/g, " ").trim());
+                const ok = raw.length > 0 && raw.length < 160 && !/[<>{};]/.test(raw)
+                    && f.length === 7 && /^[+-]?\d+\s*\u00b0[CF]$/.test(f[1]);
+                if (!ok) {                      // keep the last good values, try again soon
+                    if (root.weather === "" && root._wxRetries < 8) { root._wxRetries++; wxRetry.restart() }
+                    return;
+                }
+                root._wxRetries = 0;
                 root.weather = (f[0] + " " + f[1]).trim();
                 root.weatherPlace = f[2];
                 root.weatherDesc = f[3];
@@ -132,6 +141,9 @@ Singleton {
             }
         }
     }
+    // network is often not up yet when the bar starts at login: retry every 20 s until it answers
+    property int _wxRetries: 0
+    Timer { id: wxRetry; interval: 20000; onTriggered: root.refreshSlow() }
     Timer { id: recount; interval: 3000; onTriggered: root.refreshSlow() }
 
     // run the upgrade in a terminal; recount when that terminal closes

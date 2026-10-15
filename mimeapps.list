@@ -22,6 +22,7 @@ x-scheme-handler/mailto=userapp-Thunderbird-DZX6U3.desktop
 x-scheme-handler/mid=userapp-Thunderbird-DZX6U3.desktop
 message/rfc822=userapp-Thunderbird-DZX6U3.desktop
 x-scheme-handler/net.thunderbird=userapp-Thunderbird-NN1TU3.desktop
+x-scheme-handler/t3code=com.t3tools.T3Code.desktop
 
 [Added Associations]
 inode/directory=antigravity-ide.desktop;dev.zed.Zed.desktop;kiro.desktop;code.desktop;
@@ -39,3 +40,4 @@ message/rfc822=userapp-Thunderbird-DZX6U3.desktop;
 x-scheme-handler/net.thunderbird=userapp-Thunderbird-NN1TU3.desktop;
 video/matroska=org.gnome.Showtime.desktop;vlc.desktop;
 video/mp4=org.gnome.Showtime.desktop;
+x-scheme-handler/t3code=com.t3tools.T3Code.desktop;
