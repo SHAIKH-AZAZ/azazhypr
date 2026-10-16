@@ -27,7 +27,7 @@ ColumnLayout {
 
     RowLayout {
         spacing: 8
-        Txt { text: ""; font.pixelSize: 16 }
+        Txt { icon: true; text: "grid_view"; font.pixelSize: 16 }
         Txt { Layout.fillWidth: true; text: "Dashboard"; font.bold: true }
     }
 
@@ -37,17 +37,17 @@ ColumnLayout {
             Layout.fillWidth: true
             columns: 3
             rowSpacing: 6
-            QuickToggle { glyph: ""; text: "WiFi"; on: Sys.wifiRadio; onClicked: Sys.toggleWifi() }
+            QuickToggle { glyph: "wifi"; text: "WiFi"; on: Sys.wifiRadio; onClicked: Sys.toggleWifi() }
             QuickToggle {
-                glyph: ""; text: "Bluetooth"
+                glyph: "bluetooth"; text: "Bluetooth"
                 on: root.adapter?.enabled ?? false
                 onClicked: if (root.adapter) root.adapter.enabled = !root.adapter.enabled
             }
-            QuickToggle { glyph: ""; text: "Airplane Mode"; on: Sys.airplane; onClicked: Sys.toggleAirplane() }
-            QuickToggle { glyph: ""; text: "Do Not Disturb"; on: Notifs.dnd; onClicked: Notifs.dnd = !Notifs.dnd }
-            QuickToggle { glyph: ""; text: "Idle Inhibit"; on: Sys.inhibit; onClicked: Sys.inhibit = !Sys.inhibit }
+            QuickToggle { glyph: "flight"; text: "Airplane Mode"; on: Sys.airplane; onClicked: Sys.toggleAirplane() }
+            QuickToggle { glyph: "notifications_off"; text: "Do Not Disturb"; on: Notifs.dnd; onClicked: Notifs.dnd = !Notifs.dnd }
+            QuickToggle { glyph: "visibility"; text: "Idle Inhibit"; on: Sys.inhibit; onClicked: Sys.inhibit = !Sys.inhibit }
             QuickToggle {
-                glyph: ""; text: "Power Saver"
+                glyph: "eco"; text: "Power Saver"
                 on: PowerProfiles.profile === PowerProfile.PowerSaver
                 onClicked: PowerProfiles.profile = on ? PowerProfile.Balanced : PowerProfile.PowerSaver
             }
@@ -56,11 +56,12 @@ ColumnLayout {
 
     // ---- volume ----
     Card {
-        title: "Volume"; glyph: ""
+        title: "Volume"; glyph: "volume_up"
         RowLayout {
             spacing: 10
             Txt {
-                text: Sys.sink?.muted ? "" : ""
+                icon: true
+                text: Sys.sink?.muted ? "volume_off" : "volume_up"
                 font.pixelSize: 16
                 MouseArea { anchors { fill: parent; margins: -4 } onClicked: if (Sys.sink) Sys.sink.muted = !Sys.sink.muted }
             }
@@ -78,7 +79,7 @@ ColumnLayout {
 
     // ---- now playing ----
     Card {
-        title: "Now Playing"; glyph: ""
+        title: "Now Playing"; glyph: "album"
         Txt { visible: !root.player; text: "Nothing playing"; color: Theme.muted }
         RowLayout {
             visible: !!root.player
@@ -93,19 +94,20 @@ ColumnLayout {
                 Txt { Layout.fillWidth: true; text: root.player?.trackTitle ?? ""; font.bold: true }
                 Txt { Layout.fillWidth: true; text: root.player?.trackArtist ?? ""; color: Theme.muted; font.pixelSize: 11 }
             }
-            Txt { text: ""; font.pixelSize: 15; MouseArea { anchors { fill: parent; margins: -6 } onClicked: root.player?.previous() } }
+            Txt { icon: true; text: "skip_previous"; font.pixelSize: 15; MouseArea { anchors { fill: parent; margins: -6 } onClicked: root.player?.previous() } }
             Rectangle {
                 implicitWidth: 36; implicitHeight: 36; radius: 18
                 color: Theme.accent
                 Txt {
                     anchors.centerIn: parent
-                    text: root.player?.isPlaying ? "" : ""
+                    icon: true
+                    text: root.player?.isPlaying ? "pause" : "play_arrow"
                     color: Theme.bg
                     font.pixelSize: 14
                 }
                 MouseArea { anchors.fill: parent; onClicked: root.player?.togglePlaying() }
             }
-            Txt { text: ""; font.pixelSize: 15; MouseArea { anchors { fill: parent; margins: -6 } onClicked: root.player?.next() } }
+            Txt { icon: true; text: "skip_next"; font.pixelSize: 15; MouseArea { anchors { fill: parent; margins: -6 } onClicked: root.player?.next() } }
         }
         Slide {
             visible: !!root.player && (root.player?.length ?? 0) > 0
@@ -125,7 +127,7 @@ ColumnLayout {
         spacing: 8
         Card {
             Layout.alignment: Qt.AlignTop
-            title: "Battery"; glyph: ""
+            title: "Battery"; glyph: "battery_full"
             Txt { text: Math.round((root.bat?.percentage ?? 0) * 100) + "%"; font.bold: true }
             Rectangle {
                 Layout.fillWidth: true
@@ -141,7 +143,7 @@ ColumnLayout {
         }
         Card {
             Layout.alignment: Qt.AlignTop
-            title: "Network"; glyph: ""
+            title: "Network"; glyph: "wifi"
             RowLayout {
                 Layout.fillWidth: true
                 Repeater {
@@ -161,7 +163,7 @@ ColumnLayout {
 
     // ---- system ----
     Card {
-        title: "System"; glyph: ""
+        title: "System"; glyph: "bar_chart"
         RowLayout {
             Layout.fillWidth: true
             Gauge { Layout.fillWidth: true; value: Sys.cpu / 100; text: Math.round(Sys.cpu) + "%"; caption: "CPU" }
@@ -184,22 +186,22 @@ ColumnLayout {
             Rectangle {
                 implicitWidth: 34; implicitHeight: 34; radius: 10
                 color: Theme.subtle
-                Txt { anchors.centerIn: parent; text: "" }
+                Txt { icon: true; anchors.centerIn: parent; text: "person" }
             }
             Txt { Layout.fillWidth: true; text: Quickshell.env("USER"); font.bold: true }
             Repeater {
                 model: [
-                    { g: "", run: () => { Sys.run("hyprlock"); root.close() }, hot: false },
-                    { g: "", run: () => Sys.logout(), hot: false },
-                    { g: "", run: () => Sys.run("systemctl", "reboot"), hot: false },
-                    { g: "", run: () => Sys.run("systemctl", "poweroff"), hot: true }
+                    { g: "lock", run: () => { Sys.run("hyprlock"); root.close() }, hot: false },
+                    { g: "logout", run: () => Sys.logout(), hot: false },
+                    { g: "refresh", run: () => Sys.run("systemctl", "reboot"), hot: false },
+                    { g: "power_settings_new", run: () => Sys.run("systemctl", "poweroff"), hot: true }
                 ]
                 Rectangle {
                     required property var modelData
                     implicitWidth: 34; implicitHeight: 34; radius: 10
                     color: modelData.hot ? Theme.red : Theme.subtle
                     opacity: bm.containsMouse ? 0.85 : 1
-                    Txt { anchors.centerIn: parent; text: modelData.g; color: modelData.hot ? Theme.bg : Theme.fg }
+                    Txt { icon: true; anchors.centerIn: parent; text: modelData.g; color: modelData.hot ? Theme.bg : Theme.fg; font.pixelSize: 18 }
                     MouseArea { id: bm; anchors.fill: parent; hoverEnabled: true; onClicked: modelData.run() }
                 }
             }

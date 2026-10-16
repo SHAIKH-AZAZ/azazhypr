@@ -17,7 +17,8 @@ ColumnLayout {
     RowLayout {
         spacing: 10
         Txt {
-            text: Sys.sink?.muted ? "" : ""
+            icon: true
+            text: Sys.sink?.muted ? "volume_off" : "volume_up"
             font.pixelSize: 18
             MouseArea { anchors { fill: parent; margins: -4 } onClicked: if (Sys.sink) Sys.sink.muted = !Sys.sink.muted }
         }
@@ -28,7 +29,8 @@ ColumnLayout {
     RowLayout {
         spacing: 10
         Txt {
-            text: Sys.source?.muted ? "" : ""
+            icon: true
+            text: Sys.source?.muted ? "mic_off" : "mic"
             font.pixelSize: 18
             MouseArea { anchors { fill: parent; margins: -4 } onClicked: if (Sys.source) Sys.source.muted = !Sys.source.muted }
         }

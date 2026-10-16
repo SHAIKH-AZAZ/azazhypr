@@ -28,7 +28,7 @@ ColumnLayout {
 
     RowLayout {
         spacing: 10
-        Txt { text: "\uf293"; font.pixelSize: 20; color: b.on ? Theme.accent : Theme.muted }
+        Txt { icon: true; text: "bluetooth"; font.pixelSize: 20; color: b.on ? Theme.accent : Theme.muted }
         ColumnLayout {
             Layout.fillWidth: true
             spacing: 0
@@ -66,9 +66,9 @@ ColumnLayout {
     RowLayout {
         visible: b.on
         spacing: 8
-        Chip { glyph: "\uf002"; text: b.ad?.discovering ? "Stop scan" : "Scan"; on: b.ad?.discovering ?? false; onClicked: b.ad.discovering = !b.ad.discovering }
-        Chip { glyph: "\uf06e"; text: "Visible"; on: b.ad?.discoverable ?? false; onClicked: b.ad.discoverable = !b.ad.discoverable }
-        Chip { glyph: "\uf013"; text: "Manager"; onClicked: { Sys.run("blueman-manager"); close() } }
+        Chip { glyph: "search"; text: b.ad?.discovering ? "Stop scan" : "Scan"; on: b.ad?.discovering ?? false; onClicked: b.ad.discovering = !b.ad.discovering }
+        Chip { glyph: "visibility"; text: "Visible"; on: b.ad?.discoverable ?? false; onClicked: b.ad.discoverable = !b.ad.discoverable }
+        Chip { glyph: "settings"; text: "Manager"; onClicked: { Sys.run("blueman-manager"); close() } }
     }
 
     Flickable {

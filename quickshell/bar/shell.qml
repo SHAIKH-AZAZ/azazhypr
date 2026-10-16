@@ -19,6 +19,10 @@ ShellRoot {
         model: Quickshell.screens
         Bar {}
     }
+    Variants {
+        model: Quickshell.screens
+        Island {}
+    }
     NotifPopups {}
     Osd {}
     Launcher {}

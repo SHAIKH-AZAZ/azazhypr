@@ -16,7 +16,7 @@ Rectangle {
     Column {
         anchors.centerIn: parent
         spacing: 2
-        Text { anchors.horizontalCenter: parent.horizontalCenter; text: chip.glyph; color: chip.on ? Theme.bg : Theme.fg; font { family: Theme.font; pixelSize: 18 } }
+        Text { anchors.horizontalCenter: parent.horizontalCenter; text: chip.glyph; color: chip.on ? Theme.bg : Theme.fg; font { family: Theme.iconFont; pixelSize: 20 } }
         Text { anchors.horizontalCenter: parent.horizontalCenter; text: chip.text; color: chip.on ? Theme.bg : Theme.fg; font { family: Theme.font; pixelSize: 11 } }
     }
     MouseArea { id: ma; anchors.fill: parent; hoverEnabled: true; onClicked: chip.clicked() }

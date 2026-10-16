@@ -170,15 +170,11 @@ Singleton {
     }
     function logout() { Hyprland.dispatch(Hyprland.usingLua ? "hl.dsp.exit()" : "exit") }
 
-    function btGlyph(icon) {
-        if (/headset|headphone/.test(icon)) return "";
-        if (/keyboard/.test(icon)) return "";
-        if (/mouse/.test(icon)) return "";
-        if (/phone/.test(icon)) return "";
-        if (/computer|laptop/.test(icon)) return "";
-        if (/gaming|joystick/.test(icon)) return "";
-        if (/speaker|audio/.test(icon)) return "";
-        return "";
+    // Material Symbols name for the emoji wttr.in puts in front of the temperature
+    function wxIcon(e) {
+        return /☀|🌞/.test(e) ? "sunny" : /🌙/.test(e) ? "bedtime" : /⛅|🌤|🌥/.test(e) ? "partly_cloudy_day"
+             : /⛈|🌩/.test(e) ? "thunderstorm" : /🌧|🌦/.test(e) ? "rainy" : /🌨|❄/.test(e) ? "weather_snowy"
+             : /🌫/.test(e) ? "foggy" : /☁/.test(e) ? "cloud" : "clear_day";
     }
 
     // Material Symbols name for a bluetooth device class (bar button)

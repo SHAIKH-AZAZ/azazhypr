@@ -137,7 +137,7 @@ PanelWindow {
                 RowLayout {
                     anchors { fill: parent; leftMargin: 12; rightMargin: 12 }
                     spacing: 10
-                    Txt { text: "\uf0ea"; color: Theme.accent; font.pixelSize: 16 }
+                    Txt { icon: true; text: "content_paste"; color: Theme.accent; font.pixelSize: 16 }
                     TextInput {
                         id: input
                         Layout.fillWidth: true
@@ -271,7 +271,8 @@ PanelWindow {
                             Txt {
                                 anchors.centerIn: parent
                                 visible: !row.modelData.img
-                                text: "\uf0c5"
+                                icon: true
+                                text: "content_copy"
                                 color: Theme.fg
                                 font.pixelSize: 18
                             }

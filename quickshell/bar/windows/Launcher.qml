@@ -20,10 +20,10 @@ PanelWindow {
     property int sel: 0
     readonly property string home: Quickshell.env("HOME")
     readonly property var cats: [
-        { name: "apps", glyph: "" },
-        { name: "files", glyph: "" },
-        { name: "term", glyph: "" },
-        { name: "window", glyph: "\uf2d0" }
+        { name: "apps", glyph: "apps" },
+        { name: "files", glyph: "folder_open" },
+        { name: "term", glyph: "terminal" },
+        { name: "window", glyph: "web_asset" }
     ]
 
     screen: Quickshell.screens.find(s => s.name === Hyprland.focusedMonitor?.name) ?? Quickshell.screens[0]
@@ -78,7 +78,7 @@ PanelWindow {
         } else if (cat === 2) {
             const cmd = input.text.trim();
             results = cmd ? [{
-                title: cmd, sub: "run in " + Config.terminal, glyph: "",
+                title: cmd, sub: "run in " + Config.terminal, glyph: "terminal",
                 run: () => Sys.run(Config.terminal, "-e", "sh", "-c", cmd + "; exec \"$SHELL\"")
             }] : [];
         } else {
@@ -86,7 +86,7 @@ PanelWindow {
             for (const t of Hyprland.toplevels.values) {
                 const title = t.title ?? "", cls = t.lastIpcObject?.class ?? "";
                 if (q && !(title + " " + cls).toLowerCase().includes(q)) continue;
-                out.push({ title: title || cls, sub: cls, glyph: "", run: () => Sys.focusWindow(t.address) });
+                out.push({ title: title || cls, sub: cls, glyph: "web_asset", run: () => Sys.focusWindow(t.address) });
             }
             results = out;
         }
@@ -114,7 +114,7 @@ PanelWindow {
                     out.push({
                         title: l.replace(/\/$/, "").split("/").pop(),
                         sub: l.replace(win.home, "~"),
-                        glyph: dir ? "" : "",
+                        glyph: dir ? "folder_open" : "description",
                         run: () => Sys.run("xdg-open", l)
                     });
                 }
@@ -161,7 +161,7 @@ PanelWindow {
                 RowLayout {
                     anchors { fill: parent; leftMargin: 12; rightMargin: 12 }
                     spacing: 10
-                    Txt { text: ""; color: Theme.muted; font.pixelSize: 16 }
+                    Txt { icon: true; text: "search"; color: Theme.muted; font.pixelSize: 16 }
                     TextInput {
                         id: input
                         Layout.fillWidth: true
@@ -227,7 +227,7 @@ PanelWindow {
                             Row {
                                 anchors.centerIn: parent
                                 spacing: 8
-                                Txt { text: modelData.glyph; color: win.cat === index ? Theme.bg : Theme.fg; font.pixelSize: 16 }
+                                Txt { icon: true; text: modelData.glyph; color: win.cat === index ? Theme.bg : Theme.fg; font.pixelSize: 16 }
                                 Txt { text: modelData.name; color: win.cat === index ? Theme.bg : Theme.fg }
                             }
                             MouseArea {
@@ -282,9 +282,10 @@ PanelWindow {
                                     visible: !row.modelData.icon
                                     Layout.preferredWidth: 26
                                     horizontalAlignment: Text.AlignHCenter
+                                    icon: true
                                     text: row.modelData.glyph ?? ""
                                     color: row.index === win.sel ? Theme.bg : Theme.fg
-                                    font.pixelSize: 18
+                                    font.pixelSize: 20
                                 }
                                 ColumnLayout {
                                     Layout.fillWidth: true

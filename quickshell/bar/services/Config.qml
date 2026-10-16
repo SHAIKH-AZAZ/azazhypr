@@ -19,6 +19,10 @@ Singleton {
     // "hide" = swallow them (OSD only), "show" = also show a (replacing) popup
     readonly property string osdNotifs: "hide"
 
+    // ---- dynamic island (windows/Island.qml) ----
+    // true = top-center capsule: media/cava/date, expands on click, shows the volume/brightness OSD
+    readonly property bool island: false
+
     // ---- OSD (volume / brightness bar) ----
     readonly property int osdTimeout: 1000            // ms visible after the last change
 

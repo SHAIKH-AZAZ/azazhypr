@@ -7,10 +7,11 @@ import Quickshell.Io
 Row {
     id: root
     property var vals: []
+    property int bars: 22
     spacing: 2
 
     Repeater {
-        model: 22
+        model: root.bars
         Rectangle {
             required property int index
             anchors.verticalCenter: parent.verticalCenter
@@ -23,7 +24,7 @@ Row {
     }
 
     Process {
-        running: Sys.playing
+        running: Sys.playing && root.visible
         command: ["cava", "-p", Quickshell.shellPath("cava.conf")]
         stdout: SplitParser { onRead: l => root.vals = l.split(";").map(Number) }
         onRunningChanged: if (!running) root.vals = []

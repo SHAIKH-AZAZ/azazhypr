@@ -7,13 +7,13 @@ import Quickshell.Wayland
 PanelWindow {
     id: osd
 
-    property string glyph: ""
+    property string glyph: "volume_up"
     property color tint: Theme.green
     property real value: 0
     property bool ready: false
 
     function show(g, c, v) {
-        if (!ready) return;
+        if (!ready || Config.island) return;   // the island shows it instead
         glyph = g; tint = c; value = v;
         hide.restart();
     }
@@ -33,12 +33,12 @@ PanelWindow {
 
     Connections {
         target: Sys.sink ?? null
-        function onVolumeChanged() { osd.show(Sys.sink.muted ? "" : "", Theme.green, Sys.sink.volume) }
-        function onMutedChanged() { osd.show(Sys.sink.muted ? "" : "", Theme.green, Sys.sink.volume) }
+        function onVolumeChanged() { osd.show(Sys.sink.muted ? "volume_off" : "volume_up", Theme.green, Sys.sink.volume) }
+        function onMutedChanged() { osd.show(Sys.sink.muted ? "volume_off" : "volume_up", Theme.green, Sys.sink.volume) }
     }
     Connections {
         target: Sys
-        function onBrightChanged() { osd.show("", Theme.yellow, Sys.bright / 100) }
+        function onBrightChanged() { osd.show("brightness_high", Theme.yellow, Sys.bright / 100) }
     }
 
     Rectangle {
@@ -55,7 +55,7 @@ PanelWindow {
                 width: 22
                 text: osd.glyph
                 color: osd.tint
-                font { family: Theme.font; pixelSize: 18 }
+                font { family: Theme.iconFont; pixelSize: 20 }
             }
             Rectangle {
                 anchors.verticalCenter: parent.verticalCenter

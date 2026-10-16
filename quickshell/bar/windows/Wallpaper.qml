@@ -194,7 +194,7 @@ PanelWindow {
                 color: search.activeFocus ? Theme.accent : Theme.subtle
             }
 
-            Txt { x: 12; anchors.verticalCenter: parent.verticalCenter; text: "\uf002"; color: Theme.muted }
+            Txt { icon: true; x: 12; anchors.verticalCenter: parent.verticalCenter; text: "search"; color: Theme.muted }
             TextInput {
                 id: search
                 anchors { fill: parent; leftMargin: 34; rightMargin: 34 }
@@ -236,9 +236,10 @@ PanelWindow {
                 font.pixelSize: 13
                 }
             Txt {   // clear
+                icon: true
                 anchors { right: parent.right; rightMargin: 12; verticalCenter: parent.verticalCenter }
                 visible: search.text !== ""
-                text: "\uf00d"
+                text: "close"
                 color: clearMa.containsMouse ? Theme.red : Theme.muted
                 MouseArea { id: clearMa; anchors { fill: parent; margins: -6 } hoverEnabled: true; onClicked: search.text = "" }
             }

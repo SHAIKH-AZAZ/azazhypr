@@ -50,7 +50,7 @@ ColumnLayout {
     RowLayout {
         Layout.fillWidth: true
         spacing: 8
-        Txt { text: ""; color: Theme.muted; font.pixelSize: 16 }
+        Txt { icon: true; text: "battery_full"; color: Theme.muted; font.pixelSize: 16 }
         Txt { Layout.fillWidth: true; text: "Battery"; font { pixelSize: 15; bold: true } }
     }
 
@@ -120,7 +120,7 @@ ColumnLayout {
         RowLayout {
             Layout.fillWidth: true
             spacing: 6
-            Txt { text: b.limitEnd > 0 ? "" : ""; color: Theme.muted; font.pixelSize: 12 }
+            Txt { icon: true; text: "info"; color: Theme.muted; font.pixelSize: 12 }
             Txt {
                 Layout.fillWidth: true
                 wrapMode: Text.Wrap
@@ -148,9 +148,9 @@ ColumnLayout {
                 spacing: 3
                 Repeater {
                     model: [
-                        { g: "", t: "Saver", p: PowerProfile.PowerSaver, show: true },
-                        { g: "", t: "Balanced", p: PowerProfile.Balanced, show: true },
-                        { g: "", t: "Performance", p: PowerProfile.Performance, show: PowerProfiles.hasPerformanceProfile }
+                        { g: "eco", t: "Saver", p: PowerProfile.PowerSaver, show: true },
+                        { g: "balance", t: "Balanced", p: PowerProfile.Balanced, show: true },
+                        { g: "rocket_launch", t: "Performance", p: PowerProfile.Performance, show: PowerProfiles.hasPerformanceProfile }
                     ].filter(x => x.show)
                     Rectangle {
                         required property var modelData
@@ -162,7 +162,7 @@ ColumnLayout {
                         Row {
                             anchors.centerIn: parent
                             spacing: 6
-                            Txt { text: modelData.g; color: parent.parent.on ? Theme.green : Theme.muted; font.pixelSize: 12 }
+                            Txt { icon: true; text: modelData.g; color: parent.parent.on ? Theme.green : Theme.muted; font.pixelSize: 12 }
                             Txt { text: modelData.t; color: parent.parent.on ? Theme.fg : Theme.muted; font { pixelSize: 12; bold: parent.parent.on } }
                         }
                         MouseArea { id: pma; anchors.fill: parent; hoverEnabled: true; onClicked: PowerProfiles.profile = modelData.p }

@@ -77,19 +77,20 @@ Singleton {
         if (code >= 96) return "Thunderstorm, hail";
         return "Unknown";
     }
+    // Material Symbols name for a WMO weather code
     function icon(code, day) {
         const d = day !== false;
-        if (code === 0 || code === 1) return d ? "☀️" : "🌙";
-        if (code === 2) return d ? "⛅" : "☁️";
-        if (code === 3) return "☁️";
-        if (code === 45 || code === 48) return "🌫️";
-        if (code >= 51 && code <= 57) return "🌦️";
-        if (code >= 61 && code <= 67) return "🌧️";
-        if (code >= 71 && code <= 77) return "❄️";
-        if (code >= 80 && code <= 82) return "🌧️";
-        if (code === 85 || code === 86) return "🌨️";
-        if (code >= 95) return "⛈️";
-        return "🌡️";
+        if (code === 0 || code === 1) return d ? "sunny" : "bedtime";
+        if (code === 2) return d ? "partly_cloudy_day" : "partly_cloudy_night";
+        if (code === 3) return "cloud";
+        if (code === 45 || code === 48) return "foggy";
+        if (code >= 51 && code <= 57) return "rainy";
+        if (code >= 61 && code <= 67) return "rainy";
+        if (code >= 71 && code <= 77) return "weather_snowy";
+        if (code >= 80 && code <= 82) return "rainy";
+        if (code === 85 || code === 86) return "weather_snowy";
+        if (code >= 95) return "thunderstorm";
+        return "device_thermostat";
     }
     function compass(deg) {
         return ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"][Math.round(deg / 22.5) % 16];

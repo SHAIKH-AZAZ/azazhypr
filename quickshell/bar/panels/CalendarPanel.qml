@@ -43,7 +43,7 @@ ColumnLayout {
     RowLayout {
         Layout.fillWidth: true
         spacing: 8
-        Txt { text: ""; color: Theme.accent; font.pixelSize: 16 }
+        Txt { icon: true; text: "calendar_month"; color: Theme.accent; font.pixelSize: 16 }
         Txt { Layout.fillWidth: true; text: "Calendar"; font.bold: true }
         Rectangle {
             implicitWidth: todayTxt.implicitWidth + 18
@@ -74,17 +74,17 @@ ColumnLayout {
         Txt { Layout.fillWidth: true; text: Qt.formatDate(c.view, "MMMM yyyy"); font.bold: true; font.pixelSize: 15; color: Theme.accent }
         Repeater {
             model: [
-                { g: "", d: -12 },   // year back
-                { g: "", d: -1 },
-                { g: "", d: 1 },
-                { g: "", d: 12 }     // year forward
+                { g: "keyboard_double_arrow_left", d: -12 },   // year back
+                { g: "chevron_left", d: -1 },
+                { g: "chevron_right", d: 1 },
+                { g: "keyboard_double_arrow_right", d: 12 }     // year forward
             ]
             Rectangle {
                 required property var modelData
                 implicitWidth: 28; implicitHeight: 26
                 radius: Config.notifRadius
                 color: navMa.containsMouse ? Theme.subtle : "transparent"
-                Txt { anchors.centerIn: parent; text: parent.modelData.g }
+                Txt { icon: true; anchors.centerIn: parent; text: parent.modelData.g; font.pixelSize: 17 }
                 MouseArea { id: navMa; anchors.fill: parent; hoverEnabled: true; onClicked: c.goMonth(parent.modelData.d) }
             }
         }
@@ -202,7 +202,8 @@ ColumnLayout {
                 Rectangle { width: 6; height: 6; radius: 3; color: Theme.green; Layout.alignment: Qt.AlignVCenter }
                 Txt { Layout.fillWidth: true; text: parent.modelData; wrapMode: Text.Wrap; maximumLineCount: 3 }
                 Txt {
-                    text: ""
+                    icon: true
+                    text: "close"
                     color: delMa.containsMouse ? Theme.red : Theme.muted
                     MouseArea {
                         id: delMa

@@ -16,7 +16,7 @@ ColumnLayout {
     Txt { text: "Brightness"; font.bold: true }
     RowLayout {
         spacing: 10
-        Txt { text: ""; font.pixelSize: 18; color: Theme.yellow }
+        Txt { icon: true; text: "brightness_high"; font.pixelSize: 18; color: Theme.yellow }
         Slide { value: Sys.bright / 100; color: Theme.yellow; onMoved: v => Sys.setBright(v * 100) }
         Txt { text: Sys.bright + "%"; Layout.preferredWidth: 38 }
     }

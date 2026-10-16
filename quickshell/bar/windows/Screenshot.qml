@@ -20,9 +20,9 @@ PanelWindow {
     property string pending: ""     // flag to run once the panel is gone
 
     readonly property var modes: [
-        { glyph: "", flag: "--now",    label: "" },
-        { glyph: "", flag: "--area",   label: "" },
-        { glyph: "", flag: "--active", label: "" },
+        { glyph: "desktop_windows", flag: "--now",    label: "" },
+        { glyph: "crop", flag: "--area",   label: "" },
+        { glyph: "web_asset", flag: "--active", label: "" },
         { glyph: "",       flag: "--in5",    label: "5s" },
         { glyph: "",       flag: "--in10",   label: "10" }
     ]
@@ -122,7 +122,8 @@ PanelWindow {
                 Txt {
                     anchors.centerIn: parent
                     visible: !win.latest
-                    text: ""
+                    icon: true
+                    text: "photo_camera"
                     color: Theme.muted
                     font.pixelSize: 40
                 }
@@ -150,9 +151,10 @@ PanelWindow {
                         opacity: tileMa.containsMouse && win.sel !== index ? 0.85 : 1
                         Txt {
                             anchors.centerIn: parent
+                            icon: !!modelData.glyph
                             text: modelData.glyph || modelData.label
                             color: win.sel === index ? Theme.bg : Theme.fg
-                            font { pixelSize: modelData.glyph ? 24 : 22; bold: !modelData.glyph }
+                            font { pixelSize: modelData.glyph ? 28 : 22; bold: !modelData.glyph }
                         }
                         MouseArea {
                             id: tileMa

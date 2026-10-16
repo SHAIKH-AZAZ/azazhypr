@@ -117,9 +117,9 @@ PanelWindow {
                         Text {
                             anchors.centerIn: parent
                             visible: pop.icon === ""
-                            text: pop.critical ? "" : ""
+                            text: pop.critical ? "warning" : "info"
                             color: pop.tint
-                            font { family: Theme.font; pixelSize: 24 }
+                            font { family: Theme.iconFont; pixelSize: 26 }
                         }
                     }
                     Column {
@@ -206,9 +206,9 @@ PanelWindow {
 
                 Text {
                     anchors { top: parent.top; right: parent.right; topMargin: 6; rightMargin: 8 }
-                    text: ""
+                    text: "close"
                     color: closeHit.containsMouse ? Theme.red : Theme.muted
-                    font { family: Theme.font; pixelSize: 14 }
+                    font { family: Theme.iconFont; pixelSize: 16 }
                     MouseArea {
                         id: closeHit
                         anchors { fill: parent; margins: -4 }

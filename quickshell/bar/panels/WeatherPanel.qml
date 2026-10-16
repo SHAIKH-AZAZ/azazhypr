@@ -42,7 +42,7 @@ ColumnLayout {
     RowLayout {
         Layout.fillWidth: true
         spacing: 10
-        Txt { text: ""; color: Theme.blue; font.pixelSize: 22 }
+        Txt { icon: true; text: "location_on"; color: Theme.blue; font.pixelSize: 22 }
         ColumnLayout {
             Layout.fillWidth: true
             spacing: 0
@@ -55,7 +55,8 @@ ColumnLayout {
             border { width: 1; color: Theme.subtle }
             Txt {
                 anchors.centerIn: parent
-                text: ""
+                icon: true
+                text: "refresh"
                 color: Forecast.loading ? Theme.blue : Theme.fg
                 RotationAnimator on rotation { running: Forecast.loading; from: 0; to: 360; duration: 900; loops: Animation.Infinite }
             }
@@ -65,7 +66,7 @@ ColumnLayout {
             implicitWidth: 30; implicitHeight: 30; radius: 8
             color: c.editing || locMa.containsMouse ? Qt.alpha(Theme.fg, 0.12) : Qt.alpha(Theme.subtle, 0.4)
             border { width: 1; color: c.editing ? Theme.blue : Theme.subtle }
-            Txt { anchors.centerIn: parent; text: ""; color: c.editing ? Theme.blue : Theme.fg }
+            Txt { icon: true; anchors.centerIn: parent; text: "more_vert"; color: c.editing ? Theme.blue : Theme.fg }
             MouseArea { id: locMa; anchors.fill: parent; hoverEnabled: true; onClicked: c.editing = !c.editing }
         }
     }
@@ -138,7 +139,7 @@ ColumnLayout {
                 RowLayout {
                     anchors { fill: parent; leftMargin: 10; rightMargin: 10 }
                     spacing: 8
-                    Txt { text: "\uf041"; color: Theme.muted }
+                    Txt { icon: true; text: "location_on"; color: Theme.muted }
                     Txt { text: modelData.name; font { pixelSize: 13; bold: true } }
                     Txt {
                         Layout.fillWidth: true
@@ -175,7 +176,7 @@ ColumnLayout {
         spacing: 14
         visible: c.cur !== null
 
-        Txt { text: c.cur ? Forecast.icon(c.cur.weather_code, c.cur.is_day === 1) : ""; font.pixelSize: 62 }
+        Txt { icon: true; text: c.cur ? Forecast.icon(c.cur.weather_code, c.cur.is_day === 1) : ""; font.pixelSize: 62 }
         ColumnLayout {
             Layout.fillWidth: true
             spacing: 0
@@ -193,16 +194,16 @@ ColumnLayout {
             spacing: 7
             Repeater {
                 model: c.cur ? [
-                    { e: "💧", k: "Humidity", v: c.cur.relative_humidity_2m + "%" },
-                    { e: "💨", k: "Wind", v: Math.round(c.cur.wind_speed_10m) + " km/h " + Forecast.compass(c.cur.wind_direction_10m) },
-                    { e: "🧭", k: "Pressure", v: Math.round(c.cur.pressure_msl) + " hPa" },
-                    { e: "👁️", k: "Visibility", v: (c.cur.visibility / 1000).toFixed(c.cur.visibility >= 10000 ? 0 : 1) + " km" }
+                    { e: "water_drop", k: "Humidity", v: c.cur.relative_humidity_2m + "%" },
+                    { e: "air", k: "Wind", v: Math.round(c.cur.wind_speed_10m) + " km/h " + Forecast.compass(c.cur.wind_direction_10m) },
+                    { e: "speed", k: "Pressure", v: Math.round(c.cur.pressure_msl) + " hPa" },
+                    { e: "visibility", k: "Visibility", v: (c.cur.visibility / 1000).toFixed(c.cur.visibility >= 10000 ? 0 : 1) + " km" }
                 ] : []
                 RowLayout {
                     required property var modelData
                     Layout.fillWidth: true
                     spacing: 7
-                    Txt { text: modelData.e; font.pixelSize: 13 }
+                    Txt { icon: true; text: modelData.e; font.pixelSize: 15; color: Theme.muted }
                     Txt { Layout.fillWidth: true; text: modelData.k; color: Theme.muted; font.pixelSize: 12 }
                     Txt { text: modelData.v; font { pixelSize: 12; bold: true } }
                 }
@@ -243,7 +244,7 @@ ColumnLayout {
                     visible: strip.contentWidth > strip.width + 1
                     implicitWidth: 30; implicitHeight: 30; radius: 15
                     color: Qt.alpha(Theme.subtle, nxMa.containsMouse ? 0.9 : 0.5)
-                    Txt { anchors.centerIn: parent; text: strip.atXEnd ? "\uf053" : "\uf054" }
+                    Txt { icon: true; anchors.centerIn: parent; text: strip.atXEnd ? "chevron_left" : "chevron_right" }
                     MouseArea {
                         id: nxMa
                         anchors.fill: parent
@@ -294,7 +295,7 @@ ColumnLayout {
                                 anchors.centerIn: parent
                                 spacing: 5
                                 Txt { anchors.horizontalCenter: parent.horizontalCenter; text: modelData.label; color: Theme.muted; font.pixelSize: 11 }
-                                Txt { anchors.horizontalCenter: parent.horizontalCenter; text: Forecast.icon(modelData.code, modelData.day); font.pixelSize: 22 }
+                                Txt { icon: true; anchors.horizontalCenter: parent.horizontalCenter; text: Forecast.icon(modelData.code, modelData.day); font.pixelSize: 24 }
                                 Txt { anchors.horizontalCenter: parent.horizontalCenter; text: modelData.temp + "\u00b0"; font { pixelSize: 15; bold: true } }
                             }
                         }
@@ -330,7 +331,7 @@ ColumnLayout {
                         Layout.leftMargin: 6; Layout.rightMargin: 6
                         spacing: 8
                         Txt { Layout.preferredWidth: 46; text: modelData.name; font { pixelSize: 13; bold: index === 0 } }
-                        Txt { text: Forecast.icon(modelData.code, true); font.pixelSize: 17 }
+                        Txt { icon: true; text: Forecast.icon(modelData.code, true); font.pixelSize: 19 }
                         Txt { Layout.fillWidth: true; text: Forecast.desc(modelData.code); color: Theme.muted; font.pixelSize: 12 }
                         Txt { Layout.preferredWidth: 30; horizontalAlignment: Text.AlignRight; text: modelData.hi + "°"; font { pixelSize: 13; bold: true } }
                         Txt { Layout.preferredWidth: 30; horizontalAlignment: Text.AlignRight; text: modelData.lo + "°"; color: Theme.muted; font.pixelSize: 13 }
@@ -423,14 +424,14 @@ ColumnLayout {
                 spacing: 4
                 Repeater {
                     model: c.days.length ? [
-                        { e: "🌅", k: "Sunrise", v: Forecast.clock(c.days[0].sunrise) },
-                        { e: "🌇", k: "Sunset", v: Forecast.clock(c.days[0].sunset) }
+                        { e: "wb_twilight", k: "Sunrise", v: Forecast.clock(c.days[0].sunrise) },
+                        { e: "bedtime", k: "Sunset", v: Forecast.clock(c.days[0].sunset) }
                     ] : []
                     RowLayout {
                         required property var modelData
                         Layout.fillWidth: true
                         spacing: 6
-                        Txt { text: modelData.e; font.pixelSize: 20 }
+                        Txt { icon: true; text: modelData.e; font.pixelSize: 22 }
                         ColumnLayout {
                             spacing: 0
                             Txt { text: modelData.k; color: Theme.muted; font.pixelSize: 11 }

@@ -39,17 +39,18 @@ ColumnLayout {
     Card {
         visible: Sys.weather !== ""
         title: "Weather"
-        glyph: "\uf0c2"
+        glyph: "cloud"
 
         RowLayout {
             Layout.fillWidth: true
-            Txt { text: Sys.weather; font.pixelSize: 20; font.bold: true }
+            Txt { icon: true; text: Sys.wxIcon(Sys.weather.split(" ")[0]); font.pixelSize: 24 }
+            Txt { text: Sys.weather.replace(/^\S+\s+/, ""); font.pixelSize: 20; font.bold: true }
             Txt { Layout.fillWidth: true; text: Sys.weatherDesc; color: Theme.muted; horizontalAlignment: Text.AlignRight }
         }
         RowLayout {
             Layout.fillWidth: true
             spacing: 6
-            Txt { text: "\uf041"; color: Theme.accent }
+            Txt { icon: true; text: "location_on"; color: Theme.accent }
             Txt { Layout.fillWidth: true; text: Sys.weatherPlace || "Unknown location" }
         }
         Txt {

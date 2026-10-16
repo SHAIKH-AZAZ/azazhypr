@@ -25,7 +25,7 @@ Item {
                 anchors.centerIn: parent
                 text: root.glyph
                 color: root.on ? Theme.bg : Theme.fg
-                font { family: Theme.font; pixelSize: 18 }
+                font { family: Theme.iconFont; pixelSize: 21 }
             }
         }
         Text {

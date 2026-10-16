@@ -65,7 +65,7 @@ ColumnLayout {
         radius: 8
         color: ma.containsMouse || on ? Qt.alpha(Theme.fg, 0.12) : Qt.alpha(Theme.subtle, 0.4)
         border { width: 1; color: on ? Theme.green : Theme.subtle }
-        Txt { anchors.centerIn: parent; text: parent.glyph; color: parent.on ? Theme.green : Theme.fg }
+        Txt { icon: true; anchors.centerIn: parent; text: parent.glyph; color: parent.on ? Theme.green : Theme.fg; font.pixelSize: 17 }
         MouseArea { id: ma; anchors.fill: parent; hoverEnabled: true; onClicked: parent.clicked() }
     }
 
@@ -73,16 +73,16 @@ ColumnLayout {
     RowLayout {
         Layout.fillWidth: true
         spacing: 10
-        Txt { text: ""; color: Theme.green; font.pixelSize: 24 }
+        Txt { icon: true; text: "show_chart"; color: Theme.green; font.pixelSize: 24 }
         ColumnLayout {
             Layout.fillWidth: true
             spacing: 0
             Txt { text: "Focus"; font { pixelSize: 17; bold: true } }
             Txt { text: Activity.paused ? "Tracking paused" : "Track your productive time"; color: Activity.paused ? Theme.yellow : Theme.muted; font.pixelSize: 11 }
         }
-        IconBtn { glyph: ""; onClicked: c.goMonth(-1) }
-        IconBtn { glyph: ""; on: c.showSettings; onClicked: c.showSettings = !c.showSettings }
-        IconBtn { glyph: ""; onClicked: c.goMonth(1) }
+        IconBtn { glyph: "chevron_left"; onClicked: c.goMonth(-1) }
+        IconBtn { glyph: "settings"; on: c.showSettings; onClicked: c.showSettings = !c.showSettings }
+        IconBtn { glyph: "chevron_right"; onClicked: c.goMonth(1) }
     }
 
     // ================= settings (gear) =================
@@ -112,9 +112,9 @@ ColumnLayout {
             RowLayout {
                 Layout.fillWidth: true
                 Txt { Layout.fillWidth: true; text: "Pause after idle" }
-                IconBtn { glyph: ""; implicitWidth: 26; implicitHeight: 26; onClicked: Activity.setIdle(Activity.idleSec - 30) }
+                IconBtn { glyph: "remove"; implicitWidth: 26; implicitHeight: 26; onClicked: Activity.setIdle(Activity.idleSec - 30) }
                 Txt { Layout.minimumWidth: 52; horizontalAlignment: Text.AlignHCenter; text: Activity.idleSec >= 60 ? (Activity.idleSec / 60).toFixed(Activity.idleSec % 60 ? 1 : 0) + " min" : Activity.idleSec + " s" }
-                IconBtn { glyph: ""; implicitWidth: 26; implicitHeight: 26; onClicked: Activity.setIdle(Activity.idleSec + 30) }
+                IconBtn { glyph: "add"; implicitWidth: 26; implicitHeight: 26; onClicked: Activity.setIdle(Activity.idleSec + 30) }
             }
             RowLayout {
                 Layout.fillWidth: true
@@ -136,10 +136,10 @@ ColumnLayout {
         spacing: 8
         Repeater {
             model: [
-                { g: "", col: Theme.green, k: "Today", v: Activity.fmt(Activity.total(Activity.today)), hot: true },
-                { g: "", col: Theme.purple, k: "Streak", v: Activity.streak() + (Activity.streak() === 1 ? " day" : " days"), hot: false },
-                { g: "", col: Theme.blue, k: "Month", v: Activity.fmt(c.monthSum), hot: false },
-                { g: "", col: Theme.orange, k: "Best day", v: Activity.fmt(c.bestDay), hot: false }
+                { g: "schedule", col: Theme.green, k: "Today", v: Activity.fmt(Activity.total(Activity.today)), hot: true },
+                { g: "local_fire_department", col: Theme.purple, k: "Streak", v: Activity.streak() + (Activity.streak() === 1 ? " day" : " days"), hot: false },
+                { g: "calendar_month", col: Theme.blue, k: "Month", v: Activity.fmt(c.monthSum), hot: false },
+                { g: "emoji_events", col: Theme.orange, k: "Best day", v: Activity.fmt(c.bestDay), hot: false }
             ]
             Rectangle {
                 required property var modelData
@@ -152,7 +152,7 @@ ColumnLayout {
                 RowLayout {
                     anchors { fill: parent; leftMargin: 9; rightMargin: 6 }
                     spacing: 7
-                    Txt { text: modelData.g; color: modelData.col; font.pixelSize: 19 }
+                    Txt { icon: true; text: modelData.g; color: modelData.col; font.pixelSize: 21 }
                     ColumnLayout {
                         Layout.fillWidth: true
                         spacing: 0
@@ -189,7 +189,7 @@ ColumnLayout {
                         anchors.centerIn: parent
                         spacing: 8
                         Txt { text: c.mode === 0 ? "Daily" : "Weekly"; font.pixelSize: 12 }
-                        Txt { text: ""; color: Theme.muted }
+                        Txt { icon: true; text: "expand_more"; color: Theme.muted }
                     }
                     MouseArea { anchors.fill: parent; onClicked: { c.mode = (c.mode + 1) % 2; c.hov = -1 } }
                 }
@@ -448,7 +448,7 @@ ColumnLayout {
             RowLayout {
                 Layout.fillWidth: true
                 spacing: 8
-                Txt { text: ""; color: Theme.muted; font.pixelSize: 15 }
+                Txt { icon: true; text: "schedule"; color: Theme.muted; font.pixelSize: 15 }
                 Txt {
                     Layout.fillWidth: true
                     color: Theme.muted
@@ -466,7 +466,7 @@ ColumnLayout {
                         anchors.centerIn: parent
                         spacing: 8
                         Txt { text: c.showAll ? "Show less" : "View Details"; font.pixelSize: 12 }
-                        Txt { text: c.showAll ? "" : ""; color: Theme.muted }
+                        Txt { icon: true; text: c.showAll ? "arrow_upward" : "arrow_forward"; color: Theme.muted }
                     }
                     MouseArea { id: detMa; anchors.fill: parent; hoverEnabled: true; onClicked: c.showAll = !c.showAll }
                 }

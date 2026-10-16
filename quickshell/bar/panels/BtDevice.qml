@@ -21,8 +21,9 @@ Rectangle {
         Txt {
             Layout.preferredWidth: 24
             horizontalAlignment: Text.AlignHCenter
-            text: Sys.btGlyph(d.dev.icon)
-            font.pixelSize: 18
+            text: Sys.btIcon(d.dev.icon ?? "")
+            icon: true
+            font.pixelSize: 20
             color: d.dev.connected ? Theme.accent : Theme.fg
         }
         ColumnLayout {
@@ -37,7 +38,7 @@ Rectangle {
                     : d.connecting ? "Connecting\u2026"
                     : d.disconnecting ? "Disconnecting\u2026"
                     : (d.dev.connected ? "Connected" : d.dev.paired ? "Paired" : "Available")
-                      + (d.dev.batteryAvailable ? "  \u00b7  \uf240 " + Math.round(d.dev.battery * 100) + "%" : "")
+                      + (d.dev.batteryAvailable ? "  \u00b7  " + Math.round(d.dev.battery * 100) + "%" : "")
                       + (d.dev.trusted ? "  \u00b7  trusted" : "")
             }
         }

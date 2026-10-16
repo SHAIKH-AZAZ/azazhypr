@@ -22,7 +22,7 @@ Rectangle {
         RowLayout {
             visible: card.title !== ""
             spacing: 6
-            Text { text: card.glyph; color: Theme.muted; font { family: Theme.font; pixelSize: 13 } }
+            Text { text: card.glyph; color: Theme.muted; font { family: Theme.iconFont; pixelSize: 16 } }
             Text {
                 text: card.title.toUpperCase()
                 color: Theme.muted

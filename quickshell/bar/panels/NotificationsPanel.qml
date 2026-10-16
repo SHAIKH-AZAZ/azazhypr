@@ -54,7 +54,7 @@ ColumnLayout {
                 id: dndRow
                 anchors.centerIn: parent
                 spacing: 6
-                Txt { text: ""; color: Notifs.dnd ? Theme.bg : Theme.fg }
+                Txt { icon: true; text: "bedtime"; color: Notifs.dnd ? Theme.bg : Theme.fg }
                 Txt { text: Notifs.dnd ? "DND on" : "DND off"; color: Notifs.dnd ? Theme.bg : Theme.fg; font.pixelSize: 12 }
             }
             MouseArea { id: dndMa; anchors.fill: parent; hoverEnabled: true; onClicked: Notifs.dnd = !Notifs.dnd }
@@ -71,7 +71,7 @@ ColumnLayout {
                 id: clearRow
                 anchors.centerIn: parent
                 spacing: 6
-                Txt { text: ""; color: Theme.red }
+                Txt { icon: true; text: "delete"; color: Theme.red }
                 Txt { text: "Clear all"; color: Theme.red; font.pixelSize: 12 }
             }
             MouseArea { id: clearMa; anchors.fill: parent; hoverEnabled: true; onClicked: Notifs.clear() }
@@ -88,7 +88,7 @@ ColumnLayout {
         Column {
             anchors.centerIn: parent
             spacing: 6
-            Txt { anchors.horizontalCenter: parent.horizontalCenter; text: Notifs.dnd ? "" : ""; color: Theme.muted; font.pixelSize: 28 }
+            Txt { icon: true; anchors.horizontalCenter: parent.horizontalCenter; text: Notifs.dnd ? "notifications_off" : "notifications"; color: Theme.muted; font.pixelSize: 28 }
             Txt { anchors.horizontalCenter: parent.horizontalCenter; text: "You're all caught up"; font { pixelSize: 14; bold: true } }
             Txt {
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -158,7 +158,8 @@ ColumnLayout {
                     Txt {
                         anchors.centerIn: parent
                         visible: card.icon === ""
-                        text: ""
+                        icon: true
+                        text: "notifications"
                         color: card.critical ? Theme.red : Theme.accent
                         font.pixelSize: 18
                     }
@@ -188,7 +189,8 @@ ColumnLayout {
                         }
                         Txt { text: root.ago(card.modelData.id); color: Theme.muted; font.pixelSize: 11 }
                         Txt {
-                            text: ""
+                            icon: true
+                            text: "close"
                             color: closeMa.containsMouse ? Theme.red : Theme.muted
                             MouseArea {
                                 id: closeMa

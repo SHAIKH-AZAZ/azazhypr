@@ -63,7 +63,12 @@ PopupWindow {
                 implicitHeight: 32
                 radius: 8
                 color: backMa.containsMouse ? Theme.subtle : "transparent"
-                Txt { anchors { verticalCenter: parent.verticalCenter; left: parent.left; leftMargin: 10 } text: "   Back" }
+                Row {
+                    anchors { verticalCenter: parent.verticalCenter; left: parent.left; leftMargin: 10 }
+                    spacing: 6
+                    Txt { icon: true; text: "chevron_left"; font.pixelSize: 16; anchors.verticalCenter: parent.verticalCenter }
+                    Txt { text: "Back"; anchors.verticalCenter: parent.verticalCenter }
+                }
                 MouseArea { id: backMa; anchors.fill: parent; hoverEnabled: true; onClicked: root.stack = root.stack.slice(0, -1) }
             }
 
@@ -94,7 +99,7 @@ PopupWindow {
                         RowLayout {
                             anchors { fill: parent; leftMargin: 10; rightMargin: 10 }
                             spacing: 8
-                            Txt { visible: row.checked; text: ""; color: Theme.accent; font.pixelSize: 11 }
+                            Txt { icon: true; visible: row.checked; text: "check"; color: Theme.accent; font.pixelSize: 11 }
                             IconImage {
                                 visible: !!row.modelData.icon
                                 implicitSize: 16
@@ -105,7 +110,7 @@ PopupWindow {
                                 text: row.modelData.text
                                 color: row.modelData.enabled ? Theme.fg : Theme.muted
                             }
-                            Txt { visible: row.modelData.hasChildren; text: ""; color: Theme.muted; font.pixelSize: 11 }
+                            Txt { icon: true; visible: row.modelData.hasChildren; text: "chevron_right"; color: Theme.muted; font.pixelSize: 11 }
                         }
 
                         MouseArea {

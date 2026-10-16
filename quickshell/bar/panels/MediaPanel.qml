@@ -33,8 +33,8 @@ ColumnLayout {
     RowLayout {
         visible: !!parent.p
         spacing: 8
-        Chip { glyph: ""; text: "Prev"; onClicked: p?.previous() }
-        Chip { glyph: p?.isPlaying ? "" : ""; text: p?.isPlaying ? "Pause" : "Play"; on: true; onClicked: p?.togglePlaying() }
-        Chip { glyph: ""; text: "Next"; onClicked: p?.next() }
+        Chip { glyph: "skip_previous"; text: "Prev"; onClicked: p?.previous() }
+        Chip { glyph: p?.isPlaying ? "pause" : "play_arrow"; text: p?.isPlaying ? "Pause" : "Play"; on: true; onClicked: p?.togglePlaying() }
+        Chip { glyph: "skip_next"; text: "Next"; onClicked: p?.next() }
     }
 }

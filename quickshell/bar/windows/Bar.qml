@@ -58,7 +58,7 @@ PanelWindow {
         }
 
         // ---------------- center ----------------
-        Cava { anchors.centerIn: parent }
+        Cava { anchors.centerIn: parent; visible: !Config.island }   // the island takes the center
 
         // ---------------- right ----------------
         Row {

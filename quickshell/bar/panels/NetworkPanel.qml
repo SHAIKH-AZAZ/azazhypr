@@ -35,7 +35,8 @@ ColumnLayout {
     RowLayout {
         Txt { Layout.fillWidth: true; text: Sys.wifi ? Sys.ssid : "Not connected"; font.bold: true }
         Txt {
-            text: ""
+            icon: true
+            text: "settings"
             font.pixelSize: 16
             MouseArea { anchors { fill: parent; margins: -6 } onClicked: { Sys.run("nm-connection-editor"); close() } }
         }
