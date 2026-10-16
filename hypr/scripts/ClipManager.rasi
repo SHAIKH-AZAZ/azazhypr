@@ -1,0 +1,116 @@
+/* Clipboard layout; keep fonts and selection color in sync with Rofi/Wallust. */
+@theme "~/.config/rofi/wallust/colors-rofi.rasi"
+@import "~/.config/rofi/0-shared-fonts.rasi"
+
+configuration {
+    show-icons: false;
+    hover-select: true;
+    me-select-entry: "MouseSecondary";
+    me-accept-entry: "MousePrimary";
+}
+
+* {
+    surface: #18181b;
+    input-surface: #232329;
+    divider: #36363e;
+    text: #e6e6eb;
+    muted: #a1a1ad;
+    background-color: transparent;
+    text-color: @text;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+window {
+    location: center;
+    anchor: center;
+    width: calc(760px min 90%);
+    border: 1px;
+    border-color: @divider;
+    border-radius: 10px;
+    background-color: @surface;
+}
+
+mainbox {
+    children: [ "inputbar", "listview", "message" ];
+    spacing: 14px;
+    padding: 18px;
+}
+
+inputbar {
+    children: [ "prompt", "entry", "num-filtered-rows" ];
+    spacing: 14px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background-color: @input-surface;
+}
+
+prompt {
+    expand: false;
+    text-color: @color12;
+}
+
+entry {
+    expand: true;
+    placeholder: "Search history…";
+    placeholder-color: @muted;
+    cursor: text;
+}
+
+num-filtered-rows {
+    expand: false;
+    text-color: @muted;
+}
+
+listview {
+    columns: 1;
+    lines: 8;
+    fixed-height: true;
+    fixed-columns: true;
+    cycle: true;
+    scrollbar: true;
+    spacing: 4px;
+}
+
+scrollbar {
+    handle-width: 3px;
+    handle-color: @divider;
+    border-radius: 2px;
+}
+
+element {
+    children: [ "element-text" ];
+    padding: 10px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+element normal.normal,
+element alternate.normal {
+    background-color: transparent;
+    text-color: @text;
+}
+
+element selected.normal {
+    background-color: @color12;
+    text-color: @normal-background;
+}
+
+element-text {
+    horizontal-align: 0.0;
+    vertical-align: 0.5;
+    text-color: inherit;
+    cursor: inherit;
+}
+
+message {
+    border: 1px 0px 0px;
+    border-color: @divider;
+    padding: 12px 0px 0px;
+}
+
+textbox {
+    font: "JetBrainsMono Nerd Font 9";
+    text-color: @muted;
+}

@@ -1,0 +1,16 @@
+-- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */
+-- User Settings
+-- This is where you put your own settings as this will not be touched during
+-- update if the upgrade.sh is used.
+--
+-- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
+-- NOTE: decoration and animation settings live in UserDecorations.lua and
+-- UserAnimations.lua. Look at configs/SystemSettings.lua to see how to modify
+-- these.
+---@diagnostic disable: undefined-global
+
+-- hl.config({
+--     general = {
+--         gaps_in = 5,
+--     },
+-- })

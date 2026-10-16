@@ -1,0 +1,9 @@
+-- Workspace rules.
+-- See https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
+--
+-- NOTE: nwg-displays writes workspaces.conf, not this file. With the Lua
+-- config that .conf is no longer read — copy anything it generates to here,
+-- e.g.:
+--
+-- hl.workspace_rule({ workspace = "1", monitor = "eDP-1", default = true })
+---@diagnostic disable: undefined-global
