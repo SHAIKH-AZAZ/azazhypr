@@ -27,7 +27,7 @@ PopupWindow {
         activity: "ActivityPanel",
         weather: "WeatherPanel"
     })
-    readonly property var widths: ({ calendar: 420, bluetooth: 360, dashboard: 410, notifications: 390, activity: 440, weather: 460, battery: 380 })
+    readonly property var widths: ({ calendar: 420, bluetooth: 360, dashboard: 410, notifications: 390, activity: 440, weather: 460, battery: 380, network: 360 })
     readonly property int w: widths[name] ?? 320
 
     anchor.window: bar

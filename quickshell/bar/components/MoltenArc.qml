@@ -19,11 +19,15 @@ Item {
     readonly property real cardH: 140
     readonly property real gap: 14
     readonly property real spacing: Math.min(300, (width / 2 - 125) / 2)   // card-centre distance; shrinks so +-2 cards fit the width
-    readonly property real fusion: 26               // bridge reach
+    // motion melt: while the strip moves, `pos` lags `index`; that lag (0..1) pulls the cards
+    // together and widens the smooth union so they fuse into strands, then they part again
+    readonly property real melt: Math.min(1, Math.abs(index - pos))
+    readonly property real fusion: 26 + 90 * melt   // bridge reach
+    readonly property real sp: spacing * (1 - 0.18 * melt)
 
     // smooth position: follows `index` with easing, slots read it every frame
     property real pos: index
-    Behavior on pos { NumberAnimation { duration: 300; easing.type: Easing.OutCubic } }
+    Behavior on pos { NumberAnimation { duration: 420; easing.type: Easing.OutCubic } }
 
     // 7 slots as a ring buffer: slot j always shows the item index congruent to j (mod 7) inside
     // the window pos-3 .. pos+3, so a texture only changes while that card is off to the side.
@@ -45,7 +49,7 @@ Item {
     function scaleOf(o) { return 1.15 - 0.15 * Math.min(Math.abs(o), 3) }
     function xOf(o) {
         const a = Math.abs(o), s = o < 0 ? -1 : 1;
-        return width / 2 + s * (a <= 1 ? a * spacing : spacing + (a - 1) * (spacing - 22));
+        return width / 2 + s * (a <= 1 ? a * sp : sp + (a - 1) * (sp - 22));
     }
     function yOf(o) { return height / 2 - 2 + 8 * o * o }
     function geom(j) {
