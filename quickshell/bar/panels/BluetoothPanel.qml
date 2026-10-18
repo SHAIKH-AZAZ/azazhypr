@@ -26,9 +26,10 @@ ColumnLayout {
     Component.onCompleted: if (ad?.enabled) ad.discovering = true
     Component.onDestruction: if (ad) ad.discovering = false
 
+    // ---------------- header ----------------
     RowLayout {
         spacing: 10
-        Txt { icon: true; text: "bluetooth"; font.pixelSize: 20; color: b.on ? Theme.accent : Theme.muted }
+        Txt { icon: true; text: b.on ? "bluetooth" : "bluetooth_disabled"; font.pixelSize: 20; color: b.on ? Theme.accent : Theme.muted }
         ColumnLayout {
             Layout.fillWidth: true
             spacing: 0
@@ -40,8 +41,26 @@ ColumnLayout {
                 text: !b.ad ? "No adapter"
                     : !b.on ? "Off"
                     : b.ad.discovering ? "Scanning\u2026"
-                    : b.connected.length + " connected"
+                    : b.connected.length ? b.connected.length + " connected" : "Not connected"
             }
+        }
+        Txt {   // scan
+            visible: b.on
+            icon: true; text: "refresh"; font.pixelSize: 18
+            color: b.ad?.discovering || scanMa.containsMouse ? Theme.accent : Theme.fg
+            RotationAnimation on rotation { running: b.ad?.discovering ?? false; from: 0; to: 360; duration: 900; loops: Animation.Infinite; alwaysRunToEnd: true }
+            MouseArea { id: scanMa; anchors { fill: parent; margins: -6 } hoverEnabled: true; onClicked: b.ad.discovering = !b.ad.discovering }
+        }
+        Txt {   // discoverable
+            visible: b.on
+            icon: true; text: b.ad?.discoverable ? "visibility" : "visibility_off"; font.pixelSize: 18
+            color: b.ad?.discoverable ? Theme.accent : visMa.containsMouse ? Theme.fg : Theme.muted
+            MouseArea { id: visMa; anchors { fill: parent; margins: -6 } hoverEnabled: true; onClicked: b.ad.discoverable = !b.ad.discoverable }
+        }
+        Txt {
+            icon: true; text: "settings"; font.pixelSize: 18
+            color: cfgMa.containsMouse ? Theme.accent : Theme.fg
+            MouseArea { id: cfgMa; anchors { fill: parent; margins: -6 } hoverEnabled: true; onClicked: { Sys.run("blueman-manager"); b.close() } }
         }
         Rectangle {
             visible: !!b.ad
@@ -63,41 +82,40 @@ ColumnLayout {
         }
     }
 
-    RowLayout {
-        visible: b.on
-        spacing: 8
-        Chip { glyph: "search"; text: b.ad?.discovering ? "Stop scan" : "Scan"; on: b.ad?.discovering ?? false; onClicked: b.ad.discovering = !b.ad.discovering }
-        Chip { glyph: "visibility"; text: "Visible"; on: b.ad?.discoverable ?? false; onClicked: b.ad.discoverable = !b.ad.discoverable }
-        Chip { glyph: "settings"; text: "Manager"; onClicked: { Sys.run("blueman-manager"); close() } }
-    }
+    Txt { visible: !b.on; Layout.fillWidth: true; text: b.ad ? "Bluetooth is off" : "No Bluetooth adapter"; color: Theme.muted; horizontalAlignment: Text.AlignHCenter; Layout.topMargin: 12; Layout.bottomMargin: 12 }
 
-    Flickable {
-        visible: b.on
+    // ---------------- sections: uppercase label + grouped card ----------------
+    component Section: ColumnLayout {
+        id: sec
+        property string title
+        property var devs: []
+        visible: b.on && devs.length > 0      // from the list, not the card height (hidden children have none)
         Layout.fillWidth: true
-        Layout.preferredHeight: Math.min(list.implicitHeight, 300)
-        contentHeight: list.implicitHeight
-        clip: true
-        boundsBehavior: Flickable.StopAtBounds
-
-        ColumnLayout {
-            id: list
-            width: parent.width
-            spacing: 2
-
-            Txt { visible: b.connected.length > 0; text: "Connected"; color: Theme.muted; font.pixelSize: 11 }
-            Repeater { model: b.connected; BtDevice { required property var modelData; dev: modelData } }
-
-            Txt { visible: b.paired.length > 0; text: "Paired"; color: Theme.muted; font.pixelSize: 11 }
-            Repeater { model: b.paired; BtDevice { required property var modelData; dev: modelData } }
-
-            Txt { visible: b.nearby.length > 0; text: "Available"; color: Theme.muted; font.pixelSize: 11 }
-            Repeater { model: b.nearby; BtDevice { required property var modelData; dev: modelData } }
-
-            Txt {
-                visible: b.devs.length === 0
-                text: b.ad?.discovering ? "Searching for devices\u2026" : "No devices. Press Scan."
-                color: Theme.muted
+        spacing: 6
+        Txt { text: sec.title; color: Theme.muted; font { pixelSize: 10; bold: true; letterSpacing: 1 } }
+        Rectangle {
+            Layout.fillWidth: true
+            implicitHeight: col.implicitHeight
+            radius: 10
+            color: Qt.alpha(Theme.subtle, 0.5)
+            clip: true
+            Column {
+                id: col
+                width: parent.width
+                Repeater { model: sec.devs; BtDevice { required property var modelData; required property int index; dev: modelData; first: index === 0 } }
             }
         }
+    }
+
+    Section { title: "CONNECTED"; devs: b.connected }
+    Section { title: "PAIRED DEVICES"; devs: b.paired }
+    Section { title: "AVAILABLE DEVICES"; devs: b.nearby }
+
+    Txt {
+        visible: b.on && b.devs.length === 0
+        Layout.fillWidth: true
+        horizontalAlignment: Text.AlignHCenter
+        text: b.ad?.discovering ? "Searching for devices\u2026" : "No devices. Press \u21bb to scan."
+        color: Theme.muted
     }
 }
