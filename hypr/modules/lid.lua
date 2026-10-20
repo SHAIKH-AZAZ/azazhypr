@@ -9,5 +9,3 @@ end
 
 hl.on("hyprland.start", sync_physical_lid)
 hl.on("config.reloaded", sync_physical_lid)
-hl.bind("switch:on:Lid Switch",  hl.dsp.exec_cmd("command -v ryoku-clamshell >/dev/null 2>&1 && ryoku-clamshell lid close"), { locked = true })
-hl.bind("switch:off:Lid Switch", hl.dsp.exec_cmd("command -v ryoku-clamshell >/dev/null 2>&1 && ryoku-clamshell lid open"),  { locked = true })

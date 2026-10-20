@@ -49,11 +49,9 @@ require("workspaces")
 -- Plugins
 ------------------------------------------------------------
 
--- Scroll Overview
--- Enable once installed and ABI matches.
-
+-- Hyprdrive: overview + dock (replaces hyprexpo; plugins/scrolloverview.lua kept for rollback)
 -- require("plugins.scrolloverview")
-require("plugins.scrolloverview")
+require("plugins.hyprdrive")
 
 ------------------------------------------------------------
 -- Optional Extras

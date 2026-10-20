@@ -16,6 +16,17 @@ local function saver()
   return s:match('"saver"%s*:%s*true') ~= nil
 end
 
+
 if saver() then
-  hl.config({ decoration = { blur = { enabled = false }, shadow = { enabled = false } } })
+  hl.config(
+    { decoration = { 
+      blur = { 
+        enabled = false 
+      }, 
+      shadow = { 
+        enabled = false 
+      } 
+    } 
+  }
+  )
 end

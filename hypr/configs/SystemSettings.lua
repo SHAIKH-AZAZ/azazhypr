@@ -234,11 +234,4 @@ hl.gesture({
 	end,
 })
 
--- Three-finger swipe up: desktop overview
-hl.gesture({
-	fingers = 3,
-	direction = "up",
-	action = function()
-		hl.plugin.hyprexpo.expo("toggle")
-	end,
-})
+-- Three-finger swipe up: desktop overview -> now hyprdrive's own gesture (plugins/hyprdrive.lua)

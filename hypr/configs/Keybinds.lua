@@ -47,7 +47,7 @@ bind(mainMod .. " + D", exec("qs -p /home/azaz/.config/quickshell/bar ipc call l
 
 bind(mainMod .. " + B", exec([[xdg-open "https://"]]), "open default browser")
 
--- SUPER + A now opens the hyprexpo overview (plugins/scrolloverview.lua).
+-- SUPER + A now opens the hyprdrive overview (plugins/hyprdrive.lua).
 -- bind(mainMod .. " + A", exec(scriptsDir .. "/OverviewToggle.sh"), "desktop overview")
 
 -- AGS overview alternative:

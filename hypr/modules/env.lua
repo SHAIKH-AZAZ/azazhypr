@@ -75,7 +75,7 @@ hl.env("QML_IMPORT_PATH",  os.getenv("HOME") .. "/.local/lib/qt6/qml")
 -- administrator password is asked for on a Ryoku island instead of the stock
 -- agent's grey dialog. The daemon reads it at startup; without it the daemon
 -- leaves the slot alone.
-hl.env("RYOKU_POLKIT_AGENT", "1")
+-- hl.env("RYOKU_POLKIT_AGENT", "1")
 hl.env("QML2_IMPORT_PATH", os.getenv("HOME") .. "/.local/lib/qt6/qml")
 
 -- deploy.sh builds the ryoku-* binaries into ~/.local/bin; put it first so the
