@@ -4,6 +4,7 @@
 
 local home = assert(os.getenv("HOME"), "HOME environment variable is not set")
 
+-- Windows key as supper Key
 local mainMod = "SUPER"
 local scriptsDir = home .. "/.config/hypr/scripts"
 local userScripts = home .. "/.config/hypr/UserScripts"
@@ -19,6 +20,8 @@ local files = defaults.files or defaults.fileManager or defaults.file_manager
 
 assert(type(term) == "string" and term ~= "", "Missing 'term' in UserConfigs/01-UserDefaults.lua")
 assert(type(files) == "string" and files ~= "", "Missing 'files' in UserConfigs/01-UserDefaults.lua")
+
+--- Helper function
 ---@diagnostic disable: undefined-global
 local function bind(keys, dispatcher, description, flags)
 	flags = flags or {}
@@ -43,7 +46,7 @@ end
 --     { release = true }
 -- )
 
-bind(mainMod .. " + D", exec("qs -p /home/azaz/.config/quickshell/bar ipc call launcher toggle"), "app launcher")
+bind(mainMod .. " + D", exec("rofi -show"), "app launcher")
 
 bind(mainMod .. " + B", exec([[xdg-open "https://"]]), "open default browser")
 
@@ -87,9 +90,17 @@ bind(mainMod .. " + SHIFT + G", exec(scriptsDir .. "/GameMode.sh"), "toggle game
 
 bind(mainMod .. " + ALT + L", exec(scriptsDir .. "/ChangeLayout.sh"), "toggle master/dwindle layout")
 
-bind(mainMod .. " + ALT + V", exec("qs -p /home/azaz/.config/quickshell/bar ipc call clipboard toggle"), "clipboard manager")
+bind(
+	mainMod .. " + ALT + V",
+	exec("qs -p /home/azaz/.config/quickshell/bar ipc call clipboard toggle"),
+	"clipboard manager"
+)
 
-bind(mainMod .. " + SHIFT + P", exec("qs -p /home/azaz/.config/quickshell/bar ipc call screenshot toggle"), "screenshot menu")
+bind(
+	mainMod .. " + SHIFT + P",
+	exec("qs -p /home/azaz/.config/quickshell/bar ipc call screenshot toggle"),
+	"screenshot menu"
+)
 
 bind(mainMod .. " + CTRL + R", exec(scriptsDir .. "/RofiThemeSelector.sh"), "rofi theme selector")
 
@@ -114,26 +125,34 @@ bind(mainMod .. " + ALT + Return", exec(scriptsDir .. "/FloatCenter.sh"), "Float
 
 bind(mainMod .. " + SHIFT + SPACE", function()
 	hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
-	hl.dispatch(hl.dsp.window.resize({ x = 900, y = 600, relative = false }))
+	hl.dispatch(hl.dsp.window.resize({ x = 600, y = 300, relative = true }))
 	hl.dispatch(hl.dsp.window.center())
 end, "Floating popup center")
 
 -- There is no workspaceopt dispatcher in the Lua API, and `hyprctl dispatch` now
 -- evaluates lua, so the old command form silently errored. Float every window on
 -- the active workspace instead: any tiled window -> float all, otherwise unfloat all.
-bind(mainMod .. " + ALT + SPACE", function()
-	local windows = hl.get_workspace_windows(hl.get_active_workspace())
+-- Correct signature: hl.bind(keys, function, flags_table)
+hl.bind(mainMod .. " + ALT + SPACE", function()
+	local active_ws = hl.get_active_workspace()
+	if not active_ws then
+		return
+	end
+
+	local windows = hl.get_workspace_windows(active_ws.id)
 	local action = "disable"
+
 	for _, w in ipairs(windows) do
 		if not w.floating then
 			action = "enable"
 			break
 		end
 	end
+
 	for _, w in ipairs(windows) do
 		hl.dispatch(hl.dsp.window.float({ action = action, window = "address:" .. w.address }))
 	end
-end, "Float all windows")
+end, { description = "Float all windows" })
 
 bind(mainMod .. " + SHIFT + Return", exec(scriptsDir .. "/Dropterminal.sh " .. term), "DropDown terminal")
 
@@ -161,8 +180,11 @@ bind(
 -- Waybar / bar
 ------------------------------------------------------------
 
-bind(mainMod .. " + CTRL + ALT + B", exec("qs -p /home/azaz/.config/quickshell/bar ipc call bar toggle"), "toggle bar on/off")
-
+bind(
+	mainMod .. " + CTRL + ALT + B",
+	exec("qs -p /home/azaz/.config/quickshell/bar ipc call bar toggle"),
+	"toggle bar on/off"
+)
 
 bind(mainMod .. " + ALT + B", exec(scriptsDir .. "/WaybarLayout.sh"), "waybar layout menu")
 
@@ -178,7 +200,11 @@ bind(mainMod .. " + N", exec(scriptsDir .. "/Hyprsunset.sh toggle"), "toggle nig
 
 bind(mainMod .. " + SHIFT + M", exec(userScripts .. "/RofiBeats.sh"), "online music")
 
-bind(mainMod .. " + W", exec("qs -p " .. home .. "/.config/quickshell/bar ipc call wallpaper toggle"), "select wallpaper")
+bind(
+	mainMod .. " + W",
+	exec("qs -p " .. home .. "/.config/quickshell/bar ipc call wallpaper toggle"),
+	"select wallpaper"
+)
 
 bind(mainMod .. " + SHIFT + W", exec(userScripts .. "/WallpaperEffects.sh"), "wallpaper effects")
 
@@ -241,7 +267,11 @@ bind("CTRL + ALT + L", exec(scriptsDir .. "/LockScreen.sh"), "lock screen")
 
 bind("CTRL + ALT + P", exec(scriptsDir .. "/Wlogout.sh"), "powermenu")
 
-bind(mainMod .. " + SHIFT + N", exec("qs -p /home/azaz/.config/quickshell/bar ipc call notifs toggleDnd"), "toggle do-not-disturb")
+bind(
+	mainMod .. " + SHIFT + N",
+	exec("qs -p /home/azaz/.config/quickshell/bar ipc call notifs toggleDnd"),
+	"toggle do-not-disturb"
+)
 
 bind(mainMod .. " + SHIFT + E", exec(scriptsDir .. "/Kool_Quick_Settings.sh"), "Quick settings menu")
 
@@ -428,11 +458,9 @@ end
 
 bind(mainMod .. " + G", hl.dsp.group.toggle(), "toggle group")
 
-bind(mainMod .. " + Tab", hl.dsp.group.next(), "Change Group Forward")
-
 bind(mainMod .. " + CTRL + Tab", hl.dsp.group.next(), "change active in group")
 
-bind(mainMod .. " + SHIFT + Tab", hl.dsp.group.prev(), "Change Group Back")
+bind(mainMod .. " + CTRL + SHIFT + Tab", hl.dsp.group.prev(), "change active in group (back)")
 
 bind(mainMod .. " + CTRL + K", hl.dsp.window.move({ into_group = "l" }), "Move left into group")
 

@@ -4,35 +4,39 @@
 ------------------------------------------------------------
 ---@diagnostic disable: undefined-global
 
-hl.config({
-	plugin = {
-		hyprdrive = {
-			-- Overview
-			mission_control = true,
-			mission_control_gap = 30,
-			scale = 0.82,
-			workspace_gap = 30,
-			strip = true,
-			strip_height = 220,
-			tap_super = false,
+-- Guarded like the binds below: at boot this file parses before hyprpm loads
+-- the plugin, so the keys would be unknown. Startup re-parses after load.
+if hl.plugin.hyprdrive then
+	hl.config({
+		plugin = {
+			hyprdrive = {
+				-- Overview
+				mission_control = true,
+				mission_control_gap = 30,
+				scale = 0.82,
+				workspace_gap = 30,
+				strip = true,
+				strip_height = 220,
+				tap_super = false,
 
-			-- Animations
-			open_speed = 2.6,
-			close_speed = 1.9,
+				-- Animations
+				open_speed = 2.6,
+				close_speed = 1.9,
 
-			-- Dock
-			dock = {
-				enabled = true,
-				autohide = true,
-				icon_size = 54,
-				corner_radius = 20,
-				running_indicator = true,
-				show_favorites = true,
-				show_apps_button = true,
+				-- Dock
+				dock = {
+					enabled = true,
+					autohide = true,
+					icon_size = 54,
+					corner_radius = 20,
+					running_indicator = true,
+					show_favorites = true,
+					show_apps_button = true,
+				},
 			},
 		},
-	},
-})
+	})
+end
 
 ------------------------------------------------------------
 -- Keybindings

@@ -20,7 +20,7 @@ hl.on("hyprland.start", function()
 	-- /* ---- 🚀 Startup 🚀 */
 	-- hyprpm plugins are not auto-loaded at boot; without this the
 	-- plugin:hyprdrive:* keys in plugins/hyprdrive.lua error out.
-	hl.exec_cmd("hyprpm reload -n")
+	hl.exec_cmd("hyprpm reload -n && hyprctl reload")
 	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
 	hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
 	hl.exec_cmd(scriptsDir .. "/Dropterminal.sh kitty &")
@@ -33,7 +33,6 @@ hl.on("hyprland.start", function()
 	-- hl.exec_cmd("ags")
 	-- hl.exec_cmd("rog-control-center")
 	hl.exec_cmd("qs -p /home/azaz/.config/quickshell/bar") -- quickshell bar + notifications + launcher
-	hl.exec_cmd("qs -c overview") -- Quickshell Overview
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd(scriptsDir .. "/Hyprsunset.sh init")
 
@@ -56,7 +55,6 @@ hl.on("hyprland.start", function()
 
 	-- blueman-applet removed: the quickshell bar owns the bt indicator
 	-- hl.exec_cmd("blueman-applet")
-	hl.exec_cmd("qs -c overview") -- Quickshell Overview
 end)
 
 -- ponytail: only referenced by the commented-out wallpaper lines above.

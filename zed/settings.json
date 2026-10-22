@@ -3,7 +3,7 @@
   "git_panel": {
     "dock": "left"
   },
-  "diff_view_style": "split",
+  "diff_view_style": "unified",
   "title_bar": {
     "show_branch_status_icon": true
   },

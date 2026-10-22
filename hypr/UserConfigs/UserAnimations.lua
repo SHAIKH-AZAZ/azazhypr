@@ -35,6 +35,8 @@ hl.animation({ leaf = "windowsOut",    enabled = true, speed = 3,   bezier = "sm
 hl.animation({ leaf = "windowsMove",   enabled = true, speed = 5,   bezier = "wind",      style = "slide" })
 hl.animation({ leaf = "border",        enabled = true, speed = 1,   bezier = "liner" })
 
+
+
 -- used by rainbow borders and rotating colors.
 -- The .conf used speed 180; the Lua API caps animation speed at 100, so the
 -- border rotates ~1.8x faster than it did before.

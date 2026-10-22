@@ -91,3 +91,4 @@ hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto") -- auto-selects Wayland if possib
 -- hl.env("HYPRLAND_NO_RT",      "1")   -- disable realtime priority
 -- hl.env("HYPRLAND_NO_SD_NOTIFY","1")  -- disable sd_notify calls
 -- hl.env("HYPRLAND_NO_SD_VARS", "1")   -- disable systemd/dbus env management
+
