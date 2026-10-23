@@ -25,7 +25,7 @@ x-scheme-handler/net.thunderbird=userapp-Thunderbird-NN1TU3.desktop
 x-scheme-handler/t3code=com.t3tools.T3Code.desktop
 
 [Added Associations]
-inode/directory=antigravity-ide.desktop;dev.zed.Zed.desktop;kiro.desktop;code.desktop;
+inode/directory=dev.zed.Zed.desktop;antigravity-ide.desktop;kiro.desktop;code.desktop;
 image/png=org.gnome.Loupe.desktop;nsxiv.desktop;swappy.desktop;
 application/pdf=firefox.desktop;org.gnome.Evince.desktop;com.google.Chrome.desktop;
 text/markdown=libreoffice-writer.desktop;
