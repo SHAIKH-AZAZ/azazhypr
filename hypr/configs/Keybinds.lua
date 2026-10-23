@@ -98,7 +98,7 @@ bind(
 
 bind(
 	mainMod .. " + SHIFT + P",
-	exec("flock -n -o /tmp/ryoshot.lock qs -c ryoshot"), -- was bar screenshot menu
+	exec(scriptsDir .. "/ScreenShot.sh --area"), -- was bar screenshot menu
 	"screenshot menu"
 )
 
