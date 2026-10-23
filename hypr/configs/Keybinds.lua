@@ -92,13 +92,13 @@ bind(mainMod .. " + ALT + L", exec(scriptsDir .. "/ChangeLayout.sh"), "toggle ma
 
 bind(
 	mainMod .. " + ALT + V",
-	exec("qs -p /home/azaz/.config/quickshell/bar ipc call clipboard toggle"),
+	exec("latto open clipboard"),
 	"clipboard manager"
 )
 
 bind(
 	mainMod .. " + SHIFT + P",
-	exec("qs -p /home/azaz/.config/quickshell/bar ipc call screenshot toggle"),
+	exec("flock -n -o /tmp/ryoshot.lock qs -c ryoshot"), -- was bar screenshot menu
 	"screenshot menu"
 )
 
@@ -180,11 +180,11 @@ bind(
 -- Waybar / bar
 ------------------------------------------------------------
 
-bind(
-	mainMod .. " + CTRL + ALT + B",
-	exec("qs -p /home/azaz/.config/quickshell/bar ipc call bar toggle"),
-	"toggle bar on/off"
-)
+-- bind(
+-- 	mainMod .. " + CTRL + ALT + B",
+-- 	exec("qs -p /home/azaz/.config/quickshell/bar ipc call bar toggle"),
+-- 	"toggle bar on/off"
+-- )
 
 bind(mainMod .. " + ALT + B", exec(scriptsDir .. "/WaybarLayout.sh"), "waybar layout menu")
 
@@ -202,7 +202,7 @@ bind(mainMod .. " + SHIFT + M", exec(userScripts .. "/RofiBeats.sh"), "online mu
 
 bind(
 	mainMod .. " + W",
-	exec("qs -p " .. home .. "/.config/quickshell/bar ipc call wallpaper toggle"),
+	exec(userScripts .. "/WallpaperSelect.sh"),
 	"select wallpaper"
 )
 
@@ -269,7 +269,7 @@ bind("CTRL + ALT + P", exec(scriptsDir .. "/Wlogout.sh"), "powermenu")
 
 bind(
 	mainMod .. " + SHIFT + N",
-	exec("qs -p /home/azaz/.config/quickshell/bar ipc call notifs toggleDnd"),
+	exec("latto dnd"),
 	"toggle do-not-disturb"
 )
 
