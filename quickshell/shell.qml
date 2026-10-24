@@ -1,15 +1,14 @@
-//@ pragma UseQApplication
-//@ pragma Env QT_QUICK_CONTROLS_STYLE=Basic
-
-import "./modules/overview/"
-import "./services/"
-import "./modules/common/"
-import "./modules/common/widgets/"
-
-import QtQuick
 import Quickshell
-import Quickshell.Hyprland
+import "services"
 
 ShellRoot {
-    Overview {}
+    // Services with background work. Referencing them here starts their
+    // polling even when no island is currently showing their data.
+    readonly property var background: [Hud, Lyrics, Clipboard, Caffeine, Privacy, Downloads, Timers, Bluetooth, Network, Calendar, Notifications, Claude, NightLight]
+
+    Variants {
+        model: Quickshell.screens
+
+        delegate: IslandWindow {}
+    }
 }

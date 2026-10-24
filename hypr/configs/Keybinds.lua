@@ -92,7 +92,7 @@ bind(mainMod .. " + ALT + L", exec(scriptsDir .. "/ChangeLayout.sh"), "toggle ma
 
 bind(
 	mainMod .. " + ALT + V",
-	exec("latto open clipboard"),
+	exec("qs ipc call island open clipboard"),
 	"clipboard manager"
 )
 
@@ -269,7 +269,7 @@ bind("CTRL + ALT + P", exec(scriptsDir .. "/Wlogout.sh"), "powermenu")
 
 bind(
 	mainMod .. " + SHIFT + N",
-	exec("latto dnd"),
+	exec("qs ipc call notifications toggleDnd"),
 	"toggle do-not-disturb"
 )
 
