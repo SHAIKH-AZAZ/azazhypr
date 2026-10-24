@@ -1,6 +1,7 @@
 pragma Singleton
 
 import QtQuick
+import Quickshell
 import Quickshell.Services.Mpris
 
 // The most relevant MPRIS player (a playing one first, otherwise any) and its controls.
@@ -52,6 +53,14 @@ QtObject {
         running: root.playing
         triggeredOnStart: true
         onTriggered: root.refreshPosition()
+    }
+
+    // Brings the player's window, or the browser tab that is playing, to the
+    // front. MPRIS raise is skipped: browsers don't offer it, and Hyprland
+    // doesn't follow it for the players that do.
+    function raise() {
+        if (player)
+            Quickshell.execDetached(["sh", Quickshell.shellDir + "/services/scripts/focus-player.sh", player.dbusName, player.trackTitle]);
     }
 
     function toggle() {
