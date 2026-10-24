@@ -200,13 +200,13 @@ QtObject {
                         high: Math.round(d.temperature_2m_max[0]),
                         low: Math.round(d.temperature_2m_min[0]),
                         uv: Math.round(d.uv_index_max[0]),
-                        sunrise: d.sunrise[0].slice(11),
-                        sunset: d.sunset[0].slice(11)
+                        sunrise: Qt.formatDateTime(new Date(d.sunrise[0]), "h:mm AP"),
+                        sunset: Qt.formatDateTime(new Date(d.sunset[0]), "h:mm AP")
                     };
                     // Times are local and share a format, so they compare as text.
                     const start = h.time.findIndex(time => time > c.time);
                     root.hours = start < 0 ? [] : h.time.slice(start, start + 6).map((time, i) => ({
-                        time: time.slice(11),
+                        time: Qt.formatDateTime(new Date(time), "h AP"),
                         temperature: Math.round(h.temperature_2m[start + i]),
                         icon: root.iconFor(h.weather_code[start + i], h.is_day[start + i] === 1),
                         rain: h.precipitation_probability[start + i]

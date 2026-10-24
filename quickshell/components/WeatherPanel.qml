@@ -153,7 +153,7 @@ Item {
                     anchors.verticalCenter: parent.verticalCenter
                     text: Weather.locating ? "Locating…"
                         : Weather.locateFailed ? "Couldn't set place"
-                        : Weather.now ? "Updated " + Qt.formatTime(Weather.updated, "hh:mm")
+                        : Weather.now ? "Updated " + Qt.formatTime(Weather.updated, "h:mm AP")
                         : ""
                     color: Weather.locateFailed ? Theme.red : Theme.textTertiary
                     font.pixelSize: Theme.fontCaption + 1

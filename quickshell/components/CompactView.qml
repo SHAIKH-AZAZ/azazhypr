@@ -262,7 +262,7 @@ Item {
             anchors.right: parent.right
             anchors.rightMargin: 15
             anchors.verticalCenter: parent.verticalCenter
-            text: Qt.formatDateTime(clock.date, "HH:mm")
+            text: Qt.formatDateTime(clock.date, "h:mm AP")
             font.pixelSize: Theme.fontBody
             font.weight: Font.DemiBold
         }
