@@ -54,6 +54,14 @@ QtObject {
         return null;
     }
 
+    // A picture to show beside the text rather than as the icon (a
+    // screenshot, say): the image of a notification sent with the
+    // x-latto-preview hint.
+    function preview(notification) {
+        return notification && notification.image && notification.hints && notification.hints["x-latto-preview"]
+            ? notification.image : "";
+    }
+
     // Actions shown as buttons (everything except the click action).
     function buttonActions(notification) {
         return notification.actions.filter(action => action.identifier !== "default");

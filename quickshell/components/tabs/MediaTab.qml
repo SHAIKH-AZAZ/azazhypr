@@ -3,7 +3,8 @@ import "../../services"
 import "../../theme"
 import ".."
 
-// Now playing: artwork, title and live lyrics, a seek bar and transport controls.
+// Now playing: artwork, title and live lyrics, a seek bar, transport controls
+// and output volume.
 Item {
     id: root
 
@@ -175,20 +176,62 @@ Item {
             anchors.top: progressRow.bottom
             anchors.bottom: parent.bottom
 
-            IslandButton {
+            // Output volume: the icon mutes, the bar (or the wheel) sets the level.
+            Row {
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
-                visible: Media.shuffleSupported
-                icon: "shuffle"
-                iconSize: 16
-                color: Media.shuffle ? Theme.accent : Theme.textSecondary
-                onClicked: Media.toggleShuffle()
+                spacing: 2
+
+                IslandButton {
+                    anchors.verticalCenter: parent.verticalCenter
+                    icon: Audio.muted ? "volumeOff" : "volume"
+                    iconSize: 15
+                    color: Theme.textSecondary
+                    onClicked: Audio.toggleMute()
+                }
+                IslandBar {
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 72
+                    implicitHeight: volumeArea.containsMouse ? 8 : 5
+                    value: Audio.muted ? 0 : Audio.volume
+
+                    MouseArea {
+                        id: volumeArea
+                        anchors.fill: parent
+                        anchors.margins: -8
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onPressed: mouse => Audio.setVolume((mouse.x - 8) / (width - 16))
+                        onPositionChanged: mouse => {
+                            if (pressed)
+                                Audio.setVolume((mouse.x - 8) / (width - 16));
+                        }
+                        onWheel: wheel => Audio.setVolume(Audio.volume + wheel.angleDelta.y / 120 * 0.05)
+                    }
+                }
             }
 
+            // Shuffle and repeat show only for players that offer them.
             Row {
                 anchors.centerIn: parent
-                spacing: 14
+                spacing: 10
 
+                IslandButton {
+                    anchors.verticalCenter: parent.verticalCenter
+                    visible: Media.shuffleSupported
+                    icon: "shuffle"
+                    iconSize: 16
+                    color: Media.shuffle ? Theme.accent : Theme.textSecondary
+                    onClicked: Media.toggleShuffle()
+                }
+                IslandButton {
+                    anchors.verticalCenter: parent.verticalCenter
+                    visible: Media.canSeek
+                    icon: "rewind"
+                    iconSize: 16
+                    color: Theme.textSecondary
+                    onClicked: Media.seekBy(-10)
+                }
                 IslandButton {
                     anchors.verticalCenter: parent.verticalCenter
                     icon: "previous"
@@ -208,12 +251,28 @@ Item {
                     iconSize: 22
                     onClicked: Media.next()
                 }
+                IslandButton {
+                    anchors.verticalCenter: parent.verticalCenter
+                    visible: Media.canSeek
+                    icon: "forward"
+                    iconSize: 16
+                    color: Theme.textSecondary
+                    onClicked: Media.seekBy(10)
+                }
+                IslandButton {
+                    anchors.verticalCenter: parent.verticalCenter
+                    visible: Media.loopSupported
+                    icon: Media.loopingTrack ? "repeatOne" : "repeat"
+                    iconSize: 16
+                    color: Media.looping ? Theme.accent : Theme.textSecondary
+                    onClicked: Media.cycleLoop()
+                }
             }
 
             Label {
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
-                width: 110
+                width: 100
                 horizontalAlignment: Text.AlignRight
                 text: Media.source
                 color: Theme.textTertiary

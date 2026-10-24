@@ -6,12 +6,15 @@ import ".."
 // Quick toggles along the top, then at-a-glance tiles: battery (with
 // keep-awake), network, Bluetooth, weather, and adjustable volume and
 // brightness. The Wi-Fi and Bluetooth toggles and tiles open a list of
-// nearby networks or devices to connect to.
+// nearby networks or devices to connect to; the weather tile opens details.
 Item {
     id: root
 
-    // "", "wifi" or "bluetooth": the list shown over the tiles.
+    // "", "wifi", "bluetooth" or "weather": the page shown over the tiles.
     property string page: ""
+    // The island keeps this tab loaded while collapsed; drop back to the
+    // tiles then so a list stops scanning.
+    onVisibleChanged: if (!visible) page = ""
 
     readonly property real spacing: 8
     readonly property real cellWidth: (width - 2 * spacing) / 3
@@ -215,10 +218,20 @@ Item {
             }
 
             Tile {
-                icon: "cloud"
-                tint: Theme.cyan
+                icon: Weather.enabled ? Weather.icon : "cloud"
+                tint: Weather.icon === "weatherClear" ? Theme.yellow : Theme.cyan
                 value: Weather.enabled ? (Weather.temperature || "…") : "Weather"
-                detail: Weather.enabled ? Weather.condition : "Not set up"
+                detail: Weather.enabled ? Weather.condition
+                    : Weather.locating ? "Locating…"
+                    : Weather.locateFailed ? "Couldn't locate, retry"
+                    : "Click to set up"
+                clickable: !Weather.locating
+                onClicked: {
+                    if (Weather.enabled)
+                        root.page = "weather";
+                    else
+                        Weather.locate();
+                }
             }
 
             Tile {
@@ -240,32 +253,34 @@ Item {
         }
     }
 
-    // Kept alive while it fades out, then destroyed so scanning stops.
-    Swappable {
-        id: wifiLayer
+    // A page over the tiles, kept alive while it fades out, then destroyed
+    // so a list stops scanning.
+    component Page: Swappable {
+        id: layer
+
+        property string name: ""
+        property Component content
+
         anchors.fill: parent
-        shown: root.page === "wifi"
+        shown: root.page === name
 
         Loader {
             anchors.fill: parent
-            active: root.page === "wifi" || wifiLayer.opacity > 0.01
-            sourceComponent: WifiList {
-                onBack: root.page = ""
-            }
+            active: layer.shown || layer.opacity > 0.01
+            sourceComponent: layer.content
         }
     }
 
-    Swappable {
-        id: bluetoothLayer
-        anchors.fill: parent
-        shown: root.page === "bluetooth"
-
-        Loader {
-            anchors.fill: parent
-            active: root.page === "bluetooth" || bluetoothLayer.opacity > 0.01
-            sourceComponent: BluetoothList {
-                onBack: root.page = ""
-            }
-        }
+    Page {
+        name: "wifi"
+        content: Component { WifiList { onBack: root.page = "" } }
+    }
+    Page {
+        name: "bluetooth"
+        content: Component { BluetoothList { onBack: root.page = "" } }
+    }
+    Page {
+        name: "weather"
+        content: Component { WeatherPanel { onBack: root.page = "" } }
     }
 }

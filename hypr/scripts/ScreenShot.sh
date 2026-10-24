@@ -16,66 +16,62 @@ active_window_class=$(hyprctl -j activewindow | jq -r '(.class)')
 active_window_file="Screenshot_${time}_${active_window_class}.png"
 active_window_path="${dir}/${active_window_file}"
 
-notify_cmd_base="notify-send -t 10000 -A action1=Open -A action2=Delete -h string:x-canonical-private-synchronous:shot-notify"
-notify_cmd_shot="${notify_cmd_base} -i ${iDIR}/picture.png "
-notify_cmd_shot_win="${notify_cmd_base} -i ${iDIR}/picture.png "
-notify_cmd_NOT="notify-send -u low -i ${iDoR}/note.png "
+# Notifications name the app, carry the shot as a preview (x-latto-preview puts
+# it beside the text on the island) and open it on click.
+shot_icon=/usr/share/icons/Papirus/48x48/apps/org.gnome.Screenshot.svg
+[[ -f "$shot_icon" ]] || shot_icon="${iDIR}/picture.png"
+
+# $1 summary, $2 body, $3 image; prints the action picked (default or delete).
+notify_shot() {
+	notify-send -a "Screenshot" -n "$shot_icon" -t 10000 \
+		-h string:x-canonical-private-synchronous:shot-notify \
+		-h "string:image-path:$3" -h boolean:x-latto-preview:true \
+		-A default=Open -A delete=Delete "$1" "$2"
+}
+
+notify_failed() {
+	notify-send -a "Screenshot" -u low -n "$shot_icon" "Screenshot failed" "Nothing was saved"
+	"${sDIR}/Sounds.sh" --error
+}
 
 # notify and view screenshot
 notify_view() {
-    if [[ "$1" == "active" ]]; then
-        if [[ -e "${active_window_path}" ]]; then
+	if [[ "$1" == "active" ]]; then
+		if [[ -e "${active_window_path}" ]]; then
 			"${sDIR}/Sounds.sh" --screenshot &
-            resp=$(timeout 5 ${notify_cmd_shot_win} " Screenshot of:" " ${active_window_class} Saved.")
-            case "$resp" in
-				action1)
-					xdg-open "${active_window_path}" &
-					;;
-				action2)
-					rm "${active_window_path}" &
-					;;
+			case "$(notify_shot "Window captured" "${active_window_class} · saved to Screenshots" "${active_window_path}")" in
+				default) xdg-open "${active_window_path}" & ;;
+				delete) rm "${active_window_path}" & ;;
 			esac
-        else
-            ${notify_cmd_NOT} " Screenshot of:" " ${active_window_class} NOT Saved."
-            "${sDIR}/Sounds.sh" --error
-        fi
+		else
+			notify_failed
+		fi
 
-    elif [[ "$1" == "swappy" ]]; then
+	elif [[ "$1" == "swappy" ]]; then
 		"${sDIR}/Sounds.sh" --screenshot &
-		resp=$(${notify_cmd_shot} " Screenshot:" " Captured by Swappy")
-		case "$resp" in
-			action1)
-				swappy -f - <"$tmpfile"
-				;;
-			action2)
-				rm "$tmpfile"
-				;;
+		case "$(notify_shot "Screenshot copied" "Click to edit in Swappy" "$tmpfile")" in
+			default) swappy -f - <"$tmpfile" ;;
+			delete) rm "$tmpfile" ;;
 		esac
 
-    else
-        local check_file="${dir}/${file}"
-        if [[ -e "$check_file" ]]; then
-            "${sDIR}/Sounds.sh" --screenshot &
-            resp=$(timeout 5 ${notify_cmd_shot} " Screenshot" " Saved")
-			case "$resp" in
-				action1)
-					xdg-open "${check_file}" &
-					;;
-				action2)
-					rm "${check_file}" &
-					;;
+	else
+		local check_file="${dir}/${file}"
+		if [[ -e "$check_file" ]]; then
+			"${sDIR}/Sounds.sh" --screenshot &
+			case "$(notify_shot "Screenshot saved" "Copied to clipboard · saved to Screenshots" "$check_file")" in
+				default) xdg-open "${check_file}" & ;;
+				delete) rm "${check_file}" & ;;
 			esac
-        else
-            ${notify_cmd_NOT} " Screenshot" " NOT Saved"
-            "${sDIR}/Sounds.sh" --error
-        fi
-    fi
+		else
+			notify_failed
+		fi
+	fi
 }
 
 # countdown
 countdown() {
 	for sec in $(seq $1 -1 1); do
-		notify-send -h string:x-canonical-private-synchronous:shot-notify -t 1000 -i "$iDIR"/timer.png  " Taking shot" " in: $sec secs"
+		notify-send -a "Screenshot" -n "$shot_icon" -t 1000 -h string:x-canonical-private-synchronous:shot-notify "Taking a screenshot" "in ${sec}s"
 		sleep 1
 	done
 }

@@ -22,11 +22,15 @@ PanelWindow {
     }
     // Room for the expanded pill plus its shadow.
     implicitHeight: Theme.topMargin + Theme.expandedHeight + 48
-    exclusiveZone: 0
-    // The keyboard only while a field is being typed into (a Wi-Fi password);
-    // Hyprland won't hand an "on demand" overlay the keyboard, so it is taken
-    // exclusively for that moment and given straight back.
-    WlrLayershell.keyboardFocus: IslandState.heldOpen ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
+    // Keep windows below the compact pill so it never covers tab bars or
+    // title bars; the expanded island still opens over them. The extra 4px
+    // roughly matches the gap above the pill. While a fullscreen or maximized
+    // window hides the island, the space goes back to that window.
+    exclusiveZone: fullscreen ? 0 : Theme.topMargin + Theme.compactHeight + 4
+    // The keyboard only while a view needs it (a Wi-Fi password, the
+    // Clipboard tab's arrows); Hyprland won't hand an "on demand" overlay the
+    // keyboard, so it is taken exclusively for that moment and given back.
+    WlrLayershell.keyboardFocus: IslandState.wantsKeyboard ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
     color: "transparent"
     WlrLayershell.namespace: "latto-island"
     WlrLayershell.layer: WlrLayer.Overlay
@@ -441,5 +445,13 @@ PanelWindow {
             visible: opacity > 0
             enabled: window.expanded
         }
+    }
+
+    // A hovered clipboard image, previewed to the right of the island.
+    ClipboardPreview {
+        anchors.left: pill.right
+        anchors.leftMargin: 12
+        anchors.top: pill.top
+        item: window.expanded ? Clipboard.previewItem : null
     }
 }

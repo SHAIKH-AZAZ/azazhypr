@@ -48,6 +48,7 @@ Item {
     }
 
     readonly property bool critical: notification ? Notifications.isCritical(notification) : false
+    readonly property string preview: Notifications.preview(notification)
 
     SystemClock {
         id: clock
@@ -86,8 +87,8 @@ Item {
     Column {
         anchors.left: icon.right
         anchors.leftMargin: 12
-        anchors.right: closeButton.left
-        anchors.rightMargin: 6
+        anchors.right: root.preview !== "" ? previewImage.left : closeButton.left
+        anchors.rightMargin: root.preview !== "" ? 12 : 6
         anchors.verticalCenter: parent.verticalCenter
         spacing: 1
 
@@ -120,16 +121,69 @@ Item {
         }
     }
 
+    // The picture, 16:10 and cropped to fill, with a hairline edge.
+    RoundedImage {
+        id: previewImage
+        anchors.right: parent.right
+        anchors.rightMargin: 14
+        anchors.verticalCenter: parent.verticalCenter
+        visible: root.preview !== ""
+        width: 84
+        height: 52
+        radius: 10
+        placeholder: "camera"
+        source: root.preview
+
+        Rectangle {
+            anchors.fill: parent
+            radius: parent.radius
+            color: "transparent"
+            border.color: Qt.rgba(1, 1, 1, 0.12)
+            border.width: 1
+        }
+    }
+
     IslandButton {
         id: closeButton
         anchors.right: parent.right
         anchors.rightMargin: 12
         anchors.verticalCenter: parent.verticalCenter
+        visible: root.preview === ""
         opacity: hover.hovered ? 1 : 0
         icon: "close"
         iconSize: 13
         color: Theme.textSecondary
         onClicked: if (root.notification) root.notification.dismiss()
         Behavior on opacity { NumberAnimation { duration: Theme.fadeDuration } }
+    }
+
+    // With a preview, the cross rides its corner on a dark disc.
+    Rectangle {
+        anchors.horizontalCenter: previewImage.right
+        anchors.horizontalCenterOffset: -2
+        anchors.verticalCenter: previewImage.top
+        anchors.verticalCenterOffset: 2
+        visible: root.preview !== ""
+        opacity: hover.hovered ? 1 : 0
+        width: 20
+        height: 20
+        radius: 10
+        color: Theme.surfaceRaised
+        border.color: Theme.island
+        border.width: 2
+        Behavior on opacity { NumberAnimation { duration: Theme.fadeDuration } }
+
+        Icon {
+            anchors.centerIn: parent
+            name: "close"
+            size: 10
+            color: Theme.text
+        }
+        MouseArea {
+            anchors.fill: parent
+            anchors.margins: -4
+            cursorShape: Qt.PointingHandCursor
+            onClicked: if (root.notification) root.notification.dismiss()
+        }
     }
 }

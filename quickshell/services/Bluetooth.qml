@@ -12,14 +12,18 @@ QtObject {
     readonly property var devices: Bluetooth.devices.values
     readonly property var connected: devices.filter(device => device.connected)
 
-    // Connected first, then paired, then nearby devices that have a name.
+    // Connected first, then paired, then nearby devices that have a name; in
+    // the order found within each, so new devices join at the bottom instead
+    // of moving rows under the pointer.
     readonly property var listed: devices.filter(device => device.paired || device.deviceName !== "")
-        .sort((a, b) => (b.connected * 2 + b.paired) - (a.connected * 2 + a.paired))
+        .sort((a, b) => (b.connected * 2 + b.paired) - (a.connected * 2 + a.paired) || devices.indexOf(a) - devices.indexOf(b))
 
     readonly property var adapter: Bluetooth.defaultAdapter
     readonly property bool available: adapter !== null
     readonly property bool enabled: available && adapter.enabled
     readonly property bool discovering: enabled && adapter.discovering
+    // Powered and settled: `enabled` flips before discovery can start.
+    readonly property bool ready: available && adapter.state === BluetoothAdapterState.Enabled
 
     property int watchers: 0
     // A device being paired, connected once pairing succeeds.
@@ -44,22 +48,27 @@ QtObject {
     }
 
     function discover() {
-        if (enabled)
+        if (ready)
             adapter.discovering = watchers > 0;
     }
 
-    onEnabledChanged: discover()
+    onReadyChanged: discover()
 
     function busy(device) {
         return device.pairing || device.state === BluetoothDeviceState.Connecting
             || device.state === BluetoothDeviceState.Disconnecting;
     }
 
+    // One new device at a time, so each still gets its connect once paired.
+    function canChoose(device) {
+        return !device.connected && !busy(device) && (device.paired || pairingDevice === null);
+    }
+
     function choose(device) {
-        if (device.connected || busy(device))
+        if (!canChoose(device))
             return;
-        device.trusted = true;  // so it reconnects on its own later
         if (device.paired) {
+            device.trusted = true;  // so it reconnects on its own later
             device.connect();
         } else {
             pairingDevice = device;
@@ -74,6 +83,7 @@ QtObject {
         function onPairedChanged() {
             if (!root.pairingDevice.paired)
                 return;
+            root.pairingDevice.trusted = true;
             root.pairingDevice.connect();
             root.pairingDevice = null;
         }

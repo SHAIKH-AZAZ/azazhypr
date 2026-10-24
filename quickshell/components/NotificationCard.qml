@@ -12,8 +12,9 @@ Rectangle {
 
     readonly property bool critical: Notifications.isCritical(notification)
     readonly property var actions: Notifications.buttonActions(notification)
+    readonly property string preview: Notifications.preview(notification)
 
-    implicitHeight: content.implicitHeight + 24
+    implicitHeight: Math.max(content.implicitHeight, preview !== "" ? previewImage.height : 0) + 24
     radius: 16
     color: hover.hovered ? Theme.surfaceRaised : Theme.surface
     border.color: critical ? Qt.rgba(Theme.red.r, Theme.red.g, Theme.red.b, 0.5) : Theme.border
@@ -33,6 +34,27 @@ Rectangle {
         }
     }
 
+    RoundedImage {
+        id: previewImage
+        anchors.right: parent.right
+        anchors.rightMargin: 12
+        y: 12
+        visible: root.preview !== ""
+        width: 112
+        height: 70
+        radius: 10
+        placeholder: "camera"
+        source: root.preview
+
+        Rectangle {
+            anchors.fill: parent
+            radius: parent.radius
+            color: "transparent"
+            border.color: Qt.rgba(1, 1, 1, 0.12)
+            border.width: 1
+        }
+    }
+
     NotificationIcon {
         id: icon
         x: 12
@@ -48,7 +70,7 @@ Rectangle {
         id: content
         anchors.left: icon.right
         anchors.leftMargin: 10
-        anchors.right: parent.right
+        anchors.right: root.preview !== "" ? previewImage.left : parent.right
         anchors.rightMargin: 12
         y: 12
         spacing: 2

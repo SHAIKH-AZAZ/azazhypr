@@ -38,20 +38,11 @@ get_icon() {
     fi
 }
 
-# Notify
+# The quickshell island's HUD shows volume and mute, so no notification here;
+# just the feedback sound while audible.
 notify_user() {
-    local muted="$(pamixer --get-mute)"
-    local level="$(pamixer --get-volume)"
-
-    if [[ "$muted" == "true" || "$level" -eq 0 ]]; then
-        notify-send -e -h string:x-canonical-private-synchronous:volume_notif \
-            -h boolean:SWAYNC_BYPASS_DND:true -u low -i "$(get_icon)" \
-            " Volume:" " Muted"
-    else
-        notify-send -e -h int:value:"$level" -h string:x-canonical-private-synchronous:volume_notif \
-            -h boolean:SWAYNC_BYPASS_DND:true -u low -i "$(get_icon)" \
-            " Volume Level:" " ${level}%" &&
-            "$sDIR/Sounds.sh" --volume
+    if [[ "$(pamixer --get-mute)" != "true" && "$(pamixer --get-volume)" -ne 0 ]]; then
+        "$sDIR/Sounds.sh" --volume
     fi
 }
 
@@ -76,18 +67,18 @@ dec_volume() {
 # Toggle Mute
 toggle_mute() {
 	if [ "$(pamixer --get-mute)" == "false" ]; then
-		pamixer -m && notify-send -e -u low -h boolean:SWAYNC_BYPASS_DND:true -i "$iDIR/volume-mute.png" " Mute"
+		pamixer -m
 	elif [ "$(pamixer --get-mute)" == "true" ]; then
-		pamixer -u && notify-send -e -u low -h boolean:SWAYNC_BYPASS_DND:true -i "$(get_icon)" " Volume:" " Switched ON"
+		pamixer -u
 	fi
 }
 
-# Toggle Mic
+# Toggle Mic (the island's HUD shows the change)
 toggle_mic() {
 	if [ "$(pamixer --default-source --get-mute)" == "false" ]; then
-		pamixer --default-source -m && notify-send -e -u low -h boolean:SWAYNC_BYPASS_DND:true -i "$iDIR/microphone-mute.png" " Microphone:" " Switched OFF"
+		pamixer --default-source -m
 	elif [ "$(pamixer --default-source --get-mute)" == "true" ]; then
-		pamixer --default-source -u && notify-send -e -u low -h boolean:SWAYNC_BYPASS_DND:true -i "$iDIR/microphone.png" " Microphone:" " Switched ON"
+		pamixer --default-source -u
 	fi
 }
 # Get Mic Icon

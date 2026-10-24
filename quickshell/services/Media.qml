@@ -27,6 +27,11 @@ QtObject {
     readonly property real length: player && player.lengthSupported ? player.length : 0
     readonly property bool shuffle: player ? player.shuffle : false
     readonly property bool shuffleSupported: player ? player.shuffleSupported : false
+    readonly property int loopState: player ? player.loopState : MprisLoopState.None
+    readonly property bool loopSupported: player ? player.loopSupported : false
+    readonly property bool looping: loopState !== MprisLoopState.None
+    readonly property bool loopingTrack: loopState === MprisLoopState.Track
+    readonly property bool canSeek: player ? player.canSeek : false
 
     // Seconds. MPRIS does not push position updates, so refreshPosition() polls.
     property real position: 0
@@ -75,5 +80,25 @@ QtObject {
     function toggleShuffle() {
         if (player && player.shuffleSupported)
             player.shuffle = !player.shuffle;
+    }
+
+    // Off, then the whole list, then the one track.
+    function cycleLoop() {
+        if (!loopSupported)
+            return;
+        player.loopState = loopState === MprisLoopState.None ? MprisLoopState.Playlist
+            : loopState === MprisLoopState.Playlist ? MprisLoopState.Track
+            : MprisLoopState.None;
+    }
+
+    // Sets the position rather than calling seek(): browsers hand a relative
+    // seek to the page, which may skip its own amount.
+    function seekBy(seconds) {
+        if (!canSeek)
+            return;
+        refreshPosition();
+        const target = Math.max(0, position + seconds);
+        player.position = length > 0 ? Math.min(length, target) : target;
+        refreshPosition();
     }
 }

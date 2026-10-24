@@ -59,6 +59,9 @@ FileView {
         property bool calendarEnabled: false
         property real weatherLatitude: 0
         property real weatherLongitude: 0
+        // Place name shown with the weather; the weather tile sets it with
+        // the coordinates.
+        property string weatherLocation: ""
         property bool privacyIndicators: true
         property bool capsLockIndicator: true
         property bool bluetoothAlerts: true
@@ -93,6 +96,7 @@ FileView {
     readonly property alias calendarEnabled: adapter.calendarEnabled
     readonly property alias weatherLatitude: adapter.weatherLatitude
     readonly property alias weatherLongitude: adapter.weatherLongitude
+    readonly property alias weatherLocation: adapter.weatherLocation
     readonly property alias privacyIndicators: adapter.privacyIndicators
     readonly property alias capsLockIndicator: adapter.capsLockIndicator
     readonly property alias bluetoothAlerts: adapter.bluetoothAlerts

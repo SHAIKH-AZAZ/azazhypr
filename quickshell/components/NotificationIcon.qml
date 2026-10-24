@@ -1,9 +1,11 @@
 import QtQuick
 import Quickshell
+import "../services"
 import "../theme"
 
 // A notification's artwork, in order of preference:
-//   - the image it carries (avatar, album art), filling the tile
+//   - the image it carries (avatar, album art), filling the tile, unless it
+//     is shown as a preview beside the text
 //   - an app icon given as an image file (e.g. Claude's app tile), filling the tile
 //   - a themed app icon name, drawn small on a tinted tile
 //   - a bell
@@ -17,7 +19,7 @@ Item {
     readonly property string appIcon: notification && notification.appIcon ? notification.appIcon : ""
     readonly property bool appIconIsFile: appIcon.startsWith("/") || appIcon.includes("://")
 
-    readonly property string imageSource: notification && notification.image ? notification.image
+    readonly property string imageSource: notification && notification.image && !Notifications.preview(notification) ? notification.image
         : appIconIsFile ? appIcon
         : ""
     readonly property string iconSource: appIcon === "" || appIconIsFile ? "" : Quickshell.iconPath(appIcon, true)

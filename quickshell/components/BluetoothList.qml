@@ -69,6 +69,7 @@ Item {
                 width: 36
                 height: 20
                 radius: 10
+                opacity: Bluetooth.available ? 1 : 0.35
                 color: Bluetooth.enabled ? Theme.blue : Theme.surfaceRaised
                 Behavior on color { ColorAnimation { duration: Theme.fadeDuration } }
 
@@ -140,7 +141,7 @@ Item {
             }
             MouseArea {
                 anchors.fill: parent
-                enabled: !row.modelData.connected && !row.busy
+                enabled: Bluetooth.canChoose(row.modelData)
                 cursorShape: Qt.PointingHandCursor
                 onClicked: Bluetooth.choose(row.modelData)
             }

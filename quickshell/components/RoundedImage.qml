@@ -2,12 +2,13 @@ import QtQuick
 import QtQuick.Effects
 import "../theme"
 
-// Image clipped to a rounded rectangle, with a music-note placeholder until it loads.
+// Image clipped to a rounded rectangle, with a placeholder icon until it loads.
 Item {
     id: root
 
     property alias source: image.source
     property real radius: 8
+    property string placeholder: "music"
 
     Rectangle {
         anchors.fill: parent
@@ -17,7 +18,7 @@ Item {
 
         Icon {
             anchors.centerIn: parent
-            name: "music"
+            name: root.placeholder
             size: Math.min(parent.width, parent.height) * 0.45
             color: Theme.textTertiary
         }
