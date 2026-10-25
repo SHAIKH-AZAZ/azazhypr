@@ -279,6 +279,18 @@ bind(
 	"notification center"
 )
 
+bind(
+	mainMod .. " + CTRL + C",
+	exec("qs ipc call island open calendar"),
+	"calendar"
+)
+
+bind(
+	mainMod .. " + CTRL + A",
+	exec("qs ipc call island open overview"),
+	"quick settings overview"
+)
+
 bind(mainMod .. " + SHIFT + E", exec(scriptsDir .. "/Kool_Quick_Settings.sh"), "Quick settings menu")
 
 ------------------------------------------------------------

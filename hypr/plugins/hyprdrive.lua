@@ -48,7 +48,6 @@ end
 -- previous workspace), so the overview takes hyprexpo's old SUPER+A.
 if hl.plugin.hyprdrive then
 	hl.bind("SUPER + A", hl.plugin.hyprdrive.overview("toggle"), { description = "overview (hyprdrive)" })
-	hl.bind("SUPER + CTRL + A", hl.plugin.hyprdrive.overview("toggle all"), { description = "overview on all monitors" })
 	hl.bind("SUPER + CTRL + M", hl.plugin.hyprdrive.minimize("window"), { description = "minimize window to dock" })
 	hl.bind("SUPER + SHIFT + COMMA", hl.plugin.hyprdrive.settings(), { description = "hyprdrive settings" })
 

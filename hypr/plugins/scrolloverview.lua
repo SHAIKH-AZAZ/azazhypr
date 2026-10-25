@@ -56,7 +56,3 @@ hl.config({
 hl.bind("SUPER + A", function()
 	hl.plugin.hyprexpo.expo("toggle")
 end, { description = "workspace overview (hyprexpo)" })
-
-hl.bind("SUPER + CTRL + A", function()
-	hl.plugin.hyprexpo.expo("toggle all")
-end, { description = "workspace overview on all monitors" })
