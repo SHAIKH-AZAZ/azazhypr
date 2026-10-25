@@ -213,7 +213,8 @@ Item {
                 clickable: Bluetooth.available
                 onClicked: root.page = "bluetooth"
                 value: first ? (first.name || first.deviceName) : Bluetooth.enabled ? "Not connected" : "Off"
-                detail: first && first.batteryAvailable ? Math.round(first.battery * 100) + "% battery"
+                detail: Bluetooth.budsBattery(first) !== "" ? Bluetooth.budsBattery(first, true)
+                    : first && first.batteryAvailable ? Math.round(first.battery * 100) + "% battery"
                     : Bluetooth.connected.length > 1 ? Bluetooth.connected.length + " devices" : "Bluetooth"
             }
 

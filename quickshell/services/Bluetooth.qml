@@ -1,7 +1,9 @@
 pragma Singleton
 
 import QtQuick
+import Quickshell
 import Quickshell.Bluetooth
+import Quickshell.Io
 
 // Bluetooth devices known to the default adapter, and its power switch.
 // While a device list is open the adapter looks for nearby devices; picking
@@ -26,6 +28,22 @@ QtObject {
     readonly property bool ready: available && adapter.state === BluetoothAdapterState.Enabled
 
     property int watchers: 0
+
+    // Left bud, right bud and case charge of connected earbuds that speak
+    // Google Fast Pair, by address: { left, right, case, leftCharging, ... },
+    // a level -1 when unknown. Read by scripts/fastpair-battery.py.
+    property var buds: ({})
+
+    // "L 99%  R 99%  Case 98%" (compact: "L99% R99% C98%") for earbuds that
+    // report it, otherwise "".
+    function budsBattery(device, compact) {
+        const levels = device ? buds[device.address] : undefined;
+        if (!levels)
+            return "";
+        const part = (name, value) => value < 0 ? "" : compact ? name[0] + value + "%" : name + " " + value + "%";
+        return [part("L", levels.left), part("R", levels.right), part("Case", levels["case"])]
+            .filter(text => text !== "").join(compact ? " " : "  ");
+    }
     // A device being paired, connected once pairing succeeds.
     property var pairingDevice: null
 
@@ -74,6 +92,23 @@ QtObject {
             pairingDevice = device;
             device.pair();
         }
+    }
+
+    property Process budsReader: Process {
+        running: root.connected.length > 0
+        command: ["python3", "-I", Quickshell.shellDir + "/services/scripts/fastpair-battery.py"]
+        stdout: SplitParser {
+            onRead: line => {
+                const report = JSON.parse(line);
+                const next = Object.assign({}, root.buds);
+                if (report.left === undefined)
+                    delete next[report.address];
+                else
+                    next[report.address] = report;
+                root.buds = next;
+            }
+        }
+        onRunningChanged: if (!running) root.buds = {}
     }
 
     property Connections pairWatch: Connections {

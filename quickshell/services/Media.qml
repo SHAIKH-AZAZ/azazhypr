@@ -4,7 +4,9 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.Mpris
 
-// The most relevant MPRIS player (a playing one first, otherwise any) and its controls.
+// The most relevant MPRIS player (a playing one first, otherwise one with a
+// track loaded) and its controls. Browsers keep an empty player around after
+// the media stops or its tab closes; that one counts as nothing playing.
 QtObject {
     id: root
 
@@ -13,7 +15,7 @@ QtObject {
         for (const candidate of Mpris.players.values) {
             if (candidate.isPlaying)
                 return candidate;
-            if (!fallback)
+            if (!fallback && candidate.trackTitle)
                 fallback = candidate;
         }
         return fallback;

@@ -183,6 +183,7 @@ Item {
                     visible: text !== ""
                     text: row.modelData.pairing ? "Pairing…"
                         : row.busy ? (row.modelData.connected ? "Disconnecting…" : "Connecting…")
+                        : row.modelData.connected && Bluetooth.budsBattery(row.modelData) !== "" ? Bluetooth.budsBattery(row.modelData)
                         : row.modelData.connected && row.modelData.batteryAvailable ? Math.round(row.modelData.battery * 100) + "%"
                         : row.modelData.connected ? "Connected"
                         : row.modelData.paired ? "Paired"

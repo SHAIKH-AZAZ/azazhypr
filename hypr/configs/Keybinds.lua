@@ -273,6 +273,12 @@ bind(
 	"toggle do-not-disturb"
 )
 
+bind(
+	mainMod .. " + CTRL + N",
+	exec("qs ipc call island open notifications"),
+	"notification center"
+)
+
 bind(mainMod .. " + SHIFT + E", exec(scriptsDir .. "/Kool_Quick_Settings.sh"), "Quick settings menu")
 
 ------------------------------------------------------------
