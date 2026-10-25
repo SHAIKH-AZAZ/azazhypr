@@ -1,11 +1,13 @@
 import QtQuick
 import Quickshell
+import Quickshell.Hyprland
 import "../services"
 import "../theme"
 
 // Content of the collapsed island. `mode` picks one layout, and layouts
 // cross-fade with a small scale so the change reads as a morph:
-//   idle  - status indicators (or the date) on the left, clock on the right
+//   idle  - status indicators (or the workspaces) on the left, clock in the
+//           middle, Wi-Fi signal and battery on the right
 //   media - album art, title and an equaliser
 //   alert - the highest-priority entry from Activities
 Item {
@@ -102,18 +104,36 @@ Item {
         shown: root.mode === "idle"
 
         Row {
+            id: indicators
             anchors.left: parent.left
             anchors.leftMargin: 15
             anchors.verticalCenter: parent.verticalCenter
             spacing: 9
 
-            Label {
+            // Workspaces: the focused one a long pill, the others dots.
+            Row {
                 anchors.verticalCenter: parent.verticalCenter
                 visible: !root.hasIndicators
-                text: Qt.formatDateTime(clock.date, "ddd d")
-                color: Theme.textSecondary
-                font.pixelSize: Theme.fontSmall
-                font.weight: Font.Medium
+                spacing: 4
+
+                Repeater {
+                    model: Hyprland.workspaces.values.filter(workspace => workspace.id > 0).sort((a, b) => a.id - b.id)
+
+                    Rectangle {
+                        required property var modelData
+                        readonly property bool focused: Hyprland.focusedWorkspace === modelData
+
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: focused ? 16 : 6
+                        height: 6
+                        radius: 3
+                        color: focused ? Theme.accent : Theme.textTertiary
+                        Behavior on width {
+                            NumberAnimation { duration: 320; easing.type: Easing.BezierSpline; easing.bezierCurve: Theme.springCurve }
+                        }
+                        Behavior on color { ColorAnimation { duration: Theme.fadeDuration } }
+                    }
+                }
             }
             // Music playing; takes the date's place. The note sways to a beat
             // and a small equaliser bounces beside it.
@@ -258,13 +278,88 @@ Item {
             }
         }
 
+        // Centred, unless the indicators reach that far.
         Label {
-            anchors.right: parent.right
-            anchors.rightMargin: 15
+            x: Math.max((parent.width - width) / 2, indicators.x + indicators.width + 10)
             anchors.verticalCenter: parent.verticalCenter
             text: Qt.formatDateTime(clock.date, "h:mm AP")
             font.pixelSize: Theme.fontBody
             font.weight: Font.DemiBold
+        }
+
+        Row {
+            anchors.right: parent.right
+            anchors.rightMargin: 14
+            anchors.verticalCenter: parent.verticalCenter
+            spacing: 7
+
+            // Wi-Fi signal as four rising bars.
+            Row {
+                anchors.verticalCenter: parent.verticalCenter
+                visible: Network.signal >= 0
+                spacing: 1.5
+
+                Repeater {
+                    model: 4
+
+                    Rectangle {
+                        required property int index
+
+                        anchors.bottom: parent.bottom
+                        width: 2.5
+                        height: 4 + index * 2.5
+                        radius: 1
+                        color: Network.signal >= index * 25 ? Theme.accent : Theme.surfaceRaised
+                    }
+                }
+            }
+
+            // Battery: a neutral outline, the fill follows the charge, and a
+            // bolt shows while charging.
+            Item {
+                anchors.verticalCenter: parent.verticalCenter
+                visible: Battery.available
+                width: 28
+                height: 13
+
+                readonly property color tint: Battery.percent <= Settings.lowBatteryPercent && !Battery.charging
+                    ? Theme.red : Theme.accent
+
+                Rectangle {
+                    id: batteryBody
+                    width: 25
+                    height: parent.height
+                    radius: 4
+                    color: "transparent"
+                    border.color: Qt.rgba(1, 1, 1, 0.35)
+                    border.width: 1.2
+
+                    Rectangle {
+                        x: 2.2
+                        y: 2.2
+                        width: Math.max(3, (parent.width - 4.4) * Battery.percent / 100)
+                        height: parent.height - 4.4
+                        radius: 2.2
+                        color: parent.parent.tint
+                    }
+                    Icon {
+                        anchors.centerIn: parent
+                        visible: Battery.charging
+                        name: "bolt"
+                        size: 10
+                        color: Theme.island
+                    }
+                }
+                Rectangle {
+                    anchors.left: batteryBody.right
+                    anchors.leftMargin: 1
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 2
+                    height: 5
+                    radius: 1
+                    color: Qt.rgba(1, 1, 1, 0.35)
+                }
+            }
         }
     }
 
