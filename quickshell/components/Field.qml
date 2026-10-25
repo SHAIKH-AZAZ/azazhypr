@@ -29,6 +29,10 @@ Rectangle {
         font.pixelSize: Theme.fontSmall + 1
         clip: true
 
+        // Escape belongs to the field (cancel, close the search), not to the
+        // island's close shortcut.
+        Keys.onShortcutOverride: event => event.accepted = event.key === Qt.Key_Escape
+
         Label {
             anchors.verticalCenter: parent.verticalCenter
             visible: input.text === ""

@@ -7,12 +7,13 @@ import ".."
 // keep-awake), network, Bluetooth, weather, and adjustable volume and
 // brightness. The Wi-Fi and Bluetooth toggles and tiles open a list of
 // nearby networks or devices to connect to; the battery tile opens details
-// and the power mode, the weather tile the forecast.
+// and the power mode, the volume tile the sound devices and app volumes, the
+// weather tile the forecast.
 Item {
     id: root
 
-    // "", "wifi", "bluetooth", "battery" or "weather": the page shown over
-    // the tiles.
+    // "", "wifi", "bluetooth", "battery", "sound" or "weather": the page
+    // shown over the tiles.
     property string page: ""
     // The island keeps this tab loaded while collapsed; drop back to the
     // tiles then so a list stops scanning.
@@ -257,6 +258,8 @@ Item {
                 value: Audio.muted ? "Muted" : "Volume " + Math.round(Audio.volume * 100) + "%"
                 level: Audio.muted ? 0 : Audio.volume
                 onLevelPicked: fraction => Audio.setVolume(fraction)
+                clickable: true
+                onClicked: root.page = "sound"
             }
 
             Tile {
@@ -291,6 +294,10 @@ Item {
     Page {
         name: "wifi"
         content: Component { WifiList { onBack: root.page = "" } }
+    }
+    Page {
+        name: "sound"
+        content: Component { SoundPanel { onBack: root.page = "" } }
     }
     Page {
         name: "battery"

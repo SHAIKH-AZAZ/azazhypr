@@ -27,10 +27,10 @@ PanelWindow {
     // roughly matches the gap above the pill. While a fullscreen or maximized
     // window hides the island, the space goes back to that window.
     exclusiveZone: fullscreen ? 0 : Theme.topMargin + Theme.compactHeight + 4
-    // The keyboard only while a view needs it (a Wi-Fi password, the
-    // Clipboard tab's arrows); Hyprland won't hand an "on demand" overlay the
-    // keyboard, so it is taken exclusively for that moment and given back.
-    WlrLayershell.keyboardFocus: IslandState.wantsKeyboard ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
+    // The keyboard while expanded (Escape closes it, a view may read keys)
+    // or while a view needs it; Hyprland won't hand an "on demand" overlay the
+    // keyboard, so it is taken exclusively for that time and given back.
+    WlrLayershell.keyboardFocus: window.expanded || IslandState.wantsKeyboard ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
     color: "transparent"
     WlrLayershell.namespace: "latto-island"
     WlrLayershell.layer: WlrLayer.Overlay
@@ -384,6 +384,16 @@ PanelWindow {
                     openTimer.stop();
                     closeTimer.restart();
                 }
+            }
+        }
+
+        Shortcut {
+            sequence: "Escape"
+            enabled: window.expanded
+            onActivated: {
+                openTimer.stop();
+                closeTimer.stop();
+                window.open = false;
             }
         }
 

@@ -27,6 +27,8 @@ Item {
         if (!searching)
             return;
         searching = false;
+        // Let go of the keys, so Escape closes the island again.
+        field.input.focus = false;
         IslandState.release();
         Weather.search("");
     }
