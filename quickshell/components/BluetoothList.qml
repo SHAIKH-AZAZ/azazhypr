@@ -178,12 +178,41 @@ Item {
                 height: 24
                 spacing: 6
 
+                // Earbud levels, a bolt on the parts charging.
+                Row {
+                    anchors.verticalCenter: parent.verticalCenter
+                    spacing: 10
+
+                    Repeater {
+                        model: row.modelData.connected && !row.busy ? Bluetooth.budsParts(row.modelData) : []
+
+                        Row {
+                            required property var modelData
+
+                            spacing: 2
+
+                            Icon {
+                                anchors.verticalCenter: parent.verticalCenter
+                                visible: modelData.charging
+                                name: "bolt"
+                                size: 11
+                                color: Theme.green
+                            }
+                            Label {
+                                anchors.verticalCenter: parent.verticalCenter
+                                text: modelData.name + " " + modelData.value + "%"
+                                color: Theme.blue
+                                font.pixelSize: Theme.fontCaption + 1
+                            }
+                        }
+                    }
+                }
                 Label {
                     anchors.verticalCenter: parent.verticalCenter
                     visible: text !== ""
                     text: row.modelData.pairing ? "Pairing…"
                         : row.busy ? (row.modelData.connected ? "Disconnecting…" : "Connecting…")
-                        : row.modelData.connected && Bluetooth.budsBattery(row.modelData) !== "" ? Bluetooth.budsBattery(row.modelData)
+                        : row.modelData.connected && Bluetooth.budsParts(row.modelData).length > 0 ? ""
                         : row.modelData.connected && row.modelData.batteryAvailable ? Math.round(row.modelData.battery * 100) + "%"
                         : row.modelData.connected ? "Connected"
                         : row.modelData.paired ? "Paired"

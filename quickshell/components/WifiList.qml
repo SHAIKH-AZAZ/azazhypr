@@ -186,36 +186,15 @@ Item {
                 onClicked: root.choose(row.modelData)
             }
 
-            // Signal strength as a filled bar.
-            Item {
+            WifiSignal {
                 id: signalBox
                 anchors.left: parent.left
                 anchors.leftMargin: 10
                 y: 8
                 width: 16
                 height: 16
-
-                Icon {
-                    anchors.centerIn: parent
-                    name: "wifi"
-                    size: 15
-                    color: Theme.surfaceRaised
-                }
-                Item {
-                    anchors.bottom: parent.bottom
-                    width: parent.width
-                    height: parent.height * Math.max(0.3, row.modelData.signal / 100)
-                    clip: true
-
-                    Icon {
-                        anchors.bottom: parent.bottom
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        anchors.bottomMargin: -0.5
-                        name: "wifi"
-                        size: 15
-                        color: row.modelData.active ? Theme.blue : Theme.text
-                    }
-                }
+                signal: row.modelData.signal
+                color: row.modelData.active ? Theme.blue : Theme.text
             }
 
             Label {

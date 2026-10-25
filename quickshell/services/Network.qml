@@ -18,6 +18,8 @@ QtObject {
     readonly property string portalProbeUrl: "http://neverssl.com"
     // [{ name, type }], e.g. { name: "Home", type: "802-11-wireless" }
     property var connections: []
+    // Strength (0..100) of the Wi-Fi network in use, or -1.
+    property int signal: -1
 
     // Nearby networks, strongest first, one row per name:
     // [{ ssid, signal, security, secure, enterprise, active, known }]
@@ -262,16 +264,21 @@ QtObject {
 
     // --- radio and active connections ----------------------------------
 
-    // Lines: the Wi-Fi radio ("enabled"/"disabled"), connectivity, then one
-    // line per active connection.
+    // Lines: the Wi-Fi radio ("enabled"/"disabled"), connectivity, the signal
+    // of the network in use (empty when none), then one line per active
+    // connection.
     property Process probe: Process {
-        command: ["sh", "-c", "nmcli radio wifi 2>/dev/null; nmcli -t -f CONNECTIVITY general 2>/dev/null; nmcli -t -f NAME,TYPE connection show --active 2>/dev/null"]
+        command: ["sh", "-c", "nmcli radio wifi 2>/dev/null; nmcli -t -f CONNECTIVITY general 2>/dev/null; "
+            + "echo \"$(nmcli -t -f IN-USE,SIGNAL device wifi list --rescan no 2>/dev/null | sed -n 's/^\\*://p' | head -n1)\"; "
+            + "nmcli -t -f NAME,TYPE connection show --active 2>/dev/null"]
         stdout: StdioCollector {
             onStreamFinished: {
                 const lines = this.text.trim().split("\n");
                 root.wifiEnabled = lines[0] === "enabled";
                 root.connectivity = lines[1] || "";
-                root.connections = lines.slice(2)
+                const signal = parseInt(lines[2]);
+                root.signal = isNaN(signal) ? -1 : signal;
+                root.connections = lines.slice(3)
                     .filter(line => line.length > 0)
                     .map(line => {
                         const parts = line.split(":");

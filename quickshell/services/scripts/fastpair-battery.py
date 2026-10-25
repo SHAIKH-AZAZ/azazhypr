@@ -8,8 +8,10 @@
 # stream closes, {"address": "..."} alone says the levels are gone.
 # Runs until killed; earbuds that connect later are picked up too.
 
+import ctypes
 import json
 import os
+import signal
 
 import dbus
 import dbus.mainloop.glib
@@ -115,6 +117,11 @@ def on_properties_changed(interface, changed, _invalidated, path):
         device = bus.get_object("org.bluez", path)
         consider(path, device.GetAll(DEVICE, dbus_interface=dbus.PROPERTIES_IFACE))
 
+
+# Exit along with the shell that started this: BlueZ takes the profile from
+# one owner only, so a leftover copy would lock out the next one.
+PR_SET_PDEATHSIG = 1
+ctypes.CDLL(None).prctl(PR_SET_PDEATHSIG, signal.SIGTERM)
 
 dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 bus = dbus.SystemBus()

@@ -6,11 +6,13 @@ import ".."
 // Quick toggles along the top, then at-a-glance tiles: battery (with
 // keep-awake), network, Bluetooth, weather, and adjustable volume and
 // brightness. The Wi-Fi and Bluetooth toggles and tiles open a list of
-// nearby networks or devices to connect to; the weather tile opens details.
+// nearby networks or devices to connect to; the battery tile opens details
+// and the power mode, the weather tile the forecast.
 Item {
     id: root
 
-    // "", "wifi", "bluetooth" or "weather": the page shown over the tiles.
+    // "", "wifi", "bluetooth", "battery" or "weather": the page shown over
+    // the tiles.
     property string page: ""
     // The island keeps this tab loaded while collapsed; drop back to the
     // tiles then so a list stops scanning.
@@ -79,6 +81,7 @@ Item {
             property string value: ""
             property string detail: ""
             property real level: -1            // shows a draggable bar when >= 0
+            property int signal: -1            // shows a Wi-Fi strength fan when >= 0
             property bool clickable: false
             signal levelPicked(real fraction)
             signal clicked()
@@ -111,8 +114,15 @@ Item {
 
                 Icon {
                     anchors.centerIn: parent
+                    visible: tile.signal < 0
                     name: tile.icon
                     size: 15
+                    color: tile.tint
+                }
+                WifiSignal {
+                    anchors.centerIn: parent
+                    visible: tile.signal >= 0
+                    signal: Math.max(0, tile.signal)
                     color: tile.tint
                 }
             }
@@ -181,6 +191,8 @@ Item {
                     : Battery.percent <= Settings.lowBatteryPercent ? Theme.red
                     : Theme.green
                 value: Battery.available ? Battery.percent + "%" : "No battery"
+                clickable: Battery.available
+                onClicked: root.page = "battery"
                 detail: Battery.available ? Battery.status : ""
 
                 // Keep-awake toggle lives with power.
@@ -199,21 +211,25 @@ Item {
             Tile {
                 icon: Network.wifiEnabled ? "wifi" : "wifiOff"
                 tint: Network.connections.length > 0 ? Theme.blue : Theme.textSecondary
+                signal: Network.wifiEnabled ? Network.signal : -1
                 value: Network.connections.length > 0 ? Network.connections[0].name : "Offline"
                 clickable: true
                 onClicked: root.page = "wifi"
-                detail: Network.connections.length > 1 ? "+" + (Network.connections.length - 1) + " more" : "Network"
+                detail: Network.signal >= 0 ? "Signal " + Network.signal + "%"
+                    : Network.connections.length > 1 ? "+" + (Network.connections.length - 1) + " more" : "Network"
             }
 
             Tile {
                 readonly property var first: Bluetooth.connected.length > 0 ? Bluetooth.connected[0] : null
 
-                icon: "bluetooth"
-                tint: first ? Theme.blue : Theme.textSecondary
+                readonly property bool charging: Bluetooth.budsParts(first).some(part => part.charging)
+
+                icon: charging ? "bolt" : "bluetooth"
+                tint: charging ? Theme.green : first ? Theme.blue : Theme.textSecondary
                 clickable: Bluetooth.available
                 onClicked: root.page = "bluetooth"
                 value: first ? (first.name || first.deviceName) : Bluetooth.enabled ? "Not connected" : "Off"
-                detail: Bluetooth.budsBattery(first) !== "" ? Bluetooth.budsBattery(first, true)
+                detail: Bluetooth.budsBattery(first) !== "" ? Bluetooth.budsBattery(first)
                     : first && first.batteryAvailable ? Math.round(first.battery * 100) + "% battery"
                     : Bluetooth.connected.length > 1 ? Bluetooth.connected.length + " devices" : "Bluetooth"
             }
@@ -275,6 +291,10 @@ Item {
     Page {
         name: "wifi"
         content: Component { WifiList { onBack: root.page = "" } }
+    }
+    Page {
+        name: "battery"
+        content: Component { BatteryPanel { onBack: root.page = "" } }
     }
     Page {
         name: "bluetooth"

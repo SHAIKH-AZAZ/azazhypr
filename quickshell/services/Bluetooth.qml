@@ -34,15 +34,22 @@ QtObject {
     // a level -1 when unknown. Read by scripts/fastpair-battery.py.
     property var buds: ({})
 
-    // "L 99%  R 99%  Case 98%" (compact: "L99% R99% C98%") for earbuds that
-    // report it, otherwise "".
-    function budsBattery(device, compact) {
+    // The earbud levels as [{ name, value, charging }] for the left bud, right
+    // bud and case, leaving out unknown ones; [] for other devices.
+    function budsParts(device) {
         const levels = device ? buds[device.address] : undefined;
         if (!levels)
-            return "";
-        const part = (name, value) => value < 0 ? "" : compact ? name[0] + value + "%" : name + " " + value + "%";
-        return [part("L", levels.left), part("R", levels.right), part("Case", levels["case"])]
-            .filter(text => text !== "").join(compact ? " " : "  ");
+            return [];
+        return [
+            { name: "L", value: levels.left, charging: levels.leftCharging },
+            { name: "R", value: levels.right, charging: levels.rightCharging },
+            { name: "Case", value: levels["case"], charging: levels.caseCharging }
+        ].filter(part => part.value >= 0);
+    }
+
+    // "L99% R99% C98%" for earbuds that report levels, otherwise "".
+    function budsBattery(device) {
+        return budsParts(device).map(part => part.name[0] + part.value + "%").join(" ");
     }
     // A device being paired, connected once pairing succeeds.
     property var pairingDevice: null
@@ -108,7 +115,21 @@ QtObject {
                 root.buds = next;
             }
         }
-        onRunningChanged: if (!running) root.buds = {}
+        onRunningChanged: {
+            if (running)
+                return;
+            root.buds = {};
+            if (root.connected.length > 0)
+                budsRetry.restart();
+        }
+    }
+
+    // The reader stopped while devices are connected (bluetoothd restarted,
+    // or another copy still held the profile); start it again.
+    // ponytail: retries forever every 30s, add a cap if it ever fails for good.
+    property Timer budsRetry: Timer {
+        interval: 30000
+        onTriggered: root.budsReader.running = Qt.binding(() => root.connected.length > 0)
     }
 
     property Connections pairWatch: Connections {
