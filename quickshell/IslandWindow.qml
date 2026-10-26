@@ -24,8 +24,8 @@ PanelWindow {
     implicitHeight: Theme.topMargin + Theme.expandedHeight + 48
     // Keep windows below the compact pill so it never covers tab bars or
     // title bars; the expanded island still opens over them. The extra 4px
-    // roughly matches the gap above the pill. While a fullscreen or maximized
-    // window hides the island, the space goes back to that window.
+    // roughly matches the gap above the pill. While the island is hidden the
+    // space goes back to the windows.
     exclusiveZone: fullscreen ? 0 : Theme.topMargin + Theme.compactHeight + 4
     // The keyboard while expanded (Escape closes it, a view may read keys)
     // or while a view needs it; Hyprland won't hand an "on demand" overlay the
@@ -41,11 +41,22 @@ PanelWindow {
     // does not open the island, and leaving it always closes it.
     property bool open: false
 
-    // A fullscreen window on this monitor hides the island; only notifications
-    // bring it back, growing out of a dot and shrinking back into one.
+    // A fullscreen window on this monitor (not a maximized one) hides the
+    // island, as does IslandState.hidden; only notifications bring it back,
+    // growing out of a dot and shrinking back into one.
     readonly property var hyprMonitor: Hyprland.monitorFor(modelData)
-    readonly property bool fullscreen: Settings.hideInFullscreen === true
+    readonly property bool fullscreen: IslandState.hidden || Settings.hideInFullscreen === true
         && !!(hyprMonitor && hyprMonitor.activeWorkspace && hyprMonitor.activeWorkspace.hasFullscreen)
+        && hyprMonitor.activeWorkspace.toplevels.values.some(t => t.lastIpcObject && t.lastIpcObject.fullscreen === 2)
+
+    // Toplevels' fullscreen state comes from their last IPC snapshot.
+    Connections {
+        target: Hyprland
+        function onRawEvent(event) {
+            if (event.name === "fullscreen")
+                Hyprland.refreshToplevels();
+        }
+    }
 
     readonly property bool expanded: open
     readonly property string mode: {

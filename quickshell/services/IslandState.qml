@@ -13,6 +13,8 @@ import Quickshell.Io
 //    from a keybind or script:
 //        qs -p <latto> ipc call island open notifications
 //        qs -p <latto> ipc call island close
+//  - hidden tucks the island away like a fullscreen window does:
+//        qs -p <latto> ipc call island toggleHidden
 QtObject {
     id: root
 
@@ -20,6 +22,7 @@ QtObject {
     readonly property bool heldOpen: holds > 0
     property int keyboardUsers: 0
     readonly property bool wantsKeyboard: heldOpen || keyboardUsers > 0
+    property bool hidden: false
 
     // tab is a tab name (media, notifications, stats, ...) or "" for the current one.
     signal openRequested(string tab)
@@ -46,5 +49,6 @@ QtObject {
 
         function open(tab: string): void { root.openRequested(tab); }
         function close(): void { root.closeRequested(); }
+        function toggleHidden(): void { root.hidden = !root.hidden; }
     }
 }

@@ -186,6 +186,8 @@ bind(
 -- 	"toggle bar on/off"
 -- )
 
+bind(mainMod .. " + CTRL + ALT + B", exec("qs ipc call island toggleHidden"), "hide/show island")
+
 bind(mainMod .. " + ALT + B", exec(scriptsDir .. "/WaybarLayout.sh"), "waybar layout menu")
 
 ------------------------------------------------------------
