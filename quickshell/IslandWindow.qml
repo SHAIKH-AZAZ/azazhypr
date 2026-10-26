@@ -163,7 +163,7 @@ PanelWindow {
             },
             State {
                 name: "idle"
-                PropertyChanges { target: pill; width: Theme.idleWidth }
+                PropertyChanges { target: pill; width: compact.idleWidth }
             },
             State {
                 name: "media"

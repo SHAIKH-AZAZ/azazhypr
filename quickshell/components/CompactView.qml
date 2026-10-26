@@ -66,6 +66,14 @@ Item {
     readonly property color timerColor: !Timers.pomodoro ? Theme.orange
         : Timers.phase === "focus" ? Theme.red
         : Theme.green
+    // The idle pill's width: just enough for the indicators, the clock and
+    // the signal and battery side by side.
+    property real idleWidth: Math.max(Theme.idleWidth,
+        indicators.x + indicators.width + clockLabel.width + 24 + status.width + 14)
+    Behavior on idleWidth {
+        NumberAnimation { duration: 420; easing.type: Easing.BezierSpline; easing.bezierCurve: Theme.springCurve }
+    }
+
     readonly property bool hasIndicators: Media.playing || microphoneShown || cameraShown || recordingShown
         || Caffeine.active || Timers.timerRunning || Downloads.count > 0 || Notifications.doNotDisturb
 
@@ -278,9 +286,11 @@ Item {
             }
         }
 
-        // Centred, unless the indicators reach that far.
+        // Centred, unless that would crowd the indicators on either side.
         Label {
-            x: Math.max((parent.width - width) / 2, indicators.x + indicators.width + 10)
+            id: clockLabel
+            x: Math.max(indicators.x + indicators.width + 12,
+                Math.min((parent.width - width) / 2, status.x - 12 - width))
             anchors.verticalCenter: parent.verticalCenter
             text: Qt.formatDateTime(clock.date, "h:mm AP")
             font.pixelSize: Theme.fontBody
@@ -288,6 +298,7 @@ Item {
         }
 
         Row {
+            id: status
             anchors.right: parent.right
             anchors.rightMargin: 14
             anchors.verticalCenter: parent.verticalCenter
