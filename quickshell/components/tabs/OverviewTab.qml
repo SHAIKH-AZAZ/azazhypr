@@ -223,10 +223,8 @@ Item {
             Tile {
                 readonly property var first: Bluetooth.connected.length > 0 ? Bluetooth.connected[0] : null
 
-                readonly property bool charging: Bluetooth.budsParts(first).some(part => part.charging)
-
-                icon: charging ? "bolt" : "bluetooth"
-                tint: charging ? Theme.green : first ? Theme.blue : Theme.textSecondary
+                icon: "bluetooth"
+                tint: first ? Theme.blue : Theme.textSecondary
                 clickable: Bluetooth.available
                 onClicked: root.page = "bluetooth"
                 value: first ? (first.name || first.deviceName) : Bluetooth.enabled ? "Not connected" : "Off"

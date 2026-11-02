@@ -7,16 +7,17 @@ font-feature = liga
 font-feature = calt
 
 # Transparency & Blur
-background-opacity = 0.7
-background-blur = 50
+background-opacity = 1.0
+background-blur = true 
 
 # Window Size
 window-width = 105
 window-height = 36
 
 # Padding
-window-padding-x = 4
-window-padding-y = 4
+window-padding-x = 8
+window-padding-y = 8
+window-padding-balance = true
 window-padding-color = extend
 
 # Window Behavior
@@ -35,7 +36,7 @@ keybind = ctrl+shift+q=ignore
 cursor-style = block
 cursor-opacity = 1
 
-custom-shader  = "./shaders/cursor_glide.glsl"
+# custom-shader  = "./shaders/cursor_glide.glsl"
 
 # Scrolling
 scrollback-limit = 2000

@@ -1,0 +1,11 @@
+#!/bin/sh
+# Portal entry point. Prints the selection on stdout; printing nothing cancels.
+# Falls back to the stock picker if Quickshell can't run, so sharing keeps working.
+[ "$1" = --allow-token ] && export SHARE_PICKER_ALLOW_TOKEN=1
+
+log=$(qs -p "$(dirname "$(realpath "$0")")" --no-color 2>&1)
+status=$?
+[ "$status" -eq 0 ] || exec hyprland-share-picker "$@"
+
+printf '%s\n' "$log" | grep -o '\[SELECTION\].*'
+exit 0

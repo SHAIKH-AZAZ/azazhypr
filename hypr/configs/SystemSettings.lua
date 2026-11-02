@@ -20,7 +20,6 @@ hl.config({
 		-- pseudotile = true,
 		preserve_split = true,
 		-- smart_split = true,
-		special_scale_factor = 0.8,
 	},
 
 	--------------------------------------------------------
